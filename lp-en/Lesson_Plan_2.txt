@@ -1,0 +1,42 @@
+Lesson Plan 2: Introducing Geometry
+
+Geometry is the study of curves, angles, and shapes.  Teachers or students who are familiar with geometry can lead new learners in the following exercise.
+
+EXPLORE BASICS ABOUT ANGLES AND STRAIGHT LINES
+
+Ask the learners: What do you know about geometry?  Then explain that you will be exploring some basics about angles and straight lines.
+
+ - Using a chalk board or paper, draw a circle and explain that 
+   a perfect circle is 360 degrees around.
+ - Draw a straight horizontal line through the circle and explain 
+   that the line is a 180 degree angle.
+ - Draw a staight vertical line through the middle of the circle; 
+   ask learners what they notice about the shape it created by 
+   crossing the straight horizontal line.
+ - Point out how cutting the circle into four quarters forms 90 
+   degree angles.  Explain that a 90 degree angle is called a 
+   right angle
+ - Draw a diagonal line that cuts one of the four quarters of the 
+   circle in half again.  Explain that an angle half the size of 
+   the 90 degree angle is a 45 degree angle.
+ - Discuss with the class why mathematicians measure angles and 
+   what migth be the importance of doing this
+
+NOW USE FLIPSTICKS TO EXPLORE ANGLES FURTHER
+
+From the Home screen of your XO, lick on the Flipsticks icon to open it.  You can also open Flipsticks from the MaMaMedia Creative Center activity.
+
+Go the the Body Parts list and click on the "Upper Right Arm" then move your cursor where it says "Angle" and type in a 0.  Press "enter" on the keyboard.
+
+Click on the "Lower Right Arm" and type in 0.  Press "enter" on the keyboard. Now you should have a straight line.  This should be the figure's first
+movement.
+
+Click on the first keyframe circle and then the camera button to save this pose.  Click on the second keyframe circle, then go back to the Body Parts list.  Click on the "Lower Right Arm" and type in 45.  Press "enter" on the keyboard.  Click on the camera button to save this pose.
+
+Click on the the third keyframe circle, then go back to the Body Parts list.  Click on the "Lower Right Arm" and then type in 270.  Press "enter" on the keyboard.  Click on the camera button to save this pose.
+
+Click on the fifth keyframe circle, then go back to the Body Parts list.  Click on the "Lower Right Arm" and type in 360.  Press "enter" on the keyboard.  Click on the camera button to save this pose.
+
+Press the play button and discuss what you notice about the movements this figure is making.  What size angles are made?  What is the final shape that has been made?  How many 90 degree anbles are there?  How many 45 degree angles are there?
+
+Have on student record this discussion on the XO laptop in the WRITE program.

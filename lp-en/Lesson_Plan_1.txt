@@ -1,0 +1,65 @@
+Lesson Plan 1: Exploring Flipsticks
+From the Home screen of your XO, click on the Flipsticks icon to open it.  You can also open Flipsticks from the MaMaMedia Creative Center activity.
+
+POSE YOUR STICK FIGURE BY CLICKING DIRECTLY ON HIM
+
+The first thing you will notice is a stick figure in the 'stage' area.
+
+  - Put him in different poses by clicking and dragging on the red dots
+    on his body
+  - Use the yellow dot to rotate him.
+  - Use the green dot to move him to a different place on the screen
+
+POSE YOUR STICK FIGURE USING THE BODY PARTS LIST
+
+  - Look at the text list of body parts on the right side of the screen.
+  - Click on a part, such as "Head" or "Upper Left Arm" and look at the
+    numbers for "Angle" and "Size" that appear at the top of the list.
+  - Click on the "Angle" number then type in a new number on your 
+    keyboard to move that part on your stick figure
+  - Click on the "Size" number then type in a new number on you keyboard 
+    to make the part bigger or smaller.
+  - Press the "enter" key on your keyboard to save your new number.
+  - Notice how your stick figure has changed.
+
+SAVE YOUR POSES AS KEYFRAMES
+  
+  - When you like the way your stick figure looks, save it as a "keyframe"
+  - The keyframes are the five circles under the Stage window.
+  - Click on a keyframe circle to choose it -- it will turn pink so you 
+    know it is ready.  Then click on the Camera button (at the bottom 
+    of the screen) to save you pose into this keyframe.
+  - Move the stick figure into a new pose, then save it by clicking on 
+    another keyframe circle and then clicking the Camera button.
+  - Fill up all five keyframes with different poses.
+
+WATCH YOUR ANIMATION!
+  
+  - To play your animationl, press the Play (right arrow) button at the 
+    right end of the keyframes line.  Your figure will move through the 
+    poses you created.
+  - Notice how the computer adds extra poses in between you keyframes, 
+    so your animation plays smoothly.
+  - Press on the Play button again if you would like to stop
+  - Press the Play Backwards (left arrow) button to play it backwards
+  - Press the Play Backwards button again if you would like to stop.
+
+EDIT YOUR ANIMATION
+
+REORDER THE POSES:  You can change the order of you keyframes by clicking on each circle and dragging it to the left or right.  Press Play to see how the figure moves when the frames are in a different order.
+
+ADJUST THE SPEED:  There is a Speed control "slider" bar underneath the keyframes.  Make your animation move faster or slower by clicking on the little circle on the Speed bar and dragging it left (to go slower) or right (to go faster).
+
+RESET THE STICK FIGURE:  If you want to start a new post from the original standing position, click the butotn with the man on it.
+
+CLEAR FRAMES:  If you want to clear out the keyframes and start fresh, click the button that looks like a circle with a line through it.
+
+SAVE AND SHARE YOUR ANIMATION
+
+Take time to explore and make many different movements with your figure.  When you are done, click on the Journal icon (open book at the top of your screen) to keep a copy of your animation in the Journal.
+
+Share the animation you made with your friends and classmates by selecting the "Share with: My Neighborhood" option in the top bar of your screen.
+
+Use the "Export Frame One" button to turn your first pose into a picture that you can use in other programs, like Paint or Jigshaw Puzzle.
+
+After looking at one another's Flipsticks animations, discuss what was difficult and what was easy about making them.  What would you like to program your Flipsticks figure to do next?

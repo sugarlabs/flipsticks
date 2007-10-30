@@ -1,0 +1,4 @@
+mesh working
+ - share with neighboorhood should make animation available on mesh
+ - other users should be able to join
+lesson plans
