@@ -114,16 +114,20 @@ LANG = {'English':{'size':'Size',
 		 'LOWER LEFT LEG':u'Una pierna izquierda m\xe1s baja',
 		 'LEFT FOOT':'Pie izquierdo'}}
 
-DRAWWIDTH = 750
-DRAWHEIGHT = 500
 FPWIDTH = 150
 FPHEIGHT = 100
 #DRAWHEIGHT = 300 for my laptop
-KEYFRAMEWIDTH = 675
+KEYFRAMEWIDTH = gtk.gdk.screen_width() - 406 # 675
 KEYFRAMEHEIGHT = 80
+DRAWWIDTH = KEYFRAMEWIDTH + 64 # 750
+DRAWHEIGHT = gtk.gdk.screen_height() - 370 # 500
 
-KEYFRAMES = [50,190,337,487,625]
+KEYFRAMES = [] # [50,190,337,487,625]
 TOTALFRAMES = 30
+
+for i in range(5):
+    keyframe_width  = KEYFRAMEWIDTH/5
+    KEYFRAMES.append(keyframe_width/2 + i*keyframe_width)
 
 STICKS = {'HEAD':(0,15),
           'NECK':(90,15),
@@ -1417,7 +1421,7 @@ class flipsticks:
 	#self.drawhbox.pack_start(self.drawborder, False, False, 10)
 
 	#self.vbox.pack_start(self.drawhbox,False,False,0)
-	self.vbox.pack_start(self.drawborder,False,False,0)
+	self.vbox.pack_start(self.drawborder,True,False,0)
 
         self.keyframehbox = gtk.HBox()
 	self.keyframehbox.show()
