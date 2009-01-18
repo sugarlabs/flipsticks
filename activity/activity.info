@@ -5,3 +5,4 @@ class = flipsticks.flipsticksActivity
 icon = activity-flipsticks
 activity_version = 1
 show_launcher = yes
+license = GPLv2+
