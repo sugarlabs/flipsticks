@@ -105,6 +105,8 @@ DRAWHEIGHT = gtk.gdk.screen_height() - 370 # 500
 KEYFRAMES = [] # [50,190,337,487,625]
 TOTALFRAMES = 30
 
+KEYFRAME_RADIUS = 40
+
 for i in range(5):
     keyframe_width  = KEYFRAMEWIDTH/5
     KEYFRAMES.append(keyframe_width/2 + i*keyframe_width)

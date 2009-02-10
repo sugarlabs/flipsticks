@@ -162,9 +162,10 @@ class flipsticks:
         if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
             if self.kfpressed >= 0:
                 if _inarea(x,y,KEYFRAMEWIDTH,KEYFRAMEHEIGHT):
-                    xdiff = x - model.keys[self.kfpressed].x
+                    xdiff = int(x - self.kf_mouse_pos)
                     self.shiftjoints(xdiff,0, model.keys[self.kfpressed].scaled_joints)
-                    model.keys[self.kfpressed].x = x
+                    model.keys[self.kfpressed].x += xdiff
+                    self.kf_mouse_pos = x
                     self.drawkeyframe()
         return True
 
@@ -192,6 +193,7 @@ class flipsticks:
         if event.button == 1 and self.pixmap != None:
             kfnum = _inkeyframe(event.x, event.y)
             if kfnum >= 0:
+                self.kf_mouse_pos = event.x
                 self.kfpressed = kfnum
                 self.kfselected = kfnum
                 self.drawkeyframe()
@@ -422,10 +424,14 @@ class flipsticks:
                 drawgc.set_foreground(pink)
             else:
                 drawgc.set_foreground(darkgreen)
-            self.kfpixmap.draw_arc(drawgc,True,x-40,y-40,80,80,0,360*64)
+            self.kfpixmap.draw_arc(drawgc, True, x-KEYFRAME_RADIUS,
+                    y-KEYFRAME_RADIUS, KEYFRAME_RADIUS*2, KEYFRAME_RADIUS*2,
+                    0, 360*64)
             # then the inner circle
             drawgc.set_foreground(white)
-            self.kfpixmap.draw_arc(drawgc,True,x-35,y-35,70,70,0,360*64)
+            self.kfpixmap.draw_arc(drawgc, True, x-KEYFRAME_RADIUS+5,
+                    y-KEYFRAME_RADIUS+5, (KEYFRAME_RADIUS-5)*2,
+                    (KEYFRAME_RADIUS-5)*2, 0, 360*64)
             if model.keys[i].scaled_sticks:
                 # draw a man in the circle
                 drawgc.set_foreground(black)
@@ -831,8 +837,10 @@ def _inarea(x,y,awidth,aheight):
     return True
 
 def _inkeyframe(x, y):
+    dy = math.pow(abs(y - KEYFRAMEHEIGHT/2), 2)
     for i in range(len(model.keys)):
-        kx = model.keys[i].x
-        if (abs(kx-x) <= 20):
+        dx = math.pow(abs(x - model.keys[i].x), 2)
+        l = math.sqrt(dx + dy)
+        if int(l) <= KEYFRAME_RADIUS:
             return i
     return -1
