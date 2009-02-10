@@ -12,12 +12,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import math
-
 import model
 import theme
 
-class Frame:
+class KinematicFrame:
     def __init__(self, keyframe=None):
         if keyframe:
             self.assign(keyframe)
@@ -38,7 +36,7 @@ def makeframes():
 
     for i in model.keys:
         if not i.empty():
-            frames[i.x] = Frame(i)
+            frames[i.x] = KinematicFrame(i)
 
     if not frames:
         return {}
@@ -68,7 +66,7 @@ def makeframes():
         numframes = int((endsecs-startsecs)/float(fint))-1
 
         for j in range(numframes-1): # MAYBE SHOULD BE numframes
-            frame = frames[startsecs + ((j+1)*fint)] = Frame()
+            frame = frames[startsecs + ((j+1)*fint)] = KinematicFrame()
 
             frame.joints = _intjoints(start_frame.joints, end_frame.joints,
                     j+1, numframes)
@@ -80,61 +78,6 @@ def makeframes():
                     j+1, numframes)
 
     return frames
-
-def getparentjoint(jname, joints, middle):
-    if jname in ['rightshoulder','leftshoulder','groin','neck']:
-        return middle
-
-    parentjoints = {'rightelbow':'rightshoulder',
-                    'righthand':'rightelbow',
-                    'leftelbow':'leftshoulder',
-                    'lefthand':'leftelbow',
-                    'righthip':'groin',
-                    'rightknee':'righthip',
-                    'rightheel':'rightknee',
-                    'righttoe':'rightheel',
-                    'lefthip':'groin',
-                    'leftknee':'lefthip',
-                    'leftheel':'leftknee',
-                    'lefttoe':'leftheel',
-                    'head':'neck'}
-
-    return joints[parentjoints[jname]]
-
-def getparentsticks(stickname):
-    if stickname in ['RIGHT SHOULDER','LEFT SHOULDER','NECK','TORSO']:
-        return []
-    if stickname in ['HEAD']:
-        return ['NECK']
-    if stickname == 'UPPER RIGHT ARM':
-        return ['RIGHT SHOULDER']
-    if stickname == 'LOWER RIGHT ARM':
-        return ['UPPER RIGHT ARM','RIGHT SHOULDER']
-    if stickname == 'UPPER LEFT ARM':
-        return ['LEFT SHOULDER']
-    if stickname == 'LOWER LEFT ARM':
-        return ['UPPER LEFT ARM','LEFT SHOULDER']
-    if stickname == 'RIGHT HIP':
-        return ['TORSO']
-    if stickname == 'UPPER RIGHT LEG':
-        return ['RIGHT HIP','TORSO']
-    if stickname == 'LOWER RIGHT LEG':
-        return ['UPPER RIGHT LEG','RIGHT HIP','TORSO']
-    if stickname == 'RIGHT FOOT':
-        return ['LOWER RIGHT LEG','UPPER RIGHT LEG','RIGHT HIP','TORSO']
-    if stickname == 'LEFT HIP':
-        return ['TORSO']
-    if stickname == 'UPPER LEFT LEG':
-        return ['LEFT HIP','TORSO']
-    if stickname == 'LOWER LEFT LEG':
-        return ['UPPER LEFT LEG','LEFT HIP','TORSO']
-    if stickname == 'LEFT FOOT':
-        return ['LOWER LEFT LEG','UPPER LEFT LEG','LEFT HIP','TORSO']
-
-def getpoints(x,y,angle,len):
-    nx = int(round(x + (len * math.cos(math.radians(angle)))))
-    ny = int(round(y - (len * math.sin(math.radians(angle)))))
-    return (nx,ny)
 
 def _interpolate(x,x0,y0,x1,y1):
     if x1-x0 == 0:
@@ -183,4 +126,3 @@ def _inthsize(shsize,ehsize,count,numpoints):
         return x0
     x = x0 + (count * ((x1-x0)/float(numpoints)))
     return int(x)
-""

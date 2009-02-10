@@ -23,6 +23,7 @@ from dbus import Interface
 from dbus.service import method, signal
 from dbus.gobject_service import ExportedGObject
 
+import model
 from theme import *
 from flipsticks import flipsticks
 
@@ -55,16 +56,9 @@ class flipsticksActivity(activity.Activity):
         innerframe.add(self.app.main)
         self.set_canvas(outerframe)
 
-    """
     def read_file(self, filepath):
-        f = file(filepath)
-        sdata = f.read()
-        f.close()
-        self.app.restore(sdata)
+        model.load(filepath)
+        self.app.restore()
         
     def write_file(self, filepath):
-        sdata = self.app.getsdata()
-        f = open(filepath,'w')
-        f.write(sdata)
-        f.close()
-    """
+        model.save(filepath)

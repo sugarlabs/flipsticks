@@ -12,12 +12,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+import os
+import pickle
+
 import theme
 import kinematic
 
+keys = []
+
 class KeyFrame:
     def __init__(self):
-        pass
+        self.clear()
 
     def empty(self):
         return self.joints == None
@@ -27,71 +32,126 @@ class KeyFrame:
         self.parts = x.parts.copy()
         self.sticks = x.sticks.copy()
         self.joints = x.joints.copy()
+        self.scaled_sticks = x.get_scaled_sticks()
+        self.scaled_joints = x.get_scaled_joints(self.x,
+                int(theme.KEYFRAMEHEIGHT/2.0))
 
     def clear(self):
+        self.middle = None
         self.parts = None
         self.sticks = None
         self.scaled_sticks = None
         self.joints = None
         self.scaled_joints = None
 
-class StoredKeyFrame(KeyFrame):
-    def __init__(self):
-        KeyFrame.__init__(self)
-        self.clear()
+def save(filename):
+    out = []
 
-    def assign(self, x):
-        KeyFrame.assign(self, x)
-        self.scaled_sticks = x.sticks.copy()
-        self.scaled_joints = _initjoints()
-        _scalesticks(self.scaled_sticks, .2)
-        _setjoints(self.scaled_joints, self.scaled_sticks,
-                (self.x, int(theme.KEYFRAMEHEIGHT/2.0)))
+    for i in keys:
+        out.append({
+            'x'             : i.x,
+            'middle'        : i.middle,
+            'parts'         : i.parts,
+            'sticks'        : i.sticks,
+            'joints'        : i.joints,
+            'scaled_sticks' : i.scaled_sticks,
+            'scaled_joints' : i.scaled_joints })
 
-class CurrentKeyFrame(KeyFrame):
-    def __init__(self):
-        KeyFrame.__init__(self)
-        self.parts = theme.PARTS.copy()
-        self.sticks = theme.STICKS.copy()
-        self.joints = _initjoints()
-        self.middle = (int(theme.DRAWWIDTH/2.0), int(theme.DRAWHEIGHT/2.0))
+    file(filename, 'w').write(pickle.dumps(out))
 
-    def assign(self, x):
-        KeyFrame.assign(self, x)
-        _setjoints(self.joints, self.sticks, self.middle)
+def load(filename):
+    inc = pickle.loads(file(filename, 'r').read())
 
-keys = []
+    for i, data in enumerate(inc):
+        key = keys[i]
+
+        key.x = data['x']
+        key.middle = data['middle']
+        key.parts = data['parts']
+        key.sticks = data['sticks']
+        key.joints = data['joints']
+        key.scaled_sticks = data['scaled_sticks']
+        key.scaled_joints = data['scaled_joints']
+
+def getparentsticks(stickname):
+    if stickname in ['RIGHT SHOULDER','LEFT SHOULDER','NECK','TORSO']:
+        return []
+    if stickname in ['HEAD']:
+        return ['NECK']
+    if stickname == 'UPPER RIGHT ARM':
+        return ['RIGHT SHOULDER']
+    if stickname == 'LOWER RIGHT ARM':
+        return ['UPPER RIGHT ARM','RIGHT SHOULDER']
+    if stickname == 'UPPER LEFT ARM':
+        return ['LEFT SHOULDER']
+    if stickname == 'LOWER LEFT ARM':
+        return ['UPPER LEFT ARM','LEFT SHOULDER']
+    if stickname == 'RIGHT HIP':
+        return ['TORSO']
+    if stickname == 'UPPER RIGHT LEG':
+        return ['RIGHT HIP','TORSO']
+    if stickname == 'LOWER RIGHT LEG':
+        return ['UPPER RIGHT LEG','RIGHT HIP','TORSO']
+    if stickname == 'RIGHT FOOT':
+        return ['LOWER RIGHT LEG','UPPER RIGHT LEG','RIGHT HIP','TORSO']
+    if stickname == 'LEFT HIP':
+        return ['TORSO']
+    if stickname == 'UPPER LEFT LEG':
+        return ['LEFT HIP','TORSO']
+    if stickname == 'LOWER LEFT LEG':
+        return ['UPPER LEFT LEG','LEFT HIP','TORSO']
+    if stickname == 'LEFT FOOT':
+        return ['LOWER LEFT LEG','UPPER LEFT LEG','LEFT HIP','TORSO']
+
+def getparentjoint(jname, joints, middle):
+    if jname in ['rightshoulder','leftshoulder','groin','neck']:
+        return middle
+
+    parentjoints = {'rightelbow':'rightshoulder',
+                    'righthand':'rightelbow',
+                    'leftelbow':'leftshoulder',
+                    'lefthand':'leftelbow',
+                    'righthip':'groin',
+                    'rightknee':'righthip',
+                    'rightheel':'rightknee',
+                    'righttoe':'rightheel',
+                    'lefthip':'groin',
+                    'leftknee':'lefthip',
+                    'leftheel':'leftknee',
+                    'lefttoe':'leftheel',
+                    'head':'neck'}
+
+    return joints[parentjoints[jname]]
+
+def screen_shot(pixbuf):
+    tmpdir = '/tmp'
+
+    filename = 'fp%03d.png' % i
+    filepath = os.path.join(tmpdir,filename)
+    pixbuf.save(filepath,'png')
+
+    from sugar.datastore import datastore
+    mediaObject = datastore.create()
+    mediaObject.metadata['title'] = 'FlipSticks PNG'
+    thumbData = _get_base64_pixbuf_data(pixbuf)
+    mediaObject.metadata['preview'] = thumbData
+    #medaiObject.metadata['icon-color'] = ''
+    mediaObject.metadata['mime_type'] = 'image/png'
+    mediaObject.file_path = filepath
+    datastore.write(mediaObject)
+
+def _save_data_to_buffer_cb(buf, data):
+    data[0] += buf
+    return True
+
+def _get_base64_pixbuf_data(pixbuf):
+    data = [""]
+    pixbuf.save_to_callback(_save_data_to_buffer_cb, "png", {}, data)
+    import base64
+    return base64.b64encode(str(data[0]))
 
 for i in range(5):
-    key = StoredKeyFrame()
+    key = KeyFrame()
     keyframe_width = theme.KEYFRAMEWIDTH/5
     key.x = keyframe_width/2 + i*keyframe_width
     keys.append(key)
-
-def _scalesticks(stickdict, i):
-    for key in stickdict:
-        (angle,len) = stickdict[key]
-        newlen = int(len * i)
-        stickdict[key] = (angle,newlen)
-
-def _setjoints(joints, sticks, middle):
-    # have to traverse in order because
-    # parent joints must be set right
-    for stickname in theme.STICKLIST:
-        (angle,len) = sticks[stickname]
-        jname = theme.JOINTS[stickname]
-        (x,y) = kinematic.getparentjoint(jname, joints, middle)
-        parents = kinematic.getparentsticks(stickname)
-        panglesum = 0
-        for parentname in parents:
-            (pangle,plen) = sticks[parentname]
-            panglesum += pangle
-        (nx,ny) = kinematic.getpoints(x,y,angle+panglesum,len)
-        joints[jname] = (nx,ny)
-
-def _initjoints():
-    joints = {}
-    for stickname in theme.JOINTS:
-        jname = theme.JOINTS[stickname]
-        joints[jname] = (0,0)
-    return joints
