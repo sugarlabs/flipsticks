@@ -55,6 +55,7 @@ class flipsticksActivity(activity.Activity):
         innerframe.add(self.app.main)
         self.set_canvas(outerframe)
 
+    """
     def read_file(self, filepath):
         f = file(filepath)
         sdata = f.read()
@@ -66,3 +67,4 @@ class flipsticksActivity(activity.Activity):
         f = open(filepath,'w')
         f.write(sdata)
         f.close()
+    """

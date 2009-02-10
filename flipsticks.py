@@ -27,6 +27,8 @@ import math
 import textwrap
 import pickle
 
+import model
+import kinematic
 from theme import *
 
 def prepare_btn(btn, w=-1, h=-1):
@@ -53,13 +55,6 @@ def inarea(x,y,awidth,aheight):
     if x < 5:
         return False
     return True
-
-def interpolate(x,x0,y0,x1,y1):
-    if x1-x0 == 0:
-        return y0
-    m = float(y1-y0)/float(x1-x0)
-    y = y0 + ((x-x0)*m)
-    return y
 
 def getpoints(x,y,angle,len):
     nx = int(round(x + (len * math.cos(math.radians(angle)))))
@@ -186,7 +181,7 @@ class flipsticks:
             if self.kfpressed >= 0:
                 if inarea(x,y,KEYFRAMEWIDTH,KEYFRAMEHEIGHT):
                     xdiff = x-self.keyframes[self.kfpressed]
-                    self.shiftjoints(xdiff,0,self.kfsjoints[self.kfpressed])
+                    self.shiftjoints(xdiff,0, model.keys[self.kfpressed].scaled_joints)
                     self.keyframes[self.kfpressed] = x
                     self.drawkeyframe()
         return True
@@ -207,10 +202,10 @@ class flipsticks:
 
     def syncmaintokf(self):
         # set the main window to the keyframe
-        if self.kfsticks[self.kfselected]:
-            self.sticks = self.kfsticks[self.kfselected].copy()
-            self.parts = self.kfparts[self.kfselected].copy()
-            self.middle = self.kfmiddles[self.kfselected]
+        if model.keys[self.kfselected].sticks:
+            self.sticks = model.keys[self.kfselected].sticks.copy()
+            self.parts = model.keys[self.kfselected].parts.copy()
+            self.middle = model.keys[self.kfselected].middle
             self.setjoints()
             self.drawmainframe()
 
@@ -347,125 +342,32 @@ class flipsticks:
         self.drawmainframe()
 
     def setframe(self, widget, data=None):
-        self.kfmiddles[self.kfselected] = self.middle
-        self.kfparts[self.kfselected] = self.parts.copy()
-        self.kfsticks[self.kfselected] = self.sticks.copy()
-        self.kfssticks[self.kfselected] = self.sticks.copy()
-        scalesticks(self.kfssticks[self.kfselected],.2)
-        self.kfjoints[self.kfselected] = self.joints.copy()
-        self.kfsjoints[self.kfselected] = self.initjoints()
-        #x, y, width, height = self.kfdraw.get_allocation()
-        #y = int(height/2.0)
-        #y = int(KEYFRAMEHEIGHT/2.0)-5
-        y = int(KEYFRAMEHEIGHT/2.0)
-        x = self.keyframes[self.kfselected]
-        kfmiddle = (x,y)
-        self.setjoints(self.kfsjoints[self.kfselected],self.kfssticks[self.kfselected],kfmiddle)
+        v = model.KeyFrame()
+        v.middle = self.middle
+        v.parts = self.parts
+        v.sticks = self.sticks
+        v.joints = self.joints
+
+        model.keys[self.kfselected].assign(v)
         self.drawkeyframe()
 
     def clearframe(self, widget, data=None):
-        self.kfsticks[self.kfselected] = None
-        self.kfssticks[self.kfselected] = None
-        self.kfjoints[self.kfselected] = None
-        self.kfsjoints[self.kfselected] = None
-        self.kfparts[self.kfselected] = None
+        model.keys[self.kfselected].clear()
         self.drawkeyframe()
 
-    def intjoints(self,sjoints,ejoints,count,numpoints):
-        # numpoints: number of points between start and end
-        # count: point were getting now
-        ijoints = {}
-        for jname in sjoints:
-            (x0,y0) = sjoints[jname]
-            (x1,y1) = ejoints[jname]
-            #print 'x0:%s,y0:%s' % (x0,y0)
-            #print 'x1:%s,y1:%s' % (x1,y1)
-            x = x0 + (count * ((x1-x0)/float(numpoints)))
-            y = interpolate(x,x0,y0,x1,y1)
-            ijoints[jname] = (int(x),int(y))
-        return ijoints
-
-    def intparts(self,sparts,eparts,count,numpoints):
-        iparts = {}
-        for pname in sparts:
-            x0 = sparts[pname]
-            x1 = eparts[pname]
-            if x0 == x1:
-                iparts[pname] = x0
-                continue
-            x = x0 + (count * ((x1-x0)/float(numpoints)))
-            iparts[pname] = int(x)
-        return iparts
-
-    def inthsize(self,shsize,ehsize,count,numpoints):
-        x0 = shsize
-        x1 = ehsize
-        if x0 == x1:
-            return x0
-        x = x0 + (count * ((x1-x0)/float(numpoints)))
-        return int(x)
-
-    def intmiddle(self,smiddle,emiddle,count,numpoints):
-        (x0,y0) = smiddle
-        (x1,y1) = emiddle
-        x = x0 + (count * ((x1-x0)/float(numpoints)))
-        y = interpolate(x,x0,y0,x1,y1)
-        return (int(x),int(y))
-
     def makeframes(self):
-        endsecs = KEYFRAMEWIDTH
-        fint = int(endsecs/float(TOTALFRAMES)) # frame interval
         self.frames = {}
         self.fparts = {}
         self.fmiddles = {}
         self.fhsize = {}
-        kf = {} # point to keyframes by x-middle (which represents a time, like seconds)
-        for i in range(len(self.keyframes)):
-            secs = self.keyframes[i]
-            #kf[secs] = i
-            # use self.kfjoints[kf[secs]] and self.kfparts[kf[secs]]
-            if self.kfjoints[i]:
-                self.frames[secs] = self.kfjoints[i].copy()
-                self.fparts[secs] = self.kfparts[i].copy()
-                self.fmiddles[secs] = self.kfmiddles[i]
-                #print '%s:KFMIDDLE:%s = (%s,%s)' % (i,secs,self.fmiddles[secs][0],self.fmiddles[secs][1])
-                self.fhsize[secs] = self.kfsticks[i]['HEAD'][1]
-        fsecs = self.frames.keys()
-        fsecs.sort()
-        if not fsecs:
-            return
-        # ADD frame at 0
-        self.frames[0] = self.frames[fsecs[0]].copy()
-        self.fparts[0] = self.fparts[fsecs[0]].copy()
-        self.fmiddles[0] = self.fmiddles[fsecs[0]]
-        self.fhsize[0] = self.fhsize[fsecs[0]]
-        # ADD frame at end
-        self.frames[endsecs] = self.frames[fsecs[-1]].copy()
-        self.fparts[endsecs] = self.fparts[fsecs[-1]].copy()
-        self.fmiddles[endsecs] = self.fmiddles[fsecs[-1]]
-        self.fhsize[endsecs] = self.fhsize[fsecs[-1]]
-        # now fill in frames between
-        fsecs = self.frames.keys()
-        fsecs.sort()
-        for i in range(len(fsecs)):
-            if i == len(fsecs)-1:
-               continue # nothing after end
-            startsecs = fsecs[i]
-            endsecs = fsecs[i+1]
-            numframes = int((endsecs-startsecs)/float(fint))-1
-            #print 'NUMFRAMES(%s):%s' % (i,numframes)
-            for j in range(numframes-1): # MAYBE SHOULD BE numframes
-                secs = startsecs + ((j+1)*fint)
-                self.frames[secs] = self.intjoints(self.frames[startsecs],self.frames[endsecs],
-                                                   j+1,numframes)
-                self.fparts[secs] = self.intparts(self.fparts[startsecs],self.fparts[endsecs],
-                                                  j+1,numframes)
-                self.fmiddles[secs] = self.intmiddle(self.fmiddles[startsecs],self.fmiddles[endsecs],
-                                                     j+1,numframes)
-                self.fhsize[secs] = self.inthsize(self.fhsize[startsecs],self.fhsize[endsecs],
-                                                  j+1,numframes)
-                #print '%s,%s(%s secs):(%s,%s) START(%s,%s) - END(%s,%s) startsecs:%s endsecs:%s numframes:%s' % (i,j,secs,self.fmiddles[secs][0],self.fmiddles[secs][1],self.fmiddles[startsecs][0],self.fmiddles[startsecs][1],self.fmiddles[endsecs][0],self.fmiddles[endsecs][1],startsecs,endsecs,numframes)
-        #print self.frames.keys()
+
+        frames = kinematic.makeframes()
+
+        for key, value in frames.items():
+            self.frames[key] = value.joints
+            self.fparts[key] = value.parts
+            self.fmiddles[key] = value.middle
+            self.fhsize[key] = value.hsize
 
     def shiftjoints(self,xdiff,ydiff,joints=None):
         if not joints:
@@ -666,13 +568,13 @@ class flipsticks:
             # then the inner circle
             drawgc.set_foreground(white)
             self.kfpixmap.draw_arc(drawgc,True,x-35,y-35,70,70,0,360*64)
-            if self.kfssticks[i]:
+            if model.keys[i].scaled_sticks:
                 # draw a man in the circle
                 drawgc.set_foreground(black)
-                hsize = self.kfssticks[i]['HEAD'][1]
-                rhsize = int(self.kfparts[i]['RIGHT HAND']*0.2)
-                lhsize = int(self.kfparts[i]['LEFT HAND']*0.2)
-                self.drawstickman(drawgc,self.kfpixmap,(x,y),self.kfsjoints[i],hsize,rhsize,lhsize)
+                hsize = model.keys[i].scaled_sticks['HEAD'][1]
+                rhsize = int(model.keys[i].parts['RIGHT HAND']*0.2)
+                lhsize = int(model.keys[i].parts['LEFT HAND']*0.2)
+                self.drawstickman(drawgc,self.kfpixmap,(x,y), model.keys[i].scaled_joints,hsize,rhsize,lhsize)
                 #self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         self.kfdraw.queue_draw()
 
@@ -819,10 +721,10 @@ class flipsticks:
             widget.set_image(playimg)
             self.playing = False
             # set the main window to the keyframe
-            if self.kfsticks[self.kfselected]:
-                self.sticks = self.kfsticks[self.kfselected].copy()
-                self.parts = self.kfparts[self.kfselected].copy()
-                self.middle = self.kfmiddles[self.kfselected]
+            if model.keys[self.kfselected]:
+                self.sticks = model.keys[self.kfselected].sticks.copy()
+                self.parts = model.keys[self.kfselected].parts.copy()
+                self.middle = model.keys[self.kfselected].middle
                 self.setjoints()
                 self.drawmainframe()
             self.updateentrybox()
@@ -849,10 +751,10 @@ class flipsticks:
             widget.set_image(playimg)
             self.playing = False
             # set the main window to the keyframe
-            if self.kfsticks[self.kfselected]:
-                self.sticks = self.kfsticks[self.kfselected].copy()
-                self.parts = self.kfparts[self.kfselected].copy()
-                self.middle = self.kfmiddles[self.kfselected]
+            if model.keys[self.kfselected]:
+                self.sticks = model.keys[self.kfselected].sticks.copy()
+                self.parts = model.keys[self.kfselected].parts.copy()
+                self.middle = model.keys[self.kfselected].middle
                 self.setjoints()
                 self.drawmainframe()
             self.updateentrybox()
@@ -875,33 +777,6 @@ class flipsticks:
             self.playingbackwards = False
             self.playing = gobject.timeout_add(self.waittime, self.playframe)
 
-    def getsdata(self):
-        self.makeframes()
-        sdd = {} # save data dictionary
-        sdd['kfmiddles'] = self.kfmiddles
-        sdd['kfparts'] = self.kfparts
-        sdd['kfsticks'] = self.kfsticks
-        sdd['kfssticks'] = self.kfssticks
-        sdd['kfjoints'] = self.kfjoints
-        sdd['kfsjoints'] = self.kfsjoints
-        sdd['keyframes'] = self.keyframes
-        sdd['kfselected'] = self.kfselected
-        return pickle.dumps(sdd)
-
-    def restore(self, sdata):
-        sdd = pickle.loads(sdata)
-        self.kfmiddles = sdd['kfmiddles']
-        self.kfparts = sdd['kfparts']
-        self.kfsticks = sdd['kfsticks']
-        self.kfssticks = sdd['kfssticks']
-        self.kfjoints = sdd['kfjoints']
-        self.kfsjoints = sdd['kfsjoints']
-        self.keyframes = sdd['keyframes']
-        self.kfselected = sdd['kfselected']
-        self.drawkeyframe()
-        self.syncmaintokf()
-        self.updateentrybox()
-
     def __init__(self, toplevel_window, mdirpath):
         self.playing = False
         self.playingbackwards = False
@@ -919,12 +794,15 @@ class flipsticks:
         self.stickselected = 'RIGHT SHOULDER'
         self.laststickselected = None
         self.keyframes = KEYFRAMES
-        self.kfsticks = [None,None,None,None,None]
-        self.kfssticks = [None,None,None,None,None]
-        self.kfjoints = [None,None,None,None,None]
-        self.kfsjoints = [None,None,None,None,None]
-        self.kfmiddles = [None,None,None,None,None]
-        self.kfparts = [None,None,None,None,None]
+
+        #self.kfsticks = [None,None,None,None,None]
+        #self.kfssticks = [None,None,None,None,None]
+        #self.kfjoints = [None,None,None,None,None]
+        #self.kfsjoints = [None,None,None,None,None]
+        #self.kfmiddles = [None,None,None,None,None]
+        #self.kfparts = [None,None,None,None,None]
+
+
         self.kfselected = 0
         self.joints = self.initjoints()
         self.setjoints()
