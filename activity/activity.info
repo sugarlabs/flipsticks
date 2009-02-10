@@ -1,7 +1,7 @@
 [Activity]
 name = FlipSticks
 service_name = org.worldwideworkshop.olpc.FlipSticks
-class = flipsticks.flipsticksActivity
+class = activity.flipsticksActivity
 icon = activity-flipsticks
 activity_version = 1
 show_launcher = yes
