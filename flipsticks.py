@@ -61,12 +61,6 @@ def getpoints(x,y,angle,len):
     ny = int(round(y - (len * math.sin(math.radians(angle)))))
     return (nx,ny)
 
-def scalesticks(stickdict,i):
-    for key in stickdict:
-        (angle,len) = stickdict[key]
-        newlen = int(len * i)
-        stickdict[key] = (angle,newlen)
-
 class flipsticks:
     def expose_event(self, widget, event):
         x , y, width, height = event.area
@@ -100,10 +94,10 @@ class flipsticks:
         if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
             if self.jointpressed:
                 if inarea(x,y,DRAWWIDTH,DRAWHEIGHT):
-                    #self.joints[self.jointpressed] = (x,y) # old hack way
+                    #self.key.joints[self.jointpressed] = (x,y) # old hack way
                     # first find the parents x,y
-                    (px,py) = self.getparentjoint(self.jointpressed,self.joints,
-                                                  self.middle)
+                    (px,py) = self.getparentjoint(self.jointpressed,self.key.joints,
+                                                  self.key.middle)
                     if x-px == 0:
                         #computeangle = 0
                         b = 1
@@ -116,29 +110,29 @@ class flipsticks:
                     parents = self.getparentsticks(stickname)
                     panglesum = 0
                     for parentname in parents:
-                        (pangle,plen) = self.sticks[parentname]
+                        (pangle,plen) = self.key.sticks[parentname]
                         panglesum += pangle
-                    (angle, len) = self.sticks[stickname]
+                    (angle, len) = self.key.sticks[stickname]
                     #print 'X:%s,Y:%s,PX:%s,PY:%s,ANGLE:%s,NEWANGLE:%s' % (x,y,px,py,angle,newangle)
                     newangle = computeangle-panglesum
                     if (x < px) or (b == 1):
                         newangle = newangle + 180
                     if newangle < 0:
                         newangle = 360 + newangle
-                    self.sticks[stickname] = (newangle,len)
+                    self.key.sticks[stickname] = (newangle,len)
                     self.setjoints() # this is overkill
                     self.drawmainframe()
                     self.updateentrybox()
             elif self.middlepressed:
                 if inarea(x,y,DRAWWIDTH,DRAWHEIGHT):
-                    xdiff = x-self.middle[0]
-                    ydiff = y-self.middle[1]
+                    xdiff = x-self.key.middle[0]
+                    ydiff = y-self.key.middle[1]
                     self.shiftjoints(xdiff,ydiff)
-                    self.middle = (x,y)
+                    self.key.middle = (x,y)
                     self.drawmainframe()
             elif self.rotatepressed:
                 if inarea(x,y,DRAWWIDTH,DRAWHEIGHT):
-                    (px,py) = self.middle
+                    (px,py) = self.key.middle
                     if x-px == 0:
                         #computeangle = 0
                         b = 1
@@ -147,23 +141,23 @@ class flipsticks:
                     a = float(y-py)
                     computeangle = int(math.degrees(math.atan(a/b)))
                     stickname = 'TORSO'
-                    (angle, len) = self.sticks[stickname]
+                    (angle, len) = self.key.sticks[stickname]
                     newangle = computeangle
                     if (x < px) or (b == 1):
                         newangle = newangle + 180
                     if newangle < 0:
                         newangle = 360 + newangle
                     anglediff = newangle-angle
-                    self.sticks[stickname] = (newangle,len)
+                    self.key.sticks[stickname] = (newangle,len)
                     # now rotate the other sticks off of the middle
                     for stickname in ['NECK','RIGHT SHOULDER','LEFT SHOULDER']:
-                        (sangle,slen) = self.sticks[stickname]
+                        (sangle,slen) = self.key.sticks[stickname]
                         newsangle = sangle+anglediff
                         if newsangle < 0:
                             newsangle = 360 + newsangle
                         if newsangle > 360:
                             newsangle = newsangle - 360
-                        self.sticks[stickname] = (newsangle,slen)
+                        self.key.sticks[stickname] = (newsangle,slen)
                     self.setjoints()
                     self.drawmainframe()
                     self.updateentrybox()
@@ -180,9 +174,9 @@ class flipsticks:
         if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
             if self.kfpressed >= 0:
                 if inarea(x,y,KEYFRAMEWIDTH,KEYFRAMEHEIGHT):
-                    xdiff = x-self.keyframes[self.kfpressed]
+                    xdiff = x - model.keys[self.kfpressed].x
                     self.shiftjoints(xdiff,0, model.keys[self.kfpressed].scaled_joints)
-                    self.keyframes[self.kfpressed] = x
+                    model.keys[self.kfpressed].x = x
                     self.drawkeyframe()
         return True
 
@@ -202,11 +196,8 @@ class flipsticks:
 
     def syncmaintokf(self):
         # set the main window to the keyframe
-        if model.keys[self.kfselected].sticks:
-            self.sticks = model.keys[self.kfselected].sticks.copy()
-            self.parts = model.keys[self.kfselected].parts.copy()
-            self.middle = model.keys[self.kfselected].middle
-            self.setjoints()
+        if not model.keys[self.kfselected].empty():
+            self.key.assign(model.keys[self.kfselected])
             self.drawmainframe()
 
     def kf_button_press_event(self, widget, event):
@@ -262,7 +253,7 @@ class flipsticks:
         self.pixmap.draw_rectangle(drawgc,True,0,0,width,height)
 
         drawgc.set_foreground(black)
-        #hsize = self.sticks['HEAD'][1] # really half of head size
+        #hsize = self.key.sticks['HEAD'][1] # really half of head size
         hsize = self.fhsize[self.playframenum]
         middle = self.fmiddles[self.playframenum]
         rhsize = parts['RIGHT HAND']
@@ -298,10 +289,10 @@ class flipsticks:
 
     def enterangle_callback(self, widget, entry):
         stickname = self.stickselected
-        if stickname in self.sticks:
+        if stickname in self.key.sticks:
             newangle = int(entry.get_text())
-            (angle, len) = self.sticks[stickname]
-            self.sticks[stickname] = (newangle,len)
+            (angle, len) = self.key.sticks[stickname]
+            self.key.sticks[stickname] = (newangle,len)
         else:
             # part not stick
             self.angleentry.set_text('-')
@@ -309,46 +300,40 @@ class flipsticks:
         self.drawmainframe()
 
     def updateentrybox(self):
-        if self.stickselected in self.sticks:
-            (angle, len) = self.sticks[self.stickselected]
+        if self.stickselected in self.key.sticks:
+            (angle, len) = self.key.sticks[self.stickselected]
             self.angleentry.set_text(str(angle))
         else:
             # part not stick
-            len = self.parts[self.stickselected]
+            len = self.key.parts[self.stickselected]
         self.sizeentry.set_text(str(len))
 
     def enterlen_callback(self, widget, entry):
         stickname = self.stickselected
         newlen = int(entry.get_text())
-        if stickname in self.sticks:
+        if stickname in self.key.sticks:
             if stickname == 'HEAD':
                 newlen = int(newlen/2.0)
-            (angle, len) = self.sticks[stickname]
-            self.sticks[stickname] = (angle,newlen)
+            (angle, len) = self.key.sticks[stickname]
+            self.key.sticks[stickname] = (angle,newlen)
         else:
             # part not stick
-            self.parts[stickname] = newlen
+            self.key.parts[stickname] = newlen
         self.setjoints()
         self.drawmainframe()
 
     def reset(self, widget, data=None):
         xmiddle = int(DRAWWIDTH/2.0)
         ymiddle = int(DRAWHEIGHT/2.0)
-        self.middle = (xmiddle,ymiddle)
-        self.sticks = STICKS.copy()
-        self.parts = PARTS.copy()
+        self.key.middle = (xmiddle,ymiddle)
+        self.key.sticks = STICKS.copy()
+        self.key.parts = PARTS.copy()
         self.selectstickebox()
         self.setjoints()
         self.drawmainframe()
 
     def setframe(self, widget, data=None):
-        v = model.KeyFrame()
-        v.middle = self.middle
-        v.parts = self.parts
-        v.sticks = self.sticks
-        v.joints = self.joints
-
-        model.keys[self.kfselected].assign(v)
+        model.keys[self.kfselected].assign(self.key)
         self.drawkeyframe()
 
     def clearframe(self, widget, data=None):
@@ -371,20 +356,13 @@ class flipsticks:
 
     def shiftjoints(self,xdiff,ydiff,joints=None):
         if not joints:
-            joints = self.joints
+            joints = self.key.joints
         for jname in joints:
-            #if isinstance(self.joints[jname],tuple):
+            #if isinstance(self.key.joints[jname],tuple):
             (jx,jy) = joints[jname]
             njx = jx + xdiff
             njy = jy + ydiff
             joints[jname] = (njx,njy)
-
-    def initjoints(self):
-        joints = {}
-        for stickname in JOINTS:
-            jname = JOINTS[stickname]
-            joints[jname] = (0,0)
-        return joints
 
     def getparentsticks(self, stickname):
         if stickname in ['RIGHT SHOULDER','LEFT SHOULDER','NECK','TORSO']:
@@ -436,14 +414,14 @@ class flipsticks:
 
     def setjoints(self,joints=None,sticks=None,middle=None):
         if not joints:
-            joints = self.joints
+            joints = self.key.joints
         if not sticks:
-            sticks = self.sticks
+            sticks = self.key.sticks
         if not middle:
-            middle = self.middle
+            middle = self.key.middle
         # have to traverse in order because
         # parent joints must be set right
-        for stickname in self.sticklist:
+        for stickname in STICKLIST:
             (angle,len) = sticks[stickname]
             jname = JOINTS[stickname]
             (x,y) = self.getparentjoint(jname,joints,middle)
@@ -474,15 +452,15 @@ class flipsticks:
         self.pixmap.draw_rectangle(drawgc,True,0,0,width,height)
 
         drawgc.set_foreground(black)
-        hsize = self.sticks['HEAD'][1] # really half of head size
-        rhsize = self.parts['RIGHT HAND']
-        lhsize = self.parts['LEFT HAND']
-        self.drawstickman(drawgc,self.pixmap,self.middle,self.joints,hsize,rhsize,lhsize)
+        hsize = self.key.sticks['HEAD'][1] # really half of head size
+        rhsize = self.key.parts['RIGHT HAND']
+        lhsize = self.key.parts['LEFT HAND']
+        self.drawstickman(drawgc,self.pixmap,self.key.middle,self.key.joints,hsize,rhsize,lhsize)
         # draw circle for middle
         drawgc.set_foreground(green)
         if self.middlepressed:
             drawgc.set_foreground(blue)
-        x,y = self.middle
+        x,y = self.key.middle
         self.pixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         # draw circle for rotate (should be halfway between middle and groin
         (rx,ry) = self.getrotatepoint()
@@ -492,10 +470,10 @@ class flipsticks:
         self.pixmap.draw_arc(drawgc,True,rx-5,ry-5,10,10,0,360*64)
         # draw circles for joints
         drawgc.set_foreground(black)
-        for jname in self.joints:
+        for jname in self.key.joints:
             if jname == 'head':
                continue
-            x,y = self.joints[jname]
+            x,y = self.key.joints[jname]
             if self.jointpressed == jname:
                 drawgc.set_foreground(blue)
                 self.pixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
@@ -557,9 +535,9 @@ class flipsticks:
         x = width-10
         self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         # draw the keyframe circles
-        for i in range(len(self.keyframes)):
+        for i in range(len(model.keys)):
             # first the outer circle
-            x = self.keyframes[i]
+            x = model.keys[i].x
             if i == self.kfselected:
                 drawgc.set_foreground(pink)
             else:
@@ -600,20 +578,20 @@ class flipsticks:
         self.fpdraw.queue_draw()
 
     def inkeyframe(self, x, y):
-        for i in range(len(self.keyframes)):
-            kx = self.keyframes[i]
+        for i in range(len(model.keys)):
+            kx = model.keys[i].x
             if (abs(kx-x) <= 20):
                 return i
         return -1
 
     def injoint(self, x, y):
-        for jname in self.joints:
-            jx, jy = self.joints[jname]
+        for jname in self.key.joints:
+            jx, jy = self.key.joints[jname]
             if (abs(jx-x) <= 5) and (abs(jy-y) <= 5):
                 return jname
 
     def inmiddle(self, x, y):
-        mx, my = self.middle
+        mx, my = self.key.middle
         if (abs(mx-x) <= 5) and (abs(my-y) <= 5):
             return True
 
@@ -623,8 +601,8 @@ class flipsticks:
             return True
 
     def getrotatepoint(self):
-        (angle,len) = self.sticks['TORSO']
-        x,y = self.middle
+        (angle,len) = self.key.sticks['TORSO']
+        x,y = self.key.middle
         (rx,ry) = getpoints(x,y,angle,int(len/2.0))
         return (rx,ry)
 
@@ -643,17 +621,17 @@ class flipsticks:
         ebox.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_FOREGROUND))
         label = ebox.get_child()
         label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
-        if self.stickselected in self.sticks:
+        if self.stickselected in self.key.sticks:
             if self.stickselected == 'HEAD':
-                self.sizeentry.set_text(str(self.sticks[self.stickselected][1]*2))
+                self.sizeentry.set_text(str(self.key.sticks[self.stickselected][1]*2))
             else:
-                self.sizeentry.set_text(str(self.sticks[self.stickselected][1]))
+                self.sizeentry.set_text(str(self.key.sticks[self.stickselected][1]))
 
-            self.angleentry.set_text(str(self.sticks[self.stickselected][0]))
+            self.angleentry.set_text(str(self.key.sticks[self.stickselected][0]))
         else:
             # its a part not a stick
             self.angleentry.set_text('-')
-            self.sizeentry.set_text(str(self.parts[self.stickselected]))
+            self.sizeentry.set_text(str(self.key.parts[self.stickselected]))
 
     def exportanim(self, widget, data=None):
         self.makeframes()
@@ -679,7 +657,7 @@ class flipsticks:
             pixmap.draw_rectangle(drawgc,True,0,0,width,height)
 
             drawgc.set_foreground(black)
-            #hsize = self.sticks['HEAD'][1] # really half of head size
+            #hsize = self.key.sticks['HEAD'][1] # really half of head size
             hsize = self.fhsize[i]
             middle = self.fmiddles[i]
             rhsize = parts['RIGHT HAND']
@@ -722,10 +700,7 @@ class flipsticks:
             self.playing = False
             # set the main window to the keyframe
             if model.keys[self.kfselected]:
-                self.sticks = model.keys[self.kfselected].sticks.copy()
-                self.parts = model.keys[self.kfselected].parts.copy()
-                self.middle = model.keys[self.kfselected].middle
-                self.setjoints()
+                self.key.assign(model.keys[self.kfselected])
                 self.drawmainframe()
             self.updateentrybox()
         else:
@@ -752,10 +727,7 @@ class flipsticks:
             self.playing = False
             # set the main window to the keyframe
             if model.keys[self.kfselected]:
-                self.sticks = model.keys[self.kfselected].sticks.copy()
-                self.parts = model.keys[self.kfselected].parts.copy()
-                self.middle = model.keys[self.kfselected].middle
-                self.setjoints()
+                self.key.assign(model.keys[self.kfselected])
                 self.drawmainframe()
             self.updateentrybox()
         else:
@@ -784,27 +756,11 @@ class flipsticks:
         self.keyframe = 0
         self.toplevel = toplevel_window
         self.mdirpath = mdirpath
-        xmiddle = int(DRAWWIDTH/2.0)
-        ymiddle = int(DRAWHEIGHT/2.0)
-        self.middle = (xmiddle,ymiddle)
-        self.sticks = STICKS.copy()
-        self.parts = PARTS.copy()
-        self.sticklist = STICKLIST
-        self.labellist = LABELLIST
         self.stickselected = 'RIGHT SHOULDER'
-        self.laststickselected = None
-        self.keyframes = KEYFRAMES
 
-        #self.kfsticks = [None,None,None,None,None]
-        #self.kfssticks = [None,None,None,None,None]
-        #self.kfjoints = [None,None,None,None,None]
-        #self.kfsjoints = [None,None,None,None,None]
-        #self.kfmiddles = [None,None,None,None,None]
-        #self.kfparts = [None,None,None,None,None]
-
+        self.key = model.CurrentKeyFrame()
 
         self.kfselected = 0
-        self.joints = self.initjoints()
         self.setjoints()
         self.jointpressed = None
         self.kfpressed = -1
@@ -1004,7 +960,7 @@ class flipsticks:
         self.stickcontrols.pack_start(self.asbox,False,False,0)
         self.stickbuttons = {}
         self.sticklabels = {}
-        for stickpartname in self.labellist:
+        for stickpartname in LABELLIST:
             label = gtk.Label(LANG[self.language][stickpartname])
             label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_FOREGROUND))
             label.show()
