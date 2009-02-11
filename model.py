@@ -13,28 +13,81 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import pickle
+import cjson
+import math
 
-import theme
-import kinematic
+from theme import *
 
 keys = []
 
 class KeyFrame:
-    def __init__(self):
-        self.clear()
-
     def empty(self):
         return self.joints == None
 
-    def assign(self, x):
-        self.middle = x.middle
-        self.parts = x.parts.copy()
-        self.sticks = x.sticks.copy()
-        self.joints = x.joints.copy()
-        self.scaled_sticks = x.get_scaled_sticks()
-        self.scaled_joints = x.get_scaled_joints(self.x,
-                int(theme.KEYFRAMEHEIGHT/2.0))
+    def _setjoints(self, joints, sticks, middle):
+        if self.empty():
+            return
+
+        # have to traverse in order because
+        # parent joints must be set right
+        for stickname in STICKLIST:
+            (angle,len) = sticks[stickname]
+            jname = JOINTS[stickname]
+            (x,y) = getparentjoint(jname, joints, middle)
+            parents = getparentsticks(stickname)
+            panglesum = 0
+            for parentname in parents:
+                (pangle,plen) = sticks[parentname]
+                panglesum += pangle
+            (nx,ny) = self._getpoints(x,y,angle+panglesum,len)
+            joints[jname] = (nx,ny)
+
+    def _getpoints(self, x, y, angle, len):
+        nx = int(round(x + (len * math.cos(math.radians(angle)))))
+        ny = int(round(y - (len * math.sin(math.radians(angle)))))
+        return (nx,ny)
+
+    def _initjoints(self):
+        joints = {}
+        for stickname in JOINTS:
+            jname = JOINTS[stickname]
+            joints[jname] = (0,0)
+        return joints
+
+class StoredFrame(KeyFrame):
+    def __init__(self, data=None):
+        if not data:
+            self.clear()
+        else:
+            def array2tuple(a):
+                return a and (a[0], a[1])
+
+            def hash2tuple(h):
+                if not h:
+                    return None
+                out = {}
+                for i, j in h.items():
+                    out[i] = array2tuple(j)
+                return out
+
+            self.x = scale_keyframe(data['x'])
+            self.middle = scale_middle(data['middle'])
+            self.parts = data['parts']
+            self.sticks = hash2tuple(data['sticks'])
+            self.joints = hash2tuple(data['joints'])
+            self._make_thumbs()
+            self.setjoints()
+
+    def collect(self):
+        return { 'x'             : unscale_keyframe(self.x),
+                 'middle'        : unscale_middle(self.middle),
+                 'parts'         : self.parts,
+                 'sticks'        : self.sticks,
+                 'joints'        : self.joints }
+
+    def setjoints(self):
+        if not self.empty():
+            self._setjoints(self.joints, self.sticks, self.middle)
 
     def clear(self):
         self.middle = None
@@ -51,34 +104,43 @@ class KeyFrame:
                 self.scaled_joints[jname] = (jx+dx, jy)
         self.x += dx
 
+    def assign(self, x):
+        self.middle = x.middle
+        self.parts = x.parts.copy()
+        self.sticks = x.sticks.copy()
+        self.joints = x.joints.copy()
+        self._make_thumbs()
+
+    def _make_thumbs(self):
+        if self.empty():
+            self.scaled_sticks = None
+            self.scaled_joints = None
+            return
+
+        self.scaled_sticks = self.sticks.copy()
+        self.scaled_joints = self._initjoints()
+
+        for key in self.scaled_sticks:
+            (angle,len) = self.scaled_sticks[key]
+            newlen = int(len * .2)
+            self.scaled_sticks[key] = (angle,newlen)
+
+        self._setjoints(self.scaled_joints, self.scaled_sticks,
+                (self.x, KEYFRAMEHEIGHT/2))
+
 def save(filename):
     out = []
 
     for i in keys:
-        out.append({
-            'x'             : i.x,
-            'middle'        : i.middle,
-            'parts'         : i.parts,
-            'sticks'        : i.sticks,
-            'joints'        : i.joints,
-            'scaled_sticks' : i.scaled_sticks,
-            'scaled_joints' : i.scaled_joints })
+        out.append(i.collect())
 
-    file(filename, 'w').write(pickle.dumps(out))
+    file(filename, 'w').write(cjson.encode(out))
 
 def load(filename):
-    inc = pickle.loads(file(filename, 'r').read())
+    inc = cjson.decode(file(filename, 'r').read())
 
     for i, data in enumerate(inc):
-        key = keys[i]
-
-        key.x = data['x']
-        key.middle = data['middle']
-        key.parts = data['parts']
-        key.sticks = data['sticks']
-        key.joints = data['joints']
-        key.scaled_sticks = data['scaled_sticks']
-        key.scaled_joints = data['scaled_joints']
+        keys[i] = StoredFrame(data)
 
 def getparentsticks(stickname):
     if stickname in ['RIGHT SHOULDER','LEFT SHOULDER','NECK','TORSO']:
@@ -158,7 +220,7 @@ def _get_base64_pixbuf_data(pixbuf):
     return base64.b64encode(str(data[0]))
 
 for i in range(5):
-    key = KeyFrame()
-    keyframe_width = theme.KEYFRAMEWIDTH/5
+    key = StoredFrame()
+    keyframe_width = KEYFRAMEWIDTH/5
     key.x = keyframe_width/2 + i*keyframe_width
     keys.append(key)

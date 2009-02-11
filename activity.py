@@ -22,7 +22,7 @@ from sugar.graphics.toolbutton import ToolButton
 import model
 import montage
 import lessons
-import messenger
+from messenger import Messenger, SERVICE
 from shared import SharedActivity
 from theme import *
 from utils import *
@@ -30,7 +30,9 @@ from utils import *
 class flipsticksActivity(SharedActivity):
     def __init__(self, handle):
         self.notebook = gtk.Notebook()
-        SharedActivity.__init__(self, self.notebook, messenger.SERVICE, handle)
+        SharedActivity.__init__(self, self.notebook, SERVICE, handle)
+
+        self.connect('tube', self._tube_cb)
 
         self.notebook.show()
         self.notebook.props.show_border = False
@@ -69,6 +71,9 @@ class flipsticksActivity(SharedActivity):
             self.notebook.set_current_page(1)
         else:
             self.notebook.set_current_page(0)
+
+    def _tube_cb(self, activity, tube_conn, initiating):
+        self.messenger = Messenger(tube_conn, initiating, self.montage)
 
 class MontageToolbar(gtk.Toolbar):
     def __init__(self, montage):

@@ -22,6 +22,7 @@ import gtk
 import math
 import gobject
 import logging
+from gobject import SIGNAL_RUN_FIRST, TYPE_PYOBJECT
 from gettext import gettext as _
 
 from sugar.activity.activity import get_bundle_path
@@ -35,6 +36,20 @@ from theme import *
 logger = logging.getLogger('flipsticks')
 
 class View(gtk.EventBox):
+    __gsignals__ = {
+        'frame-changed' : (SIGNAL_RUN_FIRST, None, [TYPE_PYOBJECT]) }
+
+    def set_keyframe(self, value):
+        i, key = value
+        logger.debug('set_keyframe[%d]=%s' % (i, key and key.collect()))
+        if not key:
+            model.keys[i].clear()
+        else:
+            model.keys[i] = key
+        self.restore()
+
+    keyframe = gobject.property(type=object, getter=None, setter=set_keyframe)
+
     def reset(self):
         self.key.reset()
         self.selectstickebox()
@@ -43,10 +58,12 @@ class View(gtk.EventBox):
     def setframe(self):
         model.keys[self.kfselected].assign(self.key)
         self.drawkeyframe()
+        self.emit('frame-changed', self.kfselected)
 
     def clearframe(self):
         model.keys[self.kfselected].clear()
         self.drawkeyframe()
+        self.emit('frame-changed', self.kfselected)
 
     def setplayspeed(self, value):
         self.waittime = int((100-value)*5)
@@ -113,17 +130,6 @@ class View(gtk.EventBox):
         model.screen_shot(pixbuf)
 
     def restore(self):
-        # keep keyframes on screen after decreasing screen resolution
-        for i in model.keys:
-            if i.x >= KEYFRAMEWIDTH-KEYFRAME_RADIUS:
-                i.move(KEYFRAMEWIDTH-KEYFRAME_RADIUS - i.x)
-
-            if i.middle[0] >= DRAWWIDTH or i.middle[1] >= DRAWHEIGHT:
-                tmp = screen.ScreenFrame()
-                i.middle = (DRAWWIDTH/2, DRAWHEIGHT/3)
-                tmp.assign(i)
-                i.assign(tmp)
-
         self.drawkeyframe()
         self.syncmaintokf()
         self.updateentrybox()
@@ -245,6 +251,17 @@ class View(gtk.EventBox):
                     if frame.x + xdiff > KEYFRAME_RADIUS \
                             and frame.x + xdiff < KEYFRAMEWIDTH-KEYFRAME_RADIUS:
                         frame.move(xdiff)
+
+                        if self._emit_move_handle:
+                            gobject.source_remove(self._emit_move_handle)
+                            if self._emit_move_key != self.kfpressed:
+                                self._emit_move(self._emit_move_key)
+
+                        self._emit_move_key = self.kfpressed
+                        self._emit_move_handle = gobject.timeout_add(
+                                MOVEMIT_TIMEOUT, self._emit_move,
+                                self.kfpressed)
+
                         self.drawkeyframe()
                     self.kf_mouse_pos = x
         return True
@@ -571,6 +588,7 @@ class View(gtk.EventBox):
         self.toplevel = activity
         self.stickselected = 'RIGHT SHOULDER'
         self.pixmap = None
+        self._emit_move_handle = None
 
         self.setplayspeed(50)
 
@@ -602,6 +620,7 @@ class View(gtk.EventBox):
                                | gtk.gdk.BUTTON_RELEASE_MASK
                                | gtk.gdk.POINTER_MOTION_MASK
                                | gtk.gdk.POINTER_MOTION_HINT_MASK)
+        self.mfdraw.set_size_request(DRAWWIDTH, DRAWHEIGHT)
 
         screen_box = gtk.EventBox()
         screen_box.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BACKGROUND))
@@ -732,7 +751,7 @@ class View(gtk.EventBox):
 
         hdesktop = gtk.HBox()
         hdesktop.pack_start(leftbox, False)
-        hdesktop.pack_start(screen_pink)
+        hdesktop.pack_start(screen_pink, False, False)
 
         desktop = gtk.VBox()
         desktop.pack_start(hdesktop)
@@ -792,6 +811,11 @@ class View(gtk.EventBox):
     def _size_adj_cb(self, adj):
         self.sizeentry.set_text(str(int(adj.value)))
         self.enterlen_callback(None, self.sizeentry)
+
+    def _emit_move(self, key):
+        self._emit_move_handle = None
+        self.emit('frame-changed', key)
+        return False
 
 def _inarea(widget, x, y):
     x_, y_, width, height = widget.get_allocation()

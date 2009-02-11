@@ -14,6 +14,8 @@
 
 import gtk
 
+from sugar.graphics import style
+
 GRAY = "#B7B7B7" # gray
 PINK = "#FF0099" # pink
 YELLOW = "#FFFF00" # yellow
@@ -96,12 +98,13 @@ LANG = {'English':{'size':'Size',
 
 PAD = 10
 LOGO_WIDTH = 276
+TOLLBAR_HEIGHT = style.LARGE_ICON_SIZE
 
 KEYFRAMEWIDTH = gtk.gdk.screen_width() - PAD*3
 KEYFRAMEHEIGHT = 80
 
 DRAWWIDTH = gtk.gdk.screen_width() - LOGO_WIDTH - PAD*4
-DRAWHEIGHT = gtk.gdk.screen_height() - KEYFRAMEHEIGHT - PAD*5
+DRAWHEIGHT = gtk.gdk.screen_height() - KEYFRAMEHEIGHT - PAD*6 - TOLLBAR_HEIGHT
 
 KEYFRAMES = []
 KEYFRAMES_NUMBER = 5
@@ -109,9 +112,44 @@ TOTALFRAMES = 30
 
 KEYFRAME_RADIUS = 40
 
+MOVEMIT_TIMEOUT = 1000
+
 for i in range(KEYFRAMES_NUMBER):
     keyframe_width  = KEYFRAMEWIDTH/KEYFRAMES_NUMBER
     KEYFRAMES.append(keyframe_width/2 + i*keyframe_width)
+
+# scale coordinates between native resolution and transportable
+
+TRANSFER_DRAWWIDTH = 350
+TRANSFER_DRAWHEIGHT = 350
+TRANSFER_KEYFRAMEWIDTH = 600
+
+def scale_keyframe(x):
+    factor = float(TRANSFER_KEYFRAMEWIDTH) / (KEYFRAMEWIDTH)
+    x = max(KEYFRAME_RADIUS, int(x/factor))
+    x = min(KEYFRAMEWIDTH-KEYFRAME_RADIUS-1, x)
+    return x
+
+def scale_middle(middle):
+    if not middle:
+        return None
+    x_factor = float(TRANSFER_DRAWWIDTH) / DRAWWIDTH
+    y_factor = float(TRANSFER_DRAWHEIGHT) / DRAWHEIGHT
+    return (min(DRAWWIDTH-1, int(middle[0]/x_factor)),
+            min(DRAWHEIGHT-1, int(middle[1]/y_factor)))
+
+def unscale_keyframe(x):
+    factor = float(TRANSFER_KEYFRAMEWIDTH) / (KEYFRAMEWIDTH)
+    return int(x*factor)
+
+def unscale_middle(middle):
+    if not middle:
+        return None
+    x_factor = float(TRANSFER_DRAWWIDTH) / DRAWWIDTH
+    y_factor = float(TRANSFER_DRAWHEIGHT) / DRAWHEIGHT
+    return (int(middle[0]*x_factor), int(middle[1]*y_factor))
+
+# defaults
 
 STICKS = {'HEAD':(0,15),
           'NECK':(90,15),
@@ -133,7 +171,6 @@ STICKS = {'HEAD':(0,15),
 
 PARTS = {'RIGHT HAND':14,
          'LEFT HAND':14}
-
 
 STICKLIST = ['NECK','HEAD','RIGHT SHOULDER','UPPER RIGHT ARM','LOWER RIGHT ARM',
              'LEFT SHOULDER','UPPER LEFT ARM','LOWER LEFT ARM','TORSO',
