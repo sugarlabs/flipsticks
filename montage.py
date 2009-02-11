@@ -112,12 +112,18 @@ class View(gtk.EventBox):
 
         model.screen_shot(pixbuf)
 
-
-
-
-
-
     def restore(self):
+        # keep keyframes on screen after decreasing screen resolution
+        for i in model.keys:
+            if i.x >= KEYFRAMEWIDTH-KEYFRAME_RADIUS:
+                i.move(KEYFRAMEWIDTH-KEYFRAME_RADIUS - i.x)
+
+            if i.middle[0] >= DRAWWIDTH or i.middle[1] >= DRAWHEIGHT:
+                tmp = screen.ScreenFrame()
+                i.middle = (DRAWWIDTH/2, DRAWHEIGHT/3)
+                tmp.assign(i)
+                i.assign(tmp)
+
         self.drawkeyframe()
         self.syncmaintokf()
         self.updateentrybox()
