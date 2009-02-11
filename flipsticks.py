@@ -115,7 +115,7 @@ class flipsticks:
                 if _inarea(x,y,DRAWWIDTH,DRAWHEIGHT):
                     xdiff = x-self.key.middle[0]
                     ydiff = y-self.key.middle[1]
-                    self.shiftjoints(xdiff,ydiff)
+                    self.key.move(xdiff, ydiff)
                     self.key.middle = (x,y)
                     self.drawmainframe()
             elif self.rotatepressed:
@@ -161,12 +161,14 @@ class flipsticks:
             state = event.state
         if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
             if self.kfpressed >= 0:
-                if _inarea(x,y,KEYFRAMEWIDTH,KEYFRAMEHEIGHT):
+                if _inarea(x, y, KEYFRAMEWIDTH, KEYFRAMEHEIGHT):
                     xdiff = int(x - self.kf_mouse_pos)
-                    self.shiftjoints(xdiff,0, model.keys[self.kfpressed].scaled_joints)
-                    model.keys[self.kfpressed].x += xdiff
+                    frame = model.keys[self.kfpressed]
+                    if frame.x + xdiff > KEYFRAME_RADIUS \
+                            and frame.x + xdiff < KEYFRAMEWIDTH-KEYFRAME_RADIUS:
+                        frame.move(xdiff)
+                        self.drawkeyframe()
                     self.kf_mouse_pos = x
-                    self.drawkeyframe()
         return True
 
     def button_press_event(self, widget, event):
@@ -191,7 +193,7 @@ class flipsticks:
 
     def kf_button_press_event(self, widget, event):
         if event.button == 1 and self.pixmap != None:
-            kfnum = _inkeyframe(event.x, event.y)
+            kfnum = self._inkeyframe(event.x, event.y)
             if kfnum >= 0:
                 self.kf_mouse_pos = event.x
                 self.kfpressed = kfnum
@@ -305,16 +307,6 @@ class flipsticks:
         model.keys[self.kfselected].clear()
         self.drawkeyframe()
 
-    def shiftjoints(self,xdiff,ydiff,joints=None):
-        if not joints:
-            joints = self.key.joints
-        for jname in joints:
-            #if isinstance(self.key.joints[jname],tuple):
-            (jx,jy) = joints[jname]
-            njx = jx + xdiff
-            njy = jy + ydiff
-            joints[jname] = (njx,njy)
-
     def drawmainframe(self):
         area = self.toplevel.window
         drawgc = area.new_gc()
@@ -416,8 +408,9 @@ class flipsticks:
         self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         x = width-10
         self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
+
         # draw the keyframe circles
-        for i in range(len(model.keys)):
+        for i in list(reversed(self.keys_overlap_stack
             # first the outer circle
             x = model.keys[i].x
             if i == self.kfselected:
@@ -565,6 +558,10 @@ class flipsticks:
         self.toplevel = toplevel_window
         self.mdirpath = mdirpath
         self.stickselected = 'RIGHT SHOULDER'
+
+        self.keys_overlap_stack = []
+        for i in range(len(model.keys)):
+            self.keys_overlap_stack.append(i)
 
         self.key = screen.ScreenFrame()
 
@@ -825,7 +822,20 @@ class flipsticks:
         lhsize = parts['LEFT HAND']
         self.drawstickman(drawgc, pixmap, middle, joints, hsize, rhsize, lhsize)
 
-def _inarea(x,y,awidth,aheight):
+    def _inkeyframe(self, x, y):
+        dy = math.pow(abs(y - KEYFRAMEHEIGHT/2), 2)
+
+        for i, key in enumerate(self.keys_overlap_stack):
+            dx = math.pow(abs(x - model.keys[key].x), 2)
+            l = math.sqrt(dx + dy)
+            if int(l) <= KEYFRAME_RADIUS:
+                self.keys_overlap_stack.pop(i)
+                self.keys_overlap_stack.insert(0, key)
+                return key
+
+        return -1
+
+def _inarea(x, y, awidth, aheight):
     if x+5 > awidth:
         return False
     if y+5 > aheight:
@@ -835,12 +845,3 @@ def _inarea(x,y,awidth,aheight):
     if x < 5:
         return False
     return True
-
-def _inkeyframe(x, y):
-    dy = math.pow(abs(y - KEYFRAMEHEIGHT/2), 2)
-    for i in range(len(model.keys)):
-        dx = math.pow(abs(x - model.keys[i].x), 2)
-        l = math.sqrt(dx + dy)
-        if int(l) <= KEYFRAME_RADIUS:
-            return i
-    return -1

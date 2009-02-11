@@ -44,6 +44,13 @@ class KeyFrame:
         self.joints = None
         self.scaled_joints = None
 
+    def move(self, dx):
+        if self.scaled_joints:
+            for jname in self.scaled_joints:
+                (jx, jy) = self.scaled_joints[jname]
+                self.scaled_joints[jname] = (jx+dx, jy)
+        self.x += dx
+
 def save(filename):
     out = []
 

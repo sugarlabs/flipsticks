@@ -76,6 +76,12 @@ class ScreenFrame:
             return True
         return False
 
+    def move(self, dx, dy):
+        if self.joints:
+            for jname in self.joints:
+                (jx, jy) = self.joints[jname]
+                self.joints[jname] = (jx+dx, jy+dy)
+
 def _initjoints():
     joints = {}
     for stickname in theme.JOINTS:
