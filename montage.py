@@ -604,7 +604,6 @@ class View(gtk.EventBox):
         self.middlepressed = False
         self.rotatepressed = False
         self.iconsdir = os.path.join(get_bundle_path(), 'icons')
-        self.language = 'English'
 
         # screen
 
@@ -706,7 +705,7 @@ class View(gtk.EventBox):
         self.stickbuttons = {}
         self.sticklabels = {}
         for stickpartname in LABELLIST:
-            label = gtk.Label(LANG[self.language][stickpartname])
+            label = gtk.Label(STRINGS[stickpartname])
             label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_FOREGROUND))
             self.sticklabels[stickpartname] = label
             ebox = gtk.EventBox()

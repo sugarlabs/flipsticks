@@ -13,6 +13,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import gtk
+from gettext import gettext as _
 
 from sugar.graphics import style
 
@@ -46,55 +47,30 @@ OLD_COLOR_BG_BUTTONS = (
     (gtk.STATE_INSENSITIVE,"#027F01"),
     )
 
-SPANISH = u'Espa\xf1ol'
-LANG = {'English':{'size':'Size',
-                   'angle':'Angle',
-                   'lessonplan':'Lesson Plans',
-                   'lpdir':'lp-en',
-                   'export':'Export Frame One',
-                   'HEAD':'Head',
-                   'NECK':'Neck',
-                   'RIGHT SHOULDER':'Right Shoulder',
-                   'UPPER RIGHT ARM':'Upper Right Arm',
-                   'LOWER RIGHT ARM':'Lower Right Arm',
-                   'RIGHT HAND':'Right Hand',
-                   'LEFT SHOULDER':'Left Shoulder',
-                   'UPPER LEFT ARM':'Upper Left Arm',
-                   'LOWER LEFT ARM':'Lower Left Arm',
-                   'LEFT HAND':'Left Hand',
-                   'TORSO':'Torso',
-                   'RIGHT HIP':'Right Hip',
-                   'UPPER RIGHT LEG':'Upper Right Leg',
-                   'LOWER RIGHT LEG':'Lower Right Leg',
-                   'RIGHT FOOT':'Right Foot',
-                   'LEFT HIP':'Left Hip',
-                   'UPPER LEFT LEG':'Upper Left Leg',
-                   'LOWER LEFT LEG':'Lower Left Leg',
-                   'LEFT FOOT':'Left Foot'},
-        SPANISH:{'size':u'Tama\xf1o',
-                 'angle':u'\xe1ngulo',
-                 'lessonplan':u'Planes de la lecci\xf3n',
-                 'lpdir':'lp-en',
-                 'export':'Un marco de la exportacion',
-                 'HEAD':'Cabeza',
-                 'NECK':'Cuello',
-                 'RIGHT SHOULDER':'Hombro derecho',
-                 'UPPER RIGHT ARM':'Brazo derecho superior',
-                 'LOWER RIGHT ARM':'Bajar el brazo derecho',
-                 'RIGHT HAND':'Mano derecha',
-                 'LEFT SHOULDER':'Hombro izquierdo',
-                 'UPPER LEFT ARM':'Brazo izquierdo superior',
-                 'LOWER LEFT ARM':u'Un brazo izquierdo m\xe1s bajo',
-                 'LEFT HAND':'Mano izquierda',
-                 'TORSO':'Torso',
-                 'RIGHT HIP':'Cadera derecha',
-                 'UPPER RIGHT LEG':'Pierna derecha superior',
-                 'LOWER RIGHT LEG':'Bajar la pierna derecha',
-                 'RIGHT FOOT':'Pie derecho',
-                 'LEFT HIP':'Cadera izquierda',
-                 'UPPER LEFT LEG':'Pierna izquierda superior',
-                 'LOWER LEFT LEG':u'Una pierna izquierda m\xe1s baja',
-                 'LEFT FOOT':'Pie izquierdo'}}
+STRINGS = { 'size'              : _('Size'),
+            'angle'             : _('Angle'),
+            'lessonplan'        : _('Lesson Plans'),
+            'lpdir'             : _('lp-en'),
+            'export'            : _('Export Frame One'),
+            'HEAD'              : _('Head'),
+            'NECK'              : _('Neck'),
+            'RIGHT SHOULDER'    : _('Right Shoulder'),
+            'UPPER RIGHT ARM'   : _('Upper Right Arm'),
+            'LOWER RIGHT ARM'   : _('Lower Right Arm'),
+            'RIGHT HAND'        : _('Right Hand'),
+            'LEFT SHOULDER'     : _('Left Shoulder'),
+            'UPPER LEFT ARM'    : _('Upper Left Arm'),
+            'LOWER LEFT ARM'    : _('Lower Left Arm'),
+            'LEFT HAND'         : _('Left Hand'),
+            'TORSO'             : _('Torso'),
+            'RIGHT HIP'         : _('Right Hip'),
+            'UPPER RIGHT LEG'   : _('Upper Right Leg'),
+            'LOWER RIGHT LEG'   : _('Lower Right Leg'),
+            'RIGHT FOOT'        : _('Right Foot'),
+            'LEFT HIP'          : _('Left Hip'),
+            'UPPER LEFT LEG'    : _('Upper Left Leg'),
+            'LOWER LEFT LEG'    : _('Lower Left Leg'),
+            'LEFT FOOT'         : _('Left Foot') }
 
 PAD = 10
 LOGO_WIDTH = 276
