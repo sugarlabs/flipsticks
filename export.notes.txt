@@ -1,2 +1,0 @@
-png2yuv -I p -f 25 -j /tmp/*.png >my.yuv
-ffmpeg2theora --optimize my.yuv
