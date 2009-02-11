@@ -94,21 +94,23 @@ LANG = {'English':{'size':'Size',
                  'LOWER LEFT LEG':u'Una pierna izquierda m\xe1s baja',
                  'LEFT FOOT':'Pie izquierdo'}}
 
-FPWIDTH = 150
-FPHEIGHT = 100
-#DRAWHEIGHT = 300 for my laptop
-KEYFRAMEWIDTH = gtk.gdk.screen_width() - 406 # 675
-KEYFRAMEHEIGHT = 80
-DRAWWIDTH = KEYFRAMEWIDTH + 64 # 750
-DRAWHEIGHT = gtk.gdk.screen_height() - 370 # 500
+PAD = 10
+LOGO_WIDTH = 276
 
-KEYFRAMES = [] # [50,190,337,487,625]
+KEYFRAMEWIDTH = gtk.gdk.screen_width() - PAD*3
+KEYFRAMEHEIGHT = 80
+
+DRAWWIDTH = gtk.gdk.screen_width() - LOGO_WIDTH - PAD*4
+DRAWHEIGHT = gtk.gdk.screen_height() - KEYFRAMEHEIGHT - PAD*5
+
+KEYFRAMES = []
+KEYFRAMES_NUMBER = 5
 TOTALFRAMES = 30
 
 KEYFRAME_RADIUS = 40
 
-for i in range(5):
-    keyframe_width  = KEYFRAMEWIDTH/5
+for i in range(KEYFRAMES_NUMBER):
+    keyframe_width  = KEYFRAMEWIDTH/KEYFRAMES_NUMBER
     KEYFRAMES.append(keyframe_width/2 + i*keyframe_width)
 
 STICKS = {'HEAD':(0,15),

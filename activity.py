@@ -12,43 +12,191 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import os
 import gtk
-from sugar.activity import activity
-from sugar.presence import presenceservice
-from sugar.presence.tubeconn import TubeConnection
-import telepathy
-import telepathy.client
-from dbus import Interface
-from dbus.service import method, signal
-from dbus.gobject_service import ExportedGObject
+from gettext import gettext as _
+
+from sugar.activity.activity import Activity, ActivityToolbox
+from sugar.graphics.toggletoolbutton import ToggleToolButton
+from sugar.graphics.toolbutton import ToolButton
 
 import model
+import montage
+import lessons
+import messenger
+from shared import SharedActivity
 from theme import *
-from flipsticks import flipsticks
+from utils import *
 
-class flipsticksActivity(activity.Activity):
+class flipsticksActivity(SharedActivity):
     def __init__(self, handle):
-        activity.Activity.__init__(self,handle)
-        bundle_path = activity.get_bundle_path()
-        os.chdir(bundle_path)
-        self.set_title('FlipSticks')
-        toolbox = activity.ActivityToolbox(self)
-        self.set_toolbox(toolbox)
+        self.notebook = gtk.Notebook()
+        SharedActivity.__init__(self, self.notebook, messenger.SERVICE, handle)
+
+        self.notebook.show()
+        self.notebook.props.show_border = False
+        self.notebook.props.show_tabs = False
+
+        self.montage = montage.View(self)
+        self.notebook.append_page(self.montage)
+        self.lessons = lessons.View()
+        self.lessons.show()
+        self.notebook.append_page(self.lessons)
+
+        toolbox = ActivityToolbox(self)
         toolbox.show()
-        if hasattr(self, '_jobject'):
-            self._jobject.metadata['title'] = 'FlipSticks'
-        title_widget = toolbox._activity_toolbar.title
-        title_widget.set_size_request(title_widget.get_layout().get_pixel_size()[0] + 20, -1)
+        toolbox.connect('current-toolbar-changed', self._toolbar_changed_cb)
+        self.set_toolbox(toolbox)
 
-        self.app = flipsticks(self, bundle_path)
+        montage_bar = MontageToolbar(self.montage)
+        montage_bar.show()
+        toolbox.add_toolbar(_('Montage'), montage_bar)
 
+        lessons_bar = LessonsToolbar()
+        lessons_bar.show()
+        toolbox.add_toolbar(_('Lessons'), lessons_bar)
 
-        self.set_canvas(self.app)
+        toolbox.set_current_toolbar(1)
 
     def read_file(self, filepath):
         model.load(filepath)
-        self.app.restore()
+        self.montage.restore()
         
     def write_file(self, filepath):
         model.save(filepath)
+
+    def _toolbar_changed_cb(self, widget, index):
+        if index == 2:
+            self.notebook.set_current_page(1)
+        else:
+            self.notebook.set_current_page(0)
+
+class MontageToolbar(gtk.Toolbar):
+    def __init__(self, montage):
+        gtk.Toolbar.__init__(self)
+        self.montage = montage
+
+        # edit buttons
+
+        setframe = ToolButton('dialog-ok')
+        setframe.connect('clicked', self._setframe_cb)
+        setframe.set_tooltip(_('Set frame'))
+        self.insert(setframe, -1)
+
+        clearframe = ToolButton('gtk-delete')
+        clearframe.connect('clicked', self._clearframe_cb)
+        clearframe.set_tooltip(_('Clear frame'))
+        self.insert(clearframe, -1)
+
+        resetframe = ToolButton('gtk-cancel')
+        resetframe.connect('clicked', self._resetframe_cb)
+        resetframe.set_tooltip(_('Reset'))
+        self.insert(resetframe, -1)
+
+        separator = gtk.SeparatorToolItem()
+        self.insert(separator,-1)
+
+        # play/pause buttons
+
+        play_img_1 = gtk.Image()
+        play_img_1.set_from_icon_name('media-playback-start-back',
+                gtk.ICON_SIZE_LARGE_TOOLBAR)
+        pause_img_1 = gtk.Image()
+        pause_img_1.set_from_icon_name('media-playback-pause',
+                gtk.ICON_SIZE_LARGE_TOOLBAR)
+
+        play_img_2 = gtk.Image()
+        play_img_2.set_from_icon_name('media-playback-start',
+                gtk.ICON_SIZE_LARGE_TOOLBAR)
+        pause_img_2 = gtk.Image()
+        pause_img_2.set_from_icon_name('media-playback-pause',
+                gtk.ICON_SIZE_LARGE_TOOLBAR)
+
+        paly_1 = ToggleToolButton('media-playback-start-back')
+        play_2 = ToggleToolButton('media-playback-start')
+
+        paly_1.connect('toggled', self._play_cb,
+                (paly_1, play_2), (play_img_1, pause_img_1),
+                self.montage.playbackwards)
+        self.insert(paly_1, -1)
+        paly_1.set_tooltip(_('Play backward / Pause'))
+
+        play_2.connect('toggled', self._play_cb,
+                (play_2, paly_1), (play_img_2, pause_img_2),
+                self.montage.playforwards)
+        self.insert(play_2, -1)
+        play_2.set_tooltip(_('Play forward / Pause'))
+
+        # tempo button
+
+        tempo = TempoSlider(0, 99)
+        tempo.adjustment.connect("value-changed", self._tempo_cb)
+        tempo.set_size_request(250, -1)
+        tempo.set_value(5)
+        tempo_item = gtk.ToolItem()
+        tempo_item.add(tempo)
+        self.insert(tempo_item, -1)
+
+        separator = gtk.SeparatorToolItem()
+        self.insert(separator,-1)
+
+        # export buttons
+
+        exportframe = ToolButton('image')
+        exportframe.connect('clicked', self._exportframe_cb)
+        exportframe.set_tooltip(_('Snapshot'))
+        self.insert(exportframe, -1)
+
+        self.show_all()
+
+    def _exportframe_cb(self, widget):
+        self.montage.exportframe()
+
+    def _setframe_cb(self, widget):
+        self.montage.setframe()
+
+    def _clearframe_cb(self, widget):
+        self.montage.clearframe()
+
+    def _resetframe_cb(self, widget):
+        self.montage.reset()
+
+    def _tempo_cb(self, widget):
+        self.montage.setplayspeed(widget.value)
+
+    def _play_cb(self, widget, buttons, images, play):
+        if widget.get_active():
+            buttons[1].set_active(False)
+            images[1].show()
+            widget.set_icon_widget(images[1])
+            play()
+        else:
+            images[0].show()
+            widget.set_icon_widget(images[0])
+            self.montage.stop()
+
+class LessonsToolbar(gtk.Toolbar):
+    def __init__(self):
+        gtk.Toolbar.__init__(self)
+        self._mask = False
+
+        for lesson in lessons.THEMES:
+            button = gtk.ToggleToolButton()
+            button.set_label(lesson.name)
+            button.connect('clicked', self._lessons_cb, lesson)
+            self.insert(button, -1)
+
+        self.get_nth_item(0).set_active(True)
+        self.show_all()
+
+    def _lessons_cb(self, widget, lesson):
+        if self._mask:
+            return
+        self._mask = True
+
+        for i, j in enumerate(lessons.THEMES):
+            if j != lesson:
+                self.get_nth_item(i).set_active(False)
+
+        widget.props.active = True
+        lesson.change()
+        self._mask = False

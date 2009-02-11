@@ -21,50 +21,77 @@ import os
 import gtk
 import math
 import gobject
+import logging
 from gettext import gettext as _
+
+from sugar.activity.activity import get_bundle_path
 
 import model
 import screen
 import kinematic
+import theme
 from theme import *
 
-def prepare_btn(btn, w=-1, h=-1):
-    for state, color in COLOR_BG_BUTTONS:
-        btn.modify_bg(state, gtk.gdk.color_parse(color))
-    c = btn.get_child()
-    if c is not None:
-        for state, color in COLOR_FG_BUTTONS:
-            c.modify_fg(state, gtk.gdk.color_parse(color))
-    else:
-        for state, color in COLOR_FG_BUTTONS:
-            btn.modify_fg(state, gtk.gdk.color_parse(color))
-    if w>0 or h>0:
-        btn.set_size_request(w, h)
-    return btn
+logger = logging.getLogger('flipsticks')
 
-class flipsticks(gtk.EventBox):
-
-    def reset(self, widget, data=None):
+class View(gtk.EventBox):
+    def reset(self):
         self.key.reset()
         self.selectstickebox()
         self.drawmainframe()
 
-    def setframe(self, widget, data=None):
+    def setframe(self):
         model.keys[self.kfselected].assign(self.key)
         self.drawkeyframe()
 
-    def clearframe(self, widget, data=None):
+    def clearframe(self):
         model.keys[self.kfselected].clear()
         self.drawkeyframe()
 
-    def setplayspeed(self,adj):
-        #self.waittime = int((6-adj.value)*150)
-        self.waittime = int((6-adj.value)*75)
+    def setplayspeed(self, value):
+        self.waittime = int((100-value)*5)
         if self.playing:
             gobject.source_remove(self.playing)
             self.playing = gobject.timeout_add(self.waittime, self.playframe)
 
-    def exportanim(self, widget, data=None):
+    def playbackwards(self):
+        self.frames = kinematic.makeframes()
+        fsecs = self.frames.keys()
+        fsecs.sort()
+        if fsecs:
+            self.playframenum = fsecs[-1]
+        else:
+            self.playframenum = -1
+        self.playingbackwards = True
+
+        logger.debug('playbackwards speed=%s' % self.waittime)
+        self.playing = gobject.timeout_add(self.waittime, self.playframe)
+
+    def playforwards(self):
+        self.frames = kinematic.makeframes()
+        fsecs = self.frames.keys()
+        fsecs.sort()
+        if fsecs:
+            self.playframenum = fsecs[0]
+        else:
+            self.playframenum = -1
+
+        logger.debug('playforwards speed=%s' % self.waittime)
+        self.playingbackwards = False
+        self.playing = gobject.timeout_add(self.waittime, self.playframe)
+
+    def stop(self):
+        if not self.playing:
+            return
+
+        self.playing = False
+        # set the main window to the keyframe
+        if not model.keys[self.kfselected].empty():
+            self.key.assign(model.keys[self.kfselected])
+            self.drawmainframe()
+        self.updateentrybox()
+
+    def exportframe(self):
         self.frames = kinematic.makeframes()
         fsecs = self.frames.keys()
         firstpixindex = fsecs[0]
@@ -118,7 +145,7 @@ class flipsticks(gtk.EventBox):
             state = event.state
         if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
             if self.jointpressed:
-                if _inarea(x,y,DRAWWIDTH,DRAWHEIGHT):
+                if _inarea(widget, x, y):
                     #self.key.joints[self.jointpressed] = (x,y) # old hack way
                     # first find the parents x,y
                     (px,py) = model.getparentjoint(self.jointpressed,self.key.joints,
@@ -149,14 +176,14 @@ class flipsticks(gtk.EventBox):
                     self.drawmainframe()
                     self.updateentrybox()
             elif self.middlepressed:
-                if _inarea(x,y,DRAWWIDTH,DRAWHEIGHT):
+                if _inarea(widget, x, y):
                     xdiff = x-self.key.middle[0]
                     ydiff = y-self.key.middle[1]
                     self.key.move(xdiff, ydiff)
                     self.key.middle = (x,y)
                     self.drawmainframe()
             elif self.rotatepressed:
-                if _inarea(x,y,DRAWWIDTH,DRAWHEIGHT):
+                if _inarea(widget, x, y):
                     (px,py) = self.key.middle
                     if x-px == 0:
                         #computeangle = 0
@@ -198,7 +225,7 @@ class flipsticks(gtk.EventBox):
             state = event.state
         if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
             if self.kfpressed >= 0:
-                if _inarea(x, y, KEYFRAMEWIDTH, KEYFRAMEHEIGHT):
+                if _inarea(widget, x, y):
                     xdiff = int(x - self.kf_mouse_pos)
                     frame = model.keys[self.kfpressed]
                     if frame.x + xdiff > KEYFRAME_RADIUS \
@@ -332,6 +359,9 @@ class flipsticks(gtk.EventBox):
         self.drawmainframe()
 
     def drawmainframe(self):
+        if not self.pixmap:
+            return
+
         area = self.toplevel.window
         drawgc = area.new_gc()
         drawgc.line_width = 3
@@ -519,68 +549,16 @@ class flipsticks(gtk.EventBox):
         self.sizeentry.set_text(str(size))
         self.size_adj.set_value(size)
 
-    def playbackwards(self, widget, data=None):
-        if self.playing:
-            playimg = gtk.Image()
-            playimg.set_from_file(os.path.join(self.iconsdir,'big_left_arrow.png'))
-            playimg.show()
-            widget.set_image(playimg)
-            self.playing = False
-            # set the main window to the keyframe
-            if model.keys[self.kfselected]:
-                self.key.assign(model.keys[self.kfselected])
-                self.drawmainframe()
-            self.updateentrybox()
-        else:
-            stopimg = gtk.Image()
-            stopimg.set_from_file(os.path.join(self.iconsdir,'big_pause.png'))
-            stopimg.show()
-            widget.set_image(stopimg)
-            self.frames = kinematic.makeframes()
-            fsecs = self.frames.keys()
-            fsecs.sort()
-            if fsecs:
-                self.playframenum = fsecs[-1]
-            else:
-                self.playframenum = -1
-            self.playingbackwards = True
-            self.playing = gobject.timeout_add(self.waittime, self.playframe)
-
-    def playforwards(self, widget, data=None):
-        if self.playing:
-            playimg = gtk.Image()
-            playimg.set_from_file(os.path.join(self.iconsdir,'big_right_arrow.png'))
-            playimg.show()
-            widget.set_image(playimg)
-            self.playing = False
-            # set the main window to the keyframe
-            if model.keys[self.kfselected]:
-                self.key.assign(model.keys[self.kfselected])
-                self.drawmainframe()
-            self.updateentrybox()
-        else:
-            stopimg = gtk.Image()
-            stopimg.set_from_file(os.path.join(self.iconsdir,'big_pause.png'))
-            stopimg.show()
-            widget.set_image(stopimg)
-            self.frames = kinematic.makeframes()
-            fsecs = self.frames.keys()
-            fsecs.sort()
-            if fsecs:
-                self.playframenum = fsecs[0]
-            else:
-                self.playframenum = -1
-            self.playingbackwards = False
-            self.playing = gobject.timeout_add(self.waittime, self.playframe)
-
-    def __init__(self, toplevel_window, mdirpath):
+    def __init__(self, activity):
         gtk.EventBox.__init__(self)
 
         self.playing = False
         self.playingbackwards = False
-        self.waittime = 3*150
-        self.toplevel = toplevel_window
+        self.toplevel = activity
         self.stickselected = 'RIGHT SHOULDER'
+        self.pixmap = None
+
+        self.setplayspeed(50)
 
         self.keys_overlap_stack = []
         for i in range(len(model.keys)):
@@ -593,13 +571,12 @@ class flipsticks(gtk.EventBox):
         self.kfpressed = -1
         self.middlepressed = False
         self.rotatepressed = False
-        self.iconsdir = os.path.join(mdirpath, 'icons')
+        self.iconsdir = os.path.join(get_bundle_path(), 'icons')
         self.language = 'English'
 
         # screen
 
         self.mfdraw = gtk.DrawingArea()
-        self.mfdraw.set_size_request(DRAWWIDTH,DRAWHEIGHT)
         self.mfdraw.connect('expose_event', self.expose_event)
         self.mfdraw.connect('configure_event', self.configure_event)
         self.mfdraw.connect('motion_notify_event', self.motion_notify_event)
@@ -614,12 +591,12 @@ class flipsticks(gtk.EventBox):
 
         screen_box = gtk.EventBox()
         screen_box.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BACKGROUND))
-        screen_box.set_border_width(5)
+        screen_box.set_border_width(PAD/2)
         screen_box.add(self.mfdraw)
 
         screen_pink = gtk.EventBox()
         screen_pink.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(PINK))
-        screen_pink.set_border_width(10)
+        screen_pink.set_border_width(PAD)
         screen_pink.add(screen_box)
 
         # keyframes
@@ -637,6 +614,10 @@ class flipsticks(gtk.EventBox):
                                | gtk.gdk.BUTTON_RELEASE_MASK
                                | gtk.gdk.POINTER_MOTION_MASK
                                | gtk.gdk.POINTER_MOTION_HINT_MASK)
+
+        kfdraw_box = gtk.EventBox()
+        kfdraw_box.set_border_width(PAD)
+        kfdraw_box.add(self.kfdraw)
 
         # control box
 
@@ -716,12 +697,12 @@ class flipsticks(gtk.EventBox):
 
         control_bg = gtk.EventBox()
         control_bg.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_BACKGROUND))
-        control_bg.set_border_width(5)
+        control_bg.set_border_width(PAD/2)
         control_bg.add(control_box)
 
         control_pink = gtk.EventBox()
         control_pink.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(PINK))
-        control_pink.set_border_width(5)
+        control_pink.set_border_width(PAD)
         control_pink.add(control_bg)
 
         # left control box
@@ -741,11 +722,11 @@ class flipsticks(gtk.EventBox):
 
         desktop = gtk.VBox()
         desktop.pack_start(hdesktop)
-        desktop.pack_start(self.kfdraw, False, False, 0)
+        desktop.pack_start(kfdraw_box, False, False, 0)
 
         greenbox = gtk.EventBox()
         greenbox.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BACKGROUND))
-        greenbox.set_border_width(5)
+        greenbox.set_border_width(PAD/2)
         greenbox.add(desktop)
 
         self.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(YELLOW))
@@ -798,13 +779,8 @@ class flipsticks(gtk.EventBox):
         self.sizeentry.set_text(str(int(adj.value)))
         self.enterlen_callback(None, self.sizeentry)
 
-def _inarea(x, y, awidth, aheight):
-    if x+5 > awidth:
-        return False
-    if y+5 > aheight:
-        return False
-    if y < 5:
-        return False
-    if x < 5:
+def _inarea(widget, x, y):
+    x_, y_, width, height = widget.get_allocation()
+    if x < 0 or y < 0 or x >= width or y >= height:
         return False
     return True

@@ -28,7 +28,7 @@ class ScreenFrame:
         self.parts = theme.PARTS.copy()
         self.sticks = theme.STICKS.copy()
         self.joints = _initjoints()
-        self.middle = (int(theme.DRAWWIDTH/2.0), int(theme.DRAWHEIGHT/2.0))
+        self.middle = (theme.DRAWWIDTH/2, theme.DRAWHEIGHT/3)
         self.setjoints()
 
     def assign(self, x):
