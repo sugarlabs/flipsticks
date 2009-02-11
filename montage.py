@@ -55,6 +55,9 @@ class View(gtk.EventBox):
             self.playing = gobject.timeout_add(self.waittime, self.playframe)
 
     def playbackwards(self):
+        if self.playing:
+            gobject.source_remove(self.playing)
+
         self.frames = kinematic.makeframes()
         fsecs = self.frames.keys()
         fsecs.sort()
@@ -68,6 +71,9 @@ class View(gtk.EventBox):
         self.playing = gobject.timeout_add(self.waittime, self.playframe)
 
     def playforwards(self):
+        if self.playing:
+            gobject.source_remove(self.playing)
+
         self.frames = kinematic.makeframes()
         fsecs = self.frames.keys()
         fsecs.sort()
@@ -84,7 +90,9 @@ class View(gtk.EventBox):
         if not self.playing:
             return
 
-        self.playing = False
+        gobject.source_remove(self.playing)
+        self.playing = None
+
         # set the main window to the keyframe
         if not model.keys[self.kfselected].empty():
             self.key.assign(model.keys[self.kfselected])
