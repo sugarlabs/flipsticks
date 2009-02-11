@@ -17,13 +17,11 @@
 ### author: Ed Stoner (ed@whsd.net)
 ### (c) 2007 World Wide Workshop Foundation
 
-import time
-import pygtk
-pygtk.require('2.0')
-import gtk
-import gobject
 import os
+import gtk
 import math
+import gobject
+from gettext import gettext as _
 
 import model
 import screen
@@ -44,7 +42,46 @@ def prepare_btn(btn, w=-1, h=-1):
         btn.set_size_request(w, h)
     return btn
 
-class flipsticks:
+class flipsticks(gtk.EventBox):
+
+    def reset(self, widget, data=None):
+        self.key.reset()
+        self.selectstickebox()
+        self.drawmainframe()
+
+    def setframe(self, widget, data=None):
+        model.keys[self.kfselected].assign(self.key)
+        self.drawkeyframe()
+
+    def clearframe(self, widget, data=None):
+        model.keys[self.kfselected].clear()
+        self.drawkeyframe()
+
+    def setplayspeed(self,adj):
+        #self.waittime = int((6-adj.value)*150)
+        self.waittime = int((6-adj.value)*75)
+        if self.playing:
+            gobject.source_remove(self.playing)
+            self.playing = gobject.timeout_add(self.waittime, self.playframe)
+
+    def exportanim(self, widget, data=None):
+        self.frames = kinematic.makeframes()
+        fsecs = self.frames.keys()
+        firstpixindex = fsecs[0]
+
+        x, y, width, height = self.mfdraw.get_allocation()
+        pixmap = gtk.gdk.Pixmap(self.mfdraw.window, width, height)
+        self._draw_frame(fsecs[0], pixmap)
+        pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, width, height)
+        gtk.gdk.Pixbuf.get_from_drawable(pixbuf,pixmap,pixmap.get_colormap(),0,0,0,0,width,height)
+
+        model.screen_shot(pixbuf)
+
+
+
+
+
+
     def restore(self):
         self.drawkeyframe()
         self.syncmaintokf()
@@ -215,14 +252,6 @@ class flipsticks:
         self.drawkeyframe()
         return True
 
-    def setplayspeed(self,adj):
-        #self.waittime = int((6-adj.value)*150)
-        self.waittime = int((6-adj.value)*75)
-        if self.playing:
-            gobject.source_remove(self.playing)
-            self.playing = gobject.timeout_add(self.waittime, self.playframe)
-
-
     def playframe(self):
         if not self.playing:
             return False
@@ -265,9 +294,15 @@ class flipsticks:
             newangle = int(entry.get_text())
             (angle, len) = self.key.sticks[stickname]
             self.key.sticks[stickname] = (newangle,len)
+            self.anglel_adj.set_value(newangle)
+            self.anglel_slider.set_sensitive(True)
         else:
             # part not stick
-            self.angleentry.set_text('-')
+            self.angleentry.set_text('')
+            self.angleentry.set_sensitive(False)
+            self.anglel_adj.set_value(0)
+            self.anglel_slider.set_sensitive(False)
+
         self.key.setjoints()
         self.drawmainframe()
 
@@ -275,10 +310,12 @@ class flipsticks:
         if self.stickselected in self.key.sticks:
             (angle, len) = self.key.sticks[self.stickselected]
             self.angleentry.set_text(str(angle))
+            self.anglel_adj.set_value(angle)
         else:
             # part not stick
             len = self.key.parts[self.stickselected]
         self.sizeentry.set_text(str(len))
+        self.size_adj.set_value(len)
 
     def enterlen_callback(self, widget, entry):
         stickname = self.stickselected
@@ -293,19 +330,6 @@ class flipsticks:
             self.key.parts[stickname] = newlen
         self.key.setjoints()
         self.drawmainframe()
-
-    def reset(self, widget, data=None):
-        self.key.reset()
-        self.selectstickebox()
-        self.drawmainframe()
-
-    def setframe(self, widget, data=None):
-        model.keys[self.kfselected].assign(self.key)
-        self.drawkeyframe()
-
-    def clearframe(self, widget, data=None):
-        model.keys[self.kfselected].clear()
-        self.drawkeyframe()
 
     def drawmainframe(self):
         area = self.toplevel.window
@@ -410,7 +434,7 @@ class flipsticks:
         self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
 
         # draw the keyframe circles
-        for i in list(reversed(self.keys_overlap_stack
+        for i in list(reversed(self.keys_overlap_stack)):
             # first the outer circle
             x = model.keys[i].x
             if i == self.kfselected:
@@ -471,30 +495,29 @@ class flipsticks:
         ebox.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_FOREGROUND))
         label = ebox.get_child()
         label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+
         if self.stickselected in self.key.sticks:
             if self.stickselected == 'HEAD':
-                self.sizeentry.set_text(str(self.key.sticks[self.stickselected][1]*2))
+                size = self.key.sticks[self.stickselected][1]*2
             else:
-                self.sizeentry.set_text(str(self.key.sticks[self.stickselected][1]))
+                size = self.key.sticks[self.stickselected][1]
 
-            self.angleentry.set_text(str(self.key.sticks[self.stickselected][0]))
+            angle = self.key.sticks[self.stickselected][0]
+            self.angleentry.set_text(str(angle))
+            self.angleentry.set_sensitive(True)
+            self.anglel_adj.set_value(angle)
+            self.anglel_slider.set_sensitive(True)
         else:
+            size = self.key.parts[self.stickselected]
+
             # its a part not a stick
-            self.angleentry.set_text('-')
-            self.sizeentry.set_text(str(self.key.parts[self.stickselected]))
+            self.angleentry.set_text('')
+            self.angleentry.set_sensitive(False)
+            self.anglel_adj.set_value(0)
+            self.anglel_slider.set_sensitive(False)
 
-    def exportanim(self, widget, data=None):
-        self.frames = kinematic.makeframes()
-        fsecs = self.frames.keys()
-        firstpixindex = fsecs[0]
-
-        x, y, width, height = self.mfdraw.get_allocation()
-        pixmap = gtk.gdk.Pixmap(self.mfdraw.window, width, height)
-        self._draw_frame(fsecs[0], pixmap)
-        pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, width, height)
-        gtk.gdk.Pixbuf.get_from_drawable(pixbuf,pixmap,pixmap.get_colormap(),0,0,0,0,width,height)
-
-        model.screen_shot(pixbuf)
+        self.sizeentry.set_text(str(size))
+        self.size_adj.set_value(size)
 
     def playbackwards(self, widget, data=None):
         if self.playing:
@@ -551,12 +574,12 @@ class flipsticks:
             self.playing = gobject.timeout_add(self.waittime, self.playframe)
 
     def __init__(self, toplevel_window, mdirpath):
+        gtk.EventBox.__init__(self)
+
         self.playing = False
         self.playingbackwards = False
         self.waittime = 3*150
-        self.keyframe = 0
         self.toplevel = toplevel_window
-        self.mdirpath = mdirpath
         self.stickselected = 'RIGHT SHOULDER'
 
         self.keys_overlap_stack = []
@@ -570,36 +593,13 @@ class flipsticks:
         self.kfpressed = -1
         self.middlepressed = False
         self.rotatepressed = False
-        self.iconsdir = os.path.join(self.mdirpath,'icons')
+        self.iconsdir = os.path.join(mdirpath, 'icons')
         self.language = 'English'
 
-        self.mpbox = gtk.VBox()
-        self.main = gtk.EventBox()
-        self.main.show()
-        self.main.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(YELLOW))
-        self.mainbox = gtk.EventBox()
-        self.mainbox.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BACKGROUND))
-        self.mainbox.set_border_width(5)
-        self.mainbox.show()
-        self.main.add(self.mainbox)
-        self.mpbox.show()
-        self.hbox = gtk.HBox()
-        self.hbox.show()
-        self.vbox = gtk.VBox()
-        self.vbox.show()
-        self.hbox.pack_start(self.vbox,False,False,0)
-        self.mainbox.add(self.mpbox)
-        self.mpbox.pack_start(self.hbox,True,True,0)
-        
-        self.logo = gtk.Image()
-        self.logo.show()
-        self.logo.set_from_file(os.path.join(self.iconsdir,'logo.png'))
-
-        self.vbox.pack_start(self.logo,False,False,0)
+        # screen
 
         self.mfdraw = gtk.DrawingArea()
         self.mfdraw.set_size_request(DRAWWIDTH,DRAWHEIGHT)
-        self.mfdraw.show()
         self.mfdraw.connect('expose_event', self.expose_event)
         self.mfdraw.connect('configure_event', self.configure_event)
         self.mfdraw.connect('motion_notify_event', self.motion_notify_event)
@@ -611,40 +611,21 @@ class flipsticks:
                                | gtk.gdk.BUTTON_RELEASE_MASK
                                | gtk.gdk.POINTER_MOTION_MASK
                                | gtk.gdk.POINTER_MOTION_HINT_MASK)
-        self.drawborder = gtk.EventBox()
-        self.drawborder.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(PINK))
-        self.drawborder.set_border_width(10)
-        self.drawborder.show()
-        self.drawframe = gtk.EventBox()
-        self.drawframe.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BACKGROUND))
-        self.drawframe.set_border_width(5)
-        self.drawframe.show()
-        self.drawborder.add(self.drawframe)
-        self.drawframe.add(self.mfdraw)
-        #self.drawhbox.pack_start(self.drawborder, False, False, 10)
 
-        #self.vbox.pack_start(self.drawhbox,False,False,0)
-        self.vbox.pack_start(self.drawborder,True,False,0)
+        screen_box = gtk.EventBox()
+        screen_box.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BACKGROUND))
+        screen_box.set_border_width(5)
+        screen_box.add(self.mfdraw)
 
-        self.keyframehbox = gtk.HBox()
-        self.keyframehbox.show()
-        
-        self.playback = gtk.Button()
-        self.playback.connect('clicked', self.playbackwards, None)
-        playbackla = gtk.Image()
-        playbackla.set_from_file(os.path.join(self.iconsdir,'big_left_arrow.png'))
-        playbackla.show()
-        self.playback.add(playbackla)
-        prepare_btn(self.playback)
-        self.playback.show()
-        self.playbackvbox = gtk.VBox()
-        self.playbackvbox.show()
-        self.playbackvbox.pack_start(self.playback,True,False,0)
-        self.keyframehbox.pack_start(self.playbackvbox,True,False,0)
-        # vvvvvvvvvvKEYFRAME DRAWING AREA HEREvvvvvvvvvvvv
+        screen_pink = gtk.EventBox()
+        screen_pink.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(PINK))
+        screen_pink.set_border_width(10)
+        screen_pink.add(screen_box)
+
+        # keyframes
+
         self.kfdraw = gtk.DrawingArea()
         self.kfdraw.set_size_request(KEYFRAMEWIDTH,KEYFRAMEHEIGHT)
-        self.kfdraw.show()
         self.kfdraw.connect('expose_event', self.kf_expose_event)
         self.kfdraw.connect('configure_event', self.kf_configure_event)
         self.kfdraw.connect('motion_notify_event', self.kf_motion_notify_event)
@@ -656,146 +637,120 @@ class flipsticks:
                                | gtk.gdk.BUTTON_RELEASE_MASK
                                | gtk.gdk.POINTER_MOTION_MASK
                                | gtk.gdk.POINTER_MOTION_HINT_MASK)
-        self.keyframehbox.pack_start(self.kfdraw,False,False,0)
 
-        # ^^^^^^^^^^KEYFRAME DRAWING AREA HERE^^^^^^^^^^^^
-        self.playforward = gtk.Button()
-        self.playforward.connect('clicked', self.playforwards, None)
-        playforwardla = gtk.Image()
-        playforwardla.set_from_file(os.path.join(self.iconsdir,'big_right_arrow.png'))
-        playforwardla.show()
-        self.playforward.add(playforwardla)
-        prepare_btn(self.playforward)
-        self.playforward.show()
-        self.playforwardvbox = gtk.VBox()
-        self.playforwardvbox.show()
-        self.playforwardvbox.pack_start(self.playforward,True,False,0)
-        self.keyframehbox.pack_start(self.playforwardvbox,True,False,0)
+        # control box
 
-        self.vbox.pack_start(self.keyframehbox,False,False,10)
-
-        self.bottomcontrolshbox = gtk.HBox()
-        self.bottomcontrolshbox.show()
-        self.resetbutton = gtk.Button()
-        resetimg = gtk.Image()
-        resetimg.set_from_file(os.path.join(self.iconsdir,'reset.png'))
-        resetimg.show()
-        self.resetbutton.add(resetimg)
-        self.resetbutton.connect('clicked', self.reset, None)
-        prepare_btn(self.resetbutton)
-        self.resetbutton.show()
-        self.bottomcontrolshbox.pack_start(self.resetbutton, True, False, 0)
-
-        self.setframebutton = gtk.Button()
-        cameraimg = gtk.Image()
-        cameraimg.set_from_file(os.path.join(self.iconsdir,'camera.png'))
-        cameraimg.show()
-        self.setframebutton.add(cameraimg)
-        self.setframebutton.connect('clicked', self.setframe, None)
-        prepare_btn(self.setframebutton)
-        self.setframebutton.show()
-        self.bottomcontrolshbox.pack_start(self.setframebutton, True, False, 0)
-
-        self.clearframebutton = gtk.Button()
-        clearimg = gtk.Image()
-        clearimg.set_from_file(os.path.join(self.iconsdir,'clear.png'))
-        clearimg.show()
-        self.clearframebutton.add(clearimg)
-        self.clearframebutton.connect('clicked', self.clearframe, None)
-        prepare_btn(self.clearframebutton)
-        self.clearframebutton.show()
-        self.bottomcontrolshbox.pack_start(self.clearframebutton, True, False, 0)
-
-        adj = gtk.Adjustment(2.5,1,5,.5,1)
-        adj.connect('value_changed',self.setplayspeed)
-        self.playspeed = gtk.HScale(adj)
-        self.playspeed.set_draw_value(False)
-        for state, color in COLOR_BG_BUTTONS:
-            self.playspeed.modify_bg(state, gtk.gdk.color_parse(color))
-        self.playspeed.show()
-        self.bottomcontrolshbox.pack_start(self.playspeed, True, True, 5)
-        self.vbox.pack_start(self.bottomcontrolshbox,False,False,10)
-
-        # NOW THE RIGHT SIDE
-        self.rightvbox = gtk.VBox()
-        self.rightvbox.show()
-
-        # START OF STICK CONTROLS
-        self.stickcontrols = gtk.VBox()
-        self.stickcontrols.show()
-        self.stickcontrolsborder = gtk.EventBox()
-        self.stickcontrolsborder.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(PINK))
-        self.stickcontrolsborder.set_border_width(5)
-        self.stickcontrolsborder.show()
-        self.stickcontrolsframe = gtk.EventBox()
-        self.stickcontrolsframe.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_BACKGROUND))
-        self.stickcontrolsframe.set_border_width(5)
-        self.stickcontrolsframe.show()
-        self.stickcontrolsborder.add(self.stickcontrolsframe)
-        self.stickcontrolsframe.add(self.stickcontrols)
-        self.anglesizehbox = gtk.HBox()
-        self.anglesizehbox.show()
-        #label = gtk.Label('Angle:')
-        self.anglelabel = gtk.Label(LANG[self.language]['angle']+':')
-        self.anglelabel.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
-        self.anglelabel.show()
-        self.anglesizehbox.pack_start(self.anglelabel,False,False,5)
+        angle_box = gtk.HBox()
+        anglelabel = gtk.Label(_('Angle:'))
+        anglelabel.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        anglelabel.set_size_request(60, -1)
+        angle_box.pack_start(anglelabel,False,False,5)
         self.angleentry = gtk.Entry()
         self.angleentry.set_max_length(3)
         self.angleentry.set_width_chars(3)
         self.angleentry.connect('activate', self.enterangle_callback, self.angleentry)
-        self.angleentry.show()
-        self.anglesizehbox.pack_start(self.angleentry,False,False,0)
-        #label = gtk.Label('Size:')
-        self.sizelabel = gtk.Label(LANG[self.language]['size']+':')
-        self.sizelabel.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
-        self.sizelabel.show()
-        self.anglesizehbox.pack_start(self.sizelabel,False,False,5)
+        self.angleentry.modify_bg(gtk.STATE_INSENSITIVE,
+                gtk.gdk.color_parse(BUTTON_FOREGROUND))
+        angle_box.pack_start(self.angleentry,False,False,0)
+        self.anglel_adj = gtk.Adjustment(0, 0, 360, 1, 60, 0)
+        self.anglel_adj.connect('value_changed', self._anglel_adj_cb)
+        self.anglel_slider = gtk.HScale(self.anglel_adj)
+        self.anglel_slider.set_draw_value(False)
+        for state, color in COLOR_BG_BUTTONS:
+            self.anglel_slider.modify_bg(state, gtk.gdk.color_parse(color))
+        angle_box.pack_start(self.anglel_slider)
+
+        size_box = gtk.HBox()
+        sizelabel = gtk.Label(_('Size:'))
+        sizelabel.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        sizelabel.set_size_request(60, -1)
+        size_box.pack_start(sizelabel,False,False,5)
         self.sizeentry = gtk.Entry()
         self.sizeentry.set_max_length(3)
         self.sizeentry.set_width_chars(3)
         self.sizeentry.connect('activate', self.enterlen_callback, self.sizeentry)
-        self.sizeentry.show()
-        self.anglesizehbox.pack_start(self.sizeentry,False,False,0)
-        self.asbox = gtk.EventBox()
-        self.asbox.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_FOREGROUND))
-        self.asbox.show()
-        self.asbox.add(self.anglesizehbox)
-        self.stickcontrols.pack_start(self.asbox,False,False,0)
+        self.sizeentry.modify_bg(gtk.STATE_INSENSITIVE,
+                gtk.gdk.color_parse(BUTTON_FOREGROUND))
+        size_box.pack_start(self.sizeentry,False,False,0)
+        self.size_adj = gtk.Adjustment(0, 0, 200, 1, 30, 0)
+        self.size_adj.connect('value_changed', self._size_adj_cb)
+        size_slider = gtk.HScale(self.size_adj)
+        size_slider.set_draw_value(False)
+        for state, color in COLOR_BG_BUTTONS:
+            size_slider.modify_bg(state, gtk.gdk.color_parse(color))
+        size_box.pack_start(size_slider)
+
+        control_head_box = gtk.VBox()
+        control_head_box.pack_start(angle_box)
+        control_head_box.pack_start(size_box)
+
+        control_head = gtk.EventBox()
+        control_head.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_FOREGROUND))
+        control_head.add(control_head_box)
+
+        control_options = gtk.VBox()
         self.stickbuttons = {}
         self.sticklabels = {}
         for stickpartname in LABELLIST:
             label = gtk.Label(LANG[self.language][stickpartname])
             label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_FOREGROUND))
-            label.show()
             self.sticklabels[stickpartname] = label
             ebox = gtk.EventBox()
             ebox.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_BACKGROUND))
-            ebox.show()
             ebox.set_events(gtk.gdk.BUTTON_PRESS_MASK)
             ebox.connect('button_press_event',self.selectstick,stickpartname)
             ebox.add(label)
             self.stickbuttons[stickpartname] = ebox
-            self.stickcontrols.pack_start(ebox,False,False,0)
-        # highlight the currently selected stick and update the entry boxes
+            control_options.pack_start(ebox,False,False,0)
         self.selectstickebox()
-        # END OF STICK CONTROLS
-        stickalign = gtk.Alignment(1.0,1.0,1.0,1.0)
-        stickalign.add(self.stickcontrolsborder)
-        stickalign.set_padding(80,5,5,5) # top,bottom,left,right
-        stickalign.show()
-        self.rightvbox.pack_start(stickalign,False,False, 0)
-        self.export = gtk.Button()
-        self.export.set_label(LANG[self.language]['export'])
-        prepare_btn(self.export)
-        self.export.connect('clicked',self.exportanim,None)
-        self.export.show()
-        self.exporthbox = gtk.HBox()
-        self.exporthbox.show()
-        self.exporthbox.pack_start(self.export,True,False,0)
-        self.rightvbox.pack_start(self.exporthbox,True,False,0)
 
-        self.hbox.pack_start(self.rightvbox,False,False,0)
+        control_scroll = gtk.ScrolledWindow()
+        control_scroll.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        control_scroll.add_with_viewport(control_options)
+        control_options.get_parent().modify_bg(gtk.STATE_NORMAL,
+                gtk.gdk.color_parse(BUTTON_BACKGROUND))
+
+        control_box = gtk.VBox()
+        control_box.pack_start(control_head, False, False, 0)
+        control_box.pack_start(control_scroll)
+
+        control_bg = gtk.EventBox()
+        control_bg.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        control_bg.set_border_width(5)
+        control_bg.add(control_box)
+
+        control_pink = gtk.EventBox()
+        control_pink.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(PINK))
+        control_pink.set_border_width(5)
+        control_pink.add(control_bg)
+
+        # left control box
+
+        logo = gtk.Image()
+        logo.set_from_file(os.path.join(self.iconsdir,'logo.png'))
+
+        leftbox = gtk.VBox()
+        leftbox.pack_start(logo, False, False)
+        leftbox.pack_start(control_pink)
+
+        # desktop
+
+        hdesktop = gtk.HBox()
+        hdesktop.pack_start(leftbox, False)
+        hdesktop.pack_start(screen_pink)
+
+        desktop = gtk.VBox()
+        desktop.pack_start(hdesktop)
+        desktop.pack_start(self.kfdraw, False, False, 0)
+
+        greenbox = gtk.EventBox()
+        greenbox.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BACKGROUND))
+        greenbox.set_border_width(5)
+        greenbox.add(desktop)
+
+        self.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(YELLOW))
+        self.add(greenbox)
+        self.show_all()
 
     def _draw_frame(self, index, pixmap):
         joints = self.frames[index].joints
@@ -834,6 +789,14 @@ class flipsticks:
                 return key
 
         return -1
+
+    def _anglel_adj_cb(self, adj):
+        self.angleentry.set_text(str(int(adj.value)))
+        self.enterangle_callback(None, self.angleentry)
+
+    def _size_adj_cb(self, adj):
+        self.sizeentry.set_text(str(int(adj.value)))
+        self.enterlen_callback(None, self.sizeentry)
 
 def _inarea(x, y, awidth, aheight):
     if x+5 > awidth:

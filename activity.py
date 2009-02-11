@@ -40,21 +40,11 @@ class flipsticksActivity(activity.Activity):
             self._jobject.metadata['title'] = 'FlipSticks'
         title_widget = toolbox._activity_toolbar.title
         title_widget.set_size_request(title_widget.get_layout().get_pixel_size()[0] + 20, -1)
+
         self.app = flipsticks(self, bundle_path)
-        self.app.insugar = True
-        outerframe = gtk.EventBox()
-        outerframe.modify_bg(gtk.STATE_NORMAL,gtk.gdk.color_parse(BUTTON_BACKGROUND))
-        outerframe.show()
-        innerframe = gtk.EventBox()
-        innerframe.show()
-        ifalign = gtk.Alignment(1.0,1.0,1.0,1.0)
-        ifalign.add(innerframe)
-        ifalign.set_padding(20,20,50,50) # top,bottom,left,right
-        ifalign.show()
-        #innerframe.set_border_width(150)
-        outerframe.add(ifalign)
-        innerframe.add(self.app.main)
-        self.set_canvas(outerframe)
+
+
+        self.set_canvas(self.app)
 
     def read_file(self, filepath):
         model.load(filepath)
