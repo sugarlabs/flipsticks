@@ -1,7 +1,7 @@
 [Activity]
 name = FlipSticks
-service_name = org.worldwideworkshop.olpc.FlipSticks
-class = activity.flipsticksActivity
+bundle_id = org.worldwideworkshop.olpc.FlipSticks
+exec = sugar-activity activity.flipsticksActivity -s
 icon = activity-flipsticks
 activity_version = 2
 show_launcher = yes
