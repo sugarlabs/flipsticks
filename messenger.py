@@ -14,10 +14,15 @@
 
 import dbus
 import pickle
-import cjson
 import logging
 from dbus.gobject_service import ExportedGObject
 from dbus.service import method, signal
+
+try:
+    import json
+    json.dumps
+except (ImportError, AttributeError):
+    import simplejson as json
 
 from sugar.presence import presenceservice
 
@@ -96,7 +101,7 @@ class Messenger(ExportedGObject):
 
         for i, slot in enumerate(self._slots):
             out.append((slot.seqno, slot.owner,
-                    cjson.encode(model.keys[i].collect())))
+                    json.dumps(model.keys[i].collect())))
 
         return out
 
@@ -159,7 +164,7 @@ class Messenger(ExportedGObject):
         else:
             logger.debug('accept higher seqno')
 
-        self._view.props.keyframe = (slot, model.StoredFrame(cjson.decode(raw)))
+        self._view.props.keyframe = (slot, model.StoredFrame(json.loads(raw)))
         self._slots[slot] = new
 
     def _send(self, slot_num):
@@ -168,7 +173,7 @@ class Messenger(ExportedGObject):
         slot.owner = self.me
 
         self._notify(slot_num, slot.seqno, slot.owner,
-                cjson.encode(model.keys[slot_num].collect()))
+                json.dumps(model.keys[slot_num].collect()))
 
         logger.debug('_send slot=%s seqno=%d' % (slot_num, slot.seqno))
 

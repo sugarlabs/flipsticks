@@ -13,8 +13,13 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import cjson
 import math
+
+try:
+    import json
+    json.dumps
+except (ImportError, AttributeError):
+    import simplejson as json
 
 from theme import *
 
@@ -134,10 +139,10 @@ def save(filename):
     for i in keys:
         out.append(i.collect())
 
-    file(filename, 'w').write(cjson.encode(out))
+    file(filename, 'w').write(json.dumps(out))
 
 def load(filename):
-    inc = cjson.decode(file(filename, 'r').read())
+    inc = json.loads(file(filename, 'r').read())
 
     for i, data in enumerate(inc):
         keys[i] = StoredFrame(data)
