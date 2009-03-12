@@ -32,8 +32,6 @@ class flipsticksActivity(SharedActivity):
         self.notebook = gtk.Notebook()
         SharedActivity.__init__(self, self.notebook, SERVICE, handle)
 
-        self.connect('tube', self._tube_cb)
-
         self.notebook.show()
         self.notebook.props.show_border = False
         self.notebook.props.show_tabs = False
@@ -59,21 +57,21 @@ class flipsticksActivity(SharedActivity):
 
         toolbox.set_current_toolbar(1)
 
-    def read_file(self, filepath):
+    def resume_instance(self, filepath):
         model.load(filepath)
         self.montage.restore()
         
-    def write_file(self, filepath):
+    def save_instance(self, filepath):
         model.save(filepath)
+
+    def share_instance(self, tube_conn, initiating):
+        self.messenger = Messenger(tube_conn, initiating, self.montage)
 
     def _toolbar_changed_cb(self, widget, index):
         if index == 2:
             self.notebook.set_current_page(1)
         else:
             self.notebook.set_current_page(0)
-
-    def _tube_cb(self, activity, tube_conn, initiating):
-        self.messenger = Messenger(tube_conn, initiating, self.montage)
 
 class MontageToolbar(gtk.Toolbar):
     def __init__(self, montage):
