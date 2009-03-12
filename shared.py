@@ -19,7 +19,7 @@ from gobject import property, SIGNAL_RUN_FIRST, TYPE_PYOBJECT
 from sugar.activity.activity import Activity
 from sugar.presence.sugartubeconn import SugarTubeConnection
 
-logger = logging.getLogger('cartoon-builder')
+logger = logging.getLogger('flipsticks')
 
 INSTANCED       = 0
 NEW_INSTANCE    = 1
