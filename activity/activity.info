@@ -1,8 +1,8 @@
 [Activity]
 name = FlipSticks
 bundle_id = org.worldwideworkshop.olpc.FlipSticks
-exec = sugar-activity activity.flipsticksActivity -s
+exec = sugar-activity activity.flipsticksActivity
 icon = activity-flipsticks
-activity_version = 2
+activity_version = 3
 show_launcher = yes
 license = GPLv2+
