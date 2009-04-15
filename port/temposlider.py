@@ -15,17 +15,7 @@
 import os
 import gtk
 
-import sugar
 from sugar.graphics import style
-from sugar.activity.activity import get_bundle_path
-
-from theme import *
-
-def map_range(value, ilower, iupper, olower, oupper):
-    if value == iupper:
-        return oupper
-    return olower + int((oupper-olower+1) * (value-ilower) /
-            float(iupper-ilower))
 
 class TempoSlider(gtk.HBox):
     def __init__(self, min_value, max_value):
@@ -68,13 +58,19 @@ class TempoSlider(gtk.HBox):
         self._update(widget.get_value())
 
     def _update(self, tempo):
+        def map_range(value, ilower, iupper, olower, oupper):
+            if value == iupper:
+                return oupper
+            return olower + int((oupper-olower+1) * (value-ilower) /
+                    float(iupper-ilower))
+
         img = map_range(tempo, self.adjustment.lower,
                             self.adjustment.upper, 0, 7)
 
         if not self._pixbuf[img]:
             self._pixbuf[img] = gtk.gdk.pixbuf_new_from_file_at_size(
-                    os.path.join(get_bundle_path(), 'icons/tempo' +
-                        str(img+1) + '.svg'),
+                    os.path.join(os.path.dirname(__file__), 'images',
+                        'tempo' + str(img+1) + '.svg'),
                     style.STANDARD_ICON_SIZE, style.STANDARD_ICON_SIZE)
 
         self._image.set_from_pixbuf(self._pixbuf[img])

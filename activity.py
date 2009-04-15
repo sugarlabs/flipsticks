@@ -18,14 +18,14 @@ from gettext import gettext as _
 from sugar.activity.activity import Activity, ActivityToolbox
 from sugar.graphics.toggletoolbutton import ToggleToolButton
 from sugar.graphics.toolbutton import ToolButton
+from port.temposlider import TempoSlider
+from port.activity import SharedActivity
 
 import model
 import montage
 import lessons
 from messenger import Messenger, SERVICE
-from shared import SharedActivity
 from theme import *
-from utils import *
 
 class flipsticksActivity(SharedActivity):
     def __init__(self, handle):
