@@ -2,47 +2,48 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-11 22:04+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2009-11-01 07:29-0400\n"
+"Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.3.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: activity/activity.info:2
 msgid "FlipSticks"
-msgstr ""
+msgstr "FlipSticks"
 
 #: montage.py:657
 msgid "Angle:"
-msgstr ""
+msgstr "角度:"
 
 #: montage.py:677
 msgid "Size:"
-msgstr ""
+msgstr "サイズ:"
 
 #: theme.py:50
 msgid "Size"
-msgstr ""
+msgstr "サイズ"
 
 #: theme.py:51
 msgid "Angle"
-msgstr ""
+msgstr "角度"
 
 #: theme.py:52
 msgid "Lesson Plans"
-msgstr ""
+msgstr "学習の計画"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr ""
+msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
@@ -50,83 +51,83 @@ msgstr ""
 
 #: theme.py:55
 msgid "Head"
-msgstr ""
+msgstr "頭"
 
 #: theme.py:56
 msgid "Neck"
-msgstr ""
+msgstr "首"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr ""
+msgstr "右肩"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr ""
+msgstr "右上腕"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr ""
+msgstr "右前腕"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr ""
+msgstr "右手"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr ""
+msgstr "左肩"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr ""
+msgstr "左上腕"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr ""
+msgstr "左前腕"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr ""
+msgstr "左手"
 
 #: theme.py:65
 msgid "Torso"
-msgstr ""
+msgstr "胴体"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr ""
+msgstr "右尻"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr ""
+msgstr "右上腿"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr ""
+msgstr "右下腿"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr ""
+msgstr "右足"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr ""
+msgstr "左尻"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr ""
+msgstr "左上腿"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr ""
+msgstr "左下腿"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr ""
+msgstr "左足"
 
 #: activity.py:54
 msgid "Montage"
-msgstr ""
+msgstr "シーン合成"
 
 #: activity.py:58
 msgid "Lessons"
@@ -134,24 +135,24 @@ msgstr ""
 
 #: activity.py:87
 msgid "Set frame"
-msgstr ""
+msgstr "フレームを設定"
 
 #: activity.py:92
 msgid "Clear frame"
-msgstr ""
+msgstr "フレームを消去"
 
 #: activity.py:97
 msgid "Reset"
-msgstr ""
+msgstr "リセット"
 
 #: activity.py:126
 msgid "Play backward / Pause"
-msgstr ""
+msgstr "逆向き再生/停止"
 
 #: activity.py:132
 msgid "Play forward / Pause"
-msgstr ""
+msgstr "再生/停止"
 
 #: activity.py:151
 msgid "Snapshot"
-msgstr ""
+msgstr "スナップショット"
