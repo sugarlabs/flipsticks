@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-11 22:04+0000\n"
-"PO-Revision-Date: 2009-11-01 07:29-0400\n"
+"PO-Revision-Date: 2010-01-29 05:26+0200\n"
 "Last-Translator: korakurider <korakurider@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ja\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.0.1\n"
 
 #: activity/activity.info:2
 msgid "FlipSticks"
@@ -131,7 +131,7 @@ msgstr "シーン合成"
 
 #: activity.py:58
 msgid "Lessons"
-msgstr ""
+msgstr "学習"
 
 #: activity.py:87
 msgid "Set frame"
