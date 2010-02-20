@@ -15,11 +15,13 @@
 import gtk
 from gettext import gettext as _
 
-from sugar.activity.activity import Activity, ActivityToolbox
 from sugar.graphics.toggletoolbutton import ToggleToolButton
 from sugar.graphics.toolbutton import ToolButton
-from port.temposlider import TempoSlider
-from port.activity import SharedActivity
+
+from toolkit.activity import SharedActivity
+from toolkit.temposlider import TempoSlider
+from toolkit.toolbarbox import ToolbarBox
+from toolkit.activity_widgets import *
 
 import model
 import montage
@@ -42,36 +44,56 @@ class flipsticksActivity(SharedActivity):
         self.lessons.show()
         self.notebook.append_page(self.lessons)
 
-        toolbox = ActivityToolbox(self)
+        toolbox = ToolbarBox()
         toolbox.show()
-        toolbox.connect('current-toolbar-changed', self._toolbar_changed_cb)
-        self.set_toolbox(toolbox)
 
-        montage_bar = MontageToolbar(self.montage)
-        montage_bar.show()
-        toolbox.add_toolbar(_('Montage'), montage_bar)
+        toolbox.toolbar.insert(ActivityToolbarButton(self), -1)
 
-        lessons_bar = LessonsToolbar()
-        lessons_bar.show()
-        toolbox.add_toolbar(_('Lessons'), lessons_bar)
+        separator = gtk.SeparatorToolItem()
+        separator.set_draw(False)
+        toolbox.toolbar.insert(separator, -1)
 
-        toolbox.set_current_toolbar(1)
+        lessons_button = ToggleToolButton('mamamedia')
+        lessons_button.connect('toggled', self.__toggled_lessons_button_cb)
+        lessons_button.set_tooltip(_('Lessons'))
+        toolbox.toolbar.insert(lessons_button, -1)
+
+        separator = gtk.SeparatorToolItem()
+        separator.set_draw(False)
+        toolbox.toolbar.insert(separator, -1)
+
+        self.notebook_toolbar = gtk.Notebook()
+        self.notebook_toolbar.props.show_border = False
+        self.notebook_toolbar.props.show_tabs = False
+        self.notebook_toolbar.append_page(MontageToolbar(self.montage))
+        self.notebook_toolbar.append_page(LessonsToolbar())
+        self.notebook_toolbar.show()
+
+        notebook_item = gtk.ToolItem()
+        notebook_item.set_expand(True)
+        notebook_item.add(self.notebook_toolbar)
+        notebook_item.show()
+        toolbox.toolbar.insert(notebook_item, -1)
+
+        toolbox.toolbar.insert(StopButton(self), -1)
+
+        toolbox.show_all()
+        self.toolbar_box = toolbox
 
     def resume_instance(self, filepath):
         model.load(filepath)
         self.montage.restore()
-        
+
     def save_instance(self, filepath):
         model.save(filepath)
 
     def share_instance(self, tube_conn, initiating):
         self.messenger = Messenger(tube_conn, initiating, self.montage)
 
-    def _toolbar_changed_cb(self, widget, index):
-        if index == 2:
-            self.notebook.set_current_page(1)
-        else:
-            self.notebook.set_current_page(0)
+    def __toggled_lessons_button_cb(self, button):
+        page = button.props.active and 1 or 0
+        self.notebook_toolbar.set_current_page(page)
+        self.notebook.set_current_page(page)
 
 class MontageToolbar(gtk.Toolbar):
     def __init__(self, montage):
