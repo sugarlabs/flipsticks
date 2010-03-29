@@ -2,39 +2,41 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-02-11 22:04+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2010-03-27 22:52+0200\n"
+"Last-Translator: shellige <email@hellige-online.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.3\n"
 
 #: activity/activity.info:2
 msgid "FlipSticks"
-msgstr ""
+msgstr "Flipsticks"
 
 #: montage.py:657
 msgid "Angle:"
-msgstr ""
+msgstr "Winkel:"
 
+# comment
 #: montage.py:677
 msgid "Size:"
-msgstr ""
+msgstr "Größe:"
 
 #: theme.py:50
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #: theme.py:51
 msgid "Angle"
-msgstr ""
+msgstr "Winkel"
 
 #: theme.py:52
 msgid "Lesson Plans"
@@ -45,92 +47,93 @@ msgid "lp-en"
 msgstr ""
 
 #: theme.py:54
+#, fuzzy
 msgid "Export Frame One"
-msgstr ""
+msgstr "Exportiere Rahmen Eins"
 
 #: theme.py:55
 msgid "Head"
-msgstr ""
+msgstr "Kopf"
 
 #: theme.py:56
 msgid "Neck"
-msgstr ""
+msgstr "Nacken"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr ""
+msgstr "Rechte Schulter"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr ""
+msgstr "Rechter Oberarm"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr ""
+msgstr "Rechter Unterarm"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr ""
+msgstr "Rechte Hand"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr ""
+msgstr "Linke Schulter"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr ""
+msgstr "Linker Oberarm"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr ""
+msgstr "Linker Unterarm"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr ""
+msgstr "Linke Hand"
 
 #: theme.py:65
 msgid "Torso"
-msgstr ""
+msgstr "Oberkörper"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr ""
+msgstr "Rechte Hüfte"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr ""
+msgstr "Rechter Oberschenkel"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr ""
+msgstr "Rechter Unterschenkel"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr ""
+msgstr "Rechter Fuß"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr ""
+msgstr "Linker Hüftabschnitt"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr ""
+msgstr "Linker Oberschenkel"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr ""
+msgstr "Linker Unterschenkel"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr ""
+msgstr "Linker Fuß"
 
 #: activity.py:54
 msgid "Montage"
-msgstr ""
+msgstr "Montage"
 
 #: activity.py:58
 msgid "Lessons"
-msgstr ""
+msgstr "Lektionen"
 
 #: activity.py:87
 msgid "Set frame"
@@ -142,16 +145,16 @@ msgstr ""
 
 #: activity.py:97
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: activity.py:126
 msgid "Play backward / Pause"
-msgstr ""
+msgstr "Rückwärts abspielen / Pause"
 
 #: activity.py:132
 msgid "Play forward / Pause"
-msgstr ""
+msgstr "Vorwärts abspielen / Pause"
 
 #: activity.py:151
 msgid "Snapshot"
-msgstr ""
+msgstr "Schnappschuss"
