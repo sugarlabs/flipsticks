@@ -2,11 +2,19 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 22:04+0000\n"
+"POT-Creation-Date: 2010-02-20 00:31-0500\n"
 "PO-Revision-Date: 2009-09-25 09:49-0400\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +28,34 @@ msgstr ""
 #: activity/activity.info:2
 msgid "FlipSticks"
 msgstr "Lật Que"
+
+#: activity.py:58
+msgid "Lessons"
+msgstr "Bài học"
+
+#: activity.py:107
+msgid "Set frame"
+msgstr "Đặt khung"
+
+#: activity.py:112
+msgid "Clear frame"
+msgstr "Xoá khung"
+
+#: activity.py:117
+msgid "Reset"
+msgstr "Đặt lại"
+
+#: activity.py:146
+msgid "Play backward / Pause"
+msgstr "Phát lùi / Tạm dừng"
+
+#: activity.py:152
+msgid "Play forward / Pause"
+msgstr "Phát tới / Tạm dừng"
+
+#: activity.py:171
+msgid "Snapshot"
+msgstr "Ảnh chụp"
 
 #: montage.py:657
 msgid "Angle:"
@@ -125,34 +161,5 @@ msgstr "Cẳng dưới bên trái"
 msgid "Left Foot"
 msgstr "Chân trái"
 
-#: activity.py:54
-msgid "Montage"
-msgstr "Sự dựng phim"
-
-#: activity.py:58
-msgid "Lessons"
-msgstr "Bài học"
-
-#: activity.py:87
-msgid "Set frame"
-msgstr "Đặt khung"
-
-#: activity.py:92
-msgid "Clear frame"
-msgstr "Xoá khung"
-
-#: activity.py:97
-msgid "Reset"
-msgstr "Đặt lại"
-
-#: activity.py:126
-msgid "Play backward / Pause"
-msgstr "Phát lùi / Tạm dừng"
-
-#: activity.py:132
-msgid "Play forward / Pause"
-msgstr "Phát tới / Tạm dừng"
-
-#: activity.py:151
-msgid "Snapshot"
-msgstr "Ảnh chụp"
+#~ msgid "Montage"
+#~ msgstr "Sự dựng phim"
