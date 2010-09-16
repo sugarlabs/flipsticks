@@ -2,156 +2,177 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 22:04+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-02-20 00:31-0500\n"
+"PO-Revision-Date: 2009-05-20 05:27-0400\n"
+"Last-Translator: Raveendra Ignatious Rajendram "
+"<raveendra_rajendram@yahoo.co.uk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 1.2.1\n"
 
 #: activity/activity.info:2
 msgid "FlipSticks"
-msgstr ""
-
-#: montage.py:657
-msgid "Angle:"
-msgstr ""
-
-#: montage.py:677
-msgid "Size:"
-msgstr ""
-
-#: theme.py:50
-msgid "Size"
-msgstr ""
-
-#: theme.py:51
-msgid "Angle"
-msgstr ""
-
-#: theme.py:52
-msgid "Lesson Plans"
-msgstr ""
-
-#: theme.py:53
-msgid "lp-en"
-msgstr ""
-
-#: theme.py:54
-msgid "Export Frame One"
-msgstr ""
-
-#: theme.py:55
-msgid "Head"
-msgstr ""
-
-#: theme.py:56
-msgid "Neck"
-msgstr ""
-
-#: theme.py:57
-msgid "Right Shoulder"
-msgstr ""
-
-#: theme.py:58
-msgid "Upper Right Arm"
-msgstr ""
-
-#: theme.py:59
-msgid "Lower Right Arm"
-msgstr ""
-
-#: theme.py:60
-msgid "Right Hand"
-msgstr ""
-
-#: theme.py:61
-msgid "Left Shoulder"
-msgstr ""
-
-#: theme.py:62
-msgid "Upper Left Arm"
-msgstr ""
-
-#: theme.py:63
-msgid "Lower Left Arm"
-msgstr ""
-
-#: theme.py:64
-msgid "Left Hand"
-msgstr ""
-
-#: theme.py:65
-msgid "Torso"
-msgstr ""
-
-#: theme.py:66
-msgid "Right Hip"
-msgstr ""
-
-#: theme.py:67
-msgid "Upper Right Leg"
-msgstr ""
-
-#: theme.py:68
-msgid "Lower Right Leg"
-msgstr ""
-
-#: theme.py:69
-msgid "Right Foot"
-msgstr ""
-
-#: theme.py:70
-msgid "Left Hip"
-msgstr ""
-
-#: theme.py:71
-msgid "Upper Left Leg"
-msgstr ""
-
-#: theme.py:72
-msgid "Lower Left Leg"
-msgstr ""
-
-#: theme.py:73
-msgid "Left Foot"
-msgstr ""
-
-#: activity.py:54
-msgid "Montage"
-msgstr ""
+msgstr "குச்சி விளையாட்டு FlipSticks"
 
 #: activity.py:58
 msgid "Lessons"
-msgstr ""
+msgstr "பாடங்கள்"
 
-#: activity.py:87
+#: activity.py:107
 msgid "Set frame"
-msgstr ""
+msgstr "சட்டகத்தை தயார் செய்"
 
-#: activity.py:92
+#: activity.py:112
 msgid "Clear frame"
-msgstr ""
+msgstr "சட்டகத்தை நீக்கு"
 
-#: activity.py:97
+#: activity.py:117
 msgid "Reset"
-msgstr ""
+msgstr "முன்னிலைக்கு மீண்டும் கொண்டுவா"
 
-#: activity.py:126
+#: activity.py:146
 msgid "Play backward / Pause"
-msgstr ""
+msgstr "பின்நோக்கி இயக்கு/ இடைநிறுத்து"
 
-#: activity.py:132
+#: activity.py:152
 msgid "Play forward / Pause"
-msgstr ""
+msgstr "முன்நோக்கி இயக்கு/ இடைநிறுத்து"
 
-#: activity.py:151
+#: activity.py:171
 msgid "Snapshot"
-msgstr ""
+msgstr "  நிழல் படம் எடு"
+
+#: montage.py:657
+msgid "Angle:"
+msgstr "கோணம்:"
+
+#: montage.py:677
+msgid "Size:"
+msgstr "அளவு:"
+
+#: theme.py:50
+msgid "Size"
+msgstr "அளவு"
+
+#: theme.py:51
+msgid "Angle"
+msgstr "கோணம்"
+
+#: theme.py:52
+msgid "Lesson Plans"
+msgstr "பாடத்திட்டம்"
+
+#: theme.py:53
+msgid "lp-en"
+msgstr "lp-en"
+
+#: theme.py:54
+msgid "Export Frame One"
+msgstr "சட்டகம் 1 ஏற்றுமதி செய்"
+
+#: theme.py:55
+msgid "Head"
+msgstr " தலை"
+
+#: theme.py:56
+msgid "Neck"
+msgstr "கழுத்து"
+
+#: theme.py:57
+msgid "Right Shoulder"
+msgstr "வலது தோள்"
+
+#: theme.py:58
+msgid "Upper Right Arm"
+msgstr "வலது மேல் புயம்"
+
+#: theme.py:59
+msgid "Lower Right Arm"
+msgstr "வலது கீழ் புயம்"
+
+#: theme.py:60
+msgid "Right Hand"
+msgstr "வலது கை"
+
+#: theme.py:61
+msgid "Left Shoulder"
+msgstr "இடது தோள்"
+
+#: theme.py:62
+msgid "Upper Left Arm"
+msgstr "இடது மேல் புயம்"
+
+#: theme.py:63
+msgid "Lower Left Arm"
+msgstr "வலது கீழ் புயம்"
+
+#: theme.py:64
+msgid "Left Hand"
+msgstr "இடது கை"
+
+#: theme.py:65
+msgid "Torso"
+msgstr "முண்டப்பகுதி"
+
+#: theme.py:66
+msgid "Right Hip"
+msgstr "வலது இடுப்பு"
+
+#: theme.py:67
+msgid "Upper Right Leg"
+msgstr "வலது மேல் கால்"
+
+#: theme.py:68
+msgid "Lower Right Leg"
+msgstr "வலது கீழ் கால்"
+
+#: theme.py:69
+msgid "Right Foot"
+msgstr "வலது பாதம்"
+
+#: theme.py:70
+msgid "Left Hip"
+msgstr "இடது இடுப்பு"
+
+#: theme.py:71
+msgid "Upper Left Leg"
+msgstr "இடது மேல் கால்"
+
+#: theme.py:72
+msgid "Lower Left Leg"
+msgstr "இடது கீழ் கால்"
+
+#: theme.py:73
+msgid "Left Foot"
+msgstr "இடது பாதம்"
+
+#~ msgid "Montage"
+#~ msgstr "ஒட்டுச்சித்திரம்"
