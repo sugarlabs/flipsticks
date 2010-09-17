@@ -49,10 +49,6 @@ class flipsticksActivity(SharedActivity):
 
         toolbox.toolbar.insert(ActivityToolbarButton(self), -1)
 
-        separator = gtk.SeparatorToolItem()
-        separator.set_draw(False)
-        toolbox.toolbar.insert(separator, -1)
-
         lessons_button = ToggleToolButton('mamamedia')
         lessons_button.connect('toggled', self.__toggled_lessons_button_cb)
         lessons_button.set_tooltip(_('Lessons'))
@@ -155,7 +151,7 @@ class MontageToolbar(gtk.Toolbar):
 
         tempo = TempoSlider(0, 99)
         tempo.adjustment.connect("value-changed", self._tempo_cb)
-        tempo.set_size_request(250, -1)
+        tempo.set_size_request(200, -1)
         tempo.set_value(50)
         tempo_item = gtk.ToolItem()
         tempo_item.add(tempo)
