@@ -27,7 +27,7 @@ SAVE YOUR POSES AS KEYFRAMES
   - When you like the way your stick figure looks, save it as a "keyframe"
   - The keyframes are the five circles under the Stage window.
   - Click on a keyframe circle to choose it -- it will turn pink so you 
-    know it is ready.  Then click on the Set frame button with a tick on it
+    know it is ready.  Then click on the "Set frame" button with a tick on it
     to save you pose into this keyframe.
   - Move the stick figure into a new pose, then save it by clicking on 
     another keyframe circle and then clicking the "Set frame" button.
