@@ -2,11 +2,31 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 22:04+0000\n"
+"POT-Creation-Date: 2010-02-20 00:31-0500\n"
 "PO-Revision-Date: 2009-08-31 13:59-0400\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +40,34 @@ msgstr ""
 #: activity/activity.info:2
 msgid "FlipSticks"
 msgstr "FlipSticks"
+
+#: activity.py:58
+msgid "Lessons"
+msgstr "Leçons"
+
+#: activity.py:107
+msgid "Set frame"
+msgstr "Définir le cadre"
+
+#: activity.py:112
+msgid "Clear frame"
+msgstr "Effacer le cadre"
+
+#: activity.py:117
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: activity.py:146
+msgid "Play backward / Pause"
+msgstr "Retour / Pause"
+
+#: activity.py:152
+msgid "Play forward / Pause"
+msgstr "Avance / Pause"
+
+#: activity.py:171
+msgid "Snapshot"
+msgstr "Capture"
 
 #: montage.py:657
 msgid "Angle:"
@@ -125,34 +173,5 @@ msgstr "Jambe gauche"
 msgid "Left Foot"
 msgstr "Pied gauche"
 
-#: activity.py:54
-msgid "Montage"
-msgstr "Montage"
-
-#: activity.py:58
-msgid "Lessons"
-msgstr "Leçons"
-
-#: activity.py:87
-msgid "Set frame"
-msgstr "Définir le cadre"
-
-#: activity.py:92
-msgid "Clear frame"
-msgstr "Effacer le cadre"
-
-#: activity.py:97
-msgid "Reset"
-msgstr "Réinitialiser"
-
-#: activity.py:126
-msgid "Play backward / Pause"
-msgstr "Retour / Pause"
-
-#: activity.py:132
-msgid "Play forward / Pause"
-msgstr "Avance / Pause"
-
-#: activity.py:151
-msgid "Snapshot"
-msgstr "Capture"
+#~ msgid "Montage"
+#~ msgstr "Montage"
