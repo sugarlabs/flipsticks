@@ -379,8 +379,6 @@ class View(gtk.EventBox):
         stickname = self.stickselected
         newlen = int(entry.get_text())
         if stickname in self.key.sticks:
-            if stickname == 'HEAD':
-                newlen = int(newlen/2.0)
             (angle, len) = self.key.sticks[stickname]
             self.key.sticks[stickname] = (angle,newlen)
         else:
@@ -558,11 +556,7 @@ class View(gtk.EventBox):
         label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
 
         if self.stickselected in self.key.sticks:
-            if self.stickselected == 'HEAD':
-                size = self.key.sticks[self.stickselected][1]*2
-            else:
-                size = self.key.sticks[self.stickselected][1]
-
+            size = self.key.sticks[self.stickselected][1]
             angle = self.key.sticks[self.stickselected][0]
             self.angleentry.set_text(str(angle))
             self.angleentry.set_sensitive(True)
@@ -783,7 +777,6 @@ class View(gtk.EventBox):
         pixmap.draw_rectangle(drawgc,True,0,0,width,height)
 
         drawgc.set_foreground(black)
-        #hsize = self.key.sticks['HEAD'][1] # really half of head size
         hsize = self.frames[index].hsize
         middle = self.frames[index].middle
         rhsize = parts['RIGHT HAND']
