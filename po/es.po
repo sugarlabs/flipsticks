@@ -2,30 +2,110 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 22:04+0000\n"
-"PO-Revision-Date: 2009-06-16 16:43-0400\n"
-"Last-Translator: david jimenez <undotgiven@gmail.com>\n"
+"POT-Creation-Date: 2010-10-12 00:30-0400\n"
+"PO-Revision-Date: 2010-12-24 17:28+0200\n"
+"Last-Translator: Gonzalo <godiard@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.0.3\n"
 
 #: activity/activity.info:2
 msgid "FlipSticks"
 msgstr "Palillos"
 
-#: montage.py:657
+#: activity.py:54
+msgid "Lessons"
+msgstr "Lecciones"
+
+#: activity.py:103
+msgid "Set frame"
+msgstr "Escoger el cuadro"
+
+#: activity.py:108
+msgid "Clear frame"
+msgstr "Limpiar el cuadro"
+
+#: activity.py:113
+msgid "Reset"
+msgstr "Reiniciar"
+
+#: activity.py:142
+msgid "Play backward / Pause"
+msgstr "Reproducir hacia atrás / Pausar"
+
+#: activity.py:148
+msgid "Play forward / Pause"
+msgstr "Reproducir hacia adelante / Pausar"
+
+#: activity.py:167
+msgid "Snapshot"
+msgstr "Instantánea"
+
+#: montage.py:651
 msgid "Angle:"
 msgstr "Ángulo:"
 
-#: montage.py:677
+#: montage.py:671
 msgid "Size:"
 msgstr "Tamaño:"
 
@@ -125,34 +205,41 @@ msgstr "Pantorrilla Izquierda"
 msgid "Left Foot"
 msgstr "Pie Izquierdo"
 
-#: activity.py:54
-msgid "Montage"
-msgstr "Montaje"
+#: toolkit/activity_widgets.py:83
+msgid "Stop"
+msgstr "Detener"
 
-#: activity.py:58
-msgid "Lessons"
-msgstr "Lecciones"
+#: toolkit/activity_widgets.py:95
+msgid "Undo"
+msgstr "Deshacer"
 
-#: activity.py:87
-msgid "Set frame"
-msgstr "Escoger el cuadro"
+#: toolkit/activity_widgets.py:103
+msgid "Redo"
+msgstr "Rehacer"
 
-#: activity.py:92
-msgid "Clear frame"
-msgstr "Limpiar el cuadro"
+#: toolkit/activity_widgets.py:110
+msgid "Copy"
+msgstr "Copiar"
 
-#: activity.py:97
-msgid "Reset"
-msgstr "Reiniciar"
+#: toolkit/activity_widgets.py:117
+msgid "Paste"
+msgstr "Pegar"
 
-#: activity.py:126
-msgid "Play backward / Pause"
-msgstr "Reproducir hacia atrás / Pausar"
+#: toolkit/activity_widgets.py:127
+msgid "Private"
+msgstr "Privado"
 
-#: activity.py:132
-msgid "Play forward / Pause"
-msgstr "Reproducir hacia adelante / Pausar"
+#: toolkit/activity_widgets.py:134
+msgid "My Neighborhood"
+msgstr "Vecindario"
 
-#: activity.py:151
-msgid "Snapshot"
-msgstr "Instantánea"
+#: toolkit/activity_widgets.py:166
+msgid "Keep"
+msgstr "Guardar"
+
+#: toolkit/activity_widgets.py:344
+msgid "Activity"
+msgstr "Actividad"
+
+#~ msgid "Montage"
+#~ msgstr "Montaje"
