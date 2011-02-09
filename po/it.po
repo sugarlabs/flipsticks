@@ -22,12 +22,16 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 00:31-0500\n"
-"PO-Revision-Date: 2009-05-08 07:21-0400\n"
+"POT-Creation-Date: 2010-10-12 00:30-0400\n"
+"PO-Revision-Date: 2011-02-09 13:29+0200\n"
 "Last-Translator: Carlo Falciola <cfalciola@yahoo.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -35,45 +39,45 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.0.3\n"
 
 #: activity/activity.info:2
 msgid "FlipSticks"
 msgstr "FlipSticks"
 
-#: activity.py:58
+#: activity.py:54
 msgid "Lessons"
 msgstr "Istruzioni"
 
-#: activity.py:107
+#: activity.py:103
 msgid "Set frame"
 msgstr "Selezione fotogramma"
 
-#: activity.py:112
+#: activity.py:108
 msgid "Clear frame"
 msgstr "Pulisci fotogramma"
 
-#: activity.py:117
+#: activity.py:113
 msgid "Reset"
 msgstr "Ricomincia"
 
-#: activity.py:146
+#: activity.py:142
 msgid "Play backward / Pause"
 msgstr "Esegui all'indetro / Pausa"
 
-#: activity.py:152
+#: activity.py:148
 msgid "Play forward / Pause"
 msgstr "Avanti / Pausa"
 
-#: activity.py:171
+#: activity.py:167
 msgid "Snapshot"
 msgstr "Cattura immagine"
 
-#: montage.py:657
+#: montage.py:651
 msgid "Angle:"
 msgstr "Angolo:"
 
-#: montage.py:677
+#: montage.py:671
 msgid "Size:"
 msgstr "Dimensione:"
 
@@ -172,6 +176,42 @@ msgstr "Gamba Sinistra Bassa"
 #: theme.py:73
 msgid "Left Foot"
 msgstr "Piede Sinistro"
+
+#: toolkit/activity_widgets.py:83
+msgid "Stop"
+msgstr "Ferma"
+
+#: toolkit/activity_widgets.py:95
+msgid "Undo"
+msgstr "Annulla"
+
+#: toolkit/activity_widgets.py:103
+msgid "Redo"
+msgstr "Ripeti"
+
+#: toolkit/activity_widgets.py:110
+msgid "Copy"
+msgstr "Copia"
+
+#: toolkit/activity_widgets.py:117
+msgid "Paste"
+msgstr "Incolla"
+
+#: toolkit/activity_widgets.py:127
+msgid "Private"
+msgstr "Privato"
+
+#: toolkit/activity_widgets.py:134
+msgid "My Neighborhood"
+msgstr "I miei vicini"
+
+#: toolkit/activity_widgets.py:166
+msgid "Keep"
+msgstr "Memorizza"
+
+#: toolkit/activity_widgets.py:344
+msgid "Activity"
+msgstr "Attività"
 
 #~ msgid "Montage"
 #~ msgstr "Montaggio"
