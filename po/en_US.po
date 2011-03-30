@@ -22,12 +22,16 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-10-12 00:30-0400\n"
-"PO-Revision-Date: 2010-12-20 05:37+0200\n"
+"POT-Creation-Date: 2011-01-07 01:02-0500\n"
+"PO-Revision-Date: 2011-02-10 07:31+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_US\n"
@@ -38,8 +42,8 @@ msgstr ""
 "X-Generator: Pootle 2.0.3\n"
 
 #: activity/activity.info:2
-msgid "FlipSticks"
-msgstr "FlipSticks"
+msgid "Flip Sticks"
+msgstr "Flip Sticks"
 
 #: activity.py:54
 msgid "Lessons"
