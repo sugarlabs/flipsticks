@@ -1,5 +1,5 @@
 [Activity]
-sweet     = flipsticks
+implement = flipsticks
 name      = Flip Sticks
 summary   = Using keyframes, program a stick figure to twist and dance
 description = Flipsticks is a keyframe animation activity that lets you pose
@@ -11,12 +11,12 @@ description = Flipsticks is a keyframe animation activity that lets you pose
 homepage  = http://wiki.sugarlabs.org/go/Activities/Flip_Sticks
 license   = GPLv2+
 
+version   = %(activity_version)s
+stability = stable
+
 icon      = activity-flipsticks
 exec      = sugar-activity activity.flipsticksActivity
 
-version   = 8
-stability = testing
-
 # support original activity.info fields
-activity_version = %(version)s
+activity_version = 8
 bundle_id = org.worldwideworkshop.olpc.FlipSticks
