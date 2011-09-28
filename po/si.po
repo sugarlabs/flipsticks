@@ -2,156 +2,219 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Sulochani Dharmawardana <sulochani@gmail.com>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: flipsticks\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 22:04+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2011-08-04 13:29+0000\n"
+"PO-Revision-Date: 2011-09-28 08:22+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
+"Language-Team: Sinhalese <sulochani@gmail.com>\n"
+"Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#: activity.py:54
+msgid "Lessons"
+msgstr "පාඩම්"
+
+#: activity.py:103
+msgid "Set frame"
+msgstr "රාමුව යෙදීම"
+
+#: activity.py:108
+msgid "Clear frame"
+msgstr "රාමුව ඉවත්කිරීම"
+
+#: activity.py:113
+msgid "Reset"
+msgstr "නැවත යෙදීම"
+
+#: activity.py:142
+msgid "Play backward / Pause"
+msgstr "පසුපසට ධාවනය / නැවැත්වීම"
+
+#: activity.py:148
+msgid "Play forward / Pause"
+msgstr "ඉදිරියට ධාවනය / නැවැත්වීම"
+
+#: activity.py:167
+msgid "Snapshot"
+msgstr "ක්ෂණික ඡායාරූපය"
 
 #: activity/activity.info:2
-msgid "FlipSticks"
-msgstr ""
+msgid "Flip Sticks"
+msgstr "Flip Sticks"
 
-#: montage.py:657
+#: montage.py:651
 msgid "Angle:"
-msgstr ""
+msgstr "කෝණය:"
 
-#: montage.py:677
+#: montage.py:671
 msgid "Size:"
-msgstr ""
+msgstr "ප්‍රමාණය:"
 
 #: theme.py:50
 msgid "Size"
-msgstr ""
+msgstr "ප්‍රමාණය"
 
 #: theme.py:51
 msgid "Angle"
-msgstr ""
+msgstr "කෝණය"
 
 #: theme.py:52
 msgid "Lesson Plans"
-msgstr ""
+msgstr "පාඩම් සැලසුම්"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr ""
+msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr ""
+msgstr "පළවන රාමුව නිර්යාත කරන්න"
 
 #: theme.py:55
 msgid "Head"
-msgstr ""
+msgstr "හිස"
 
 #: theme.py:56
 msgid "Neck"
-msgstr ""
+msgstr "බෙල්ල"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr ""
+msgstr "දකුණු උරහිස"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr ""
+msgstr "දකුණු අතේ උඩ කොටස"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr ""
+msgstr "දකුණු අතේ යට කොටස"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr ""
+msgstr "දකුණු අත"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr ""
+msgstr "වම් උරහිස"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr ""
+msgstr "වම් අතේ උඩ කොටස"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr ""
+msgstr "වම් අතේ යට කොටස"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr ""
+msgstr "වම් අත"
 
 #: theme.py:65
 msgid "Torso"
-msgstr ""
+msgstr "කවන්ධය"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr ""
+msgstr "දකුණු උකුල"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr ""
+msgstr "දකුණු කකුලේ උඩ කොටස"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr ""
+msgstr "දකුණු කකුලේ යට කොටස"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr ""
+msgstr "දකුණු අඩිය"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr ""
+msgstr "වම් උකුල"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr ""
+msgstr "වම් කකුලේ උඩ කොටස"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr ""
+msgstr "වම් කකුලේ යට කොටස"
 
 #: theme.py:73
 msgid "Left Foot"
+msgstr "වම් අඩිය"
+
+#: toolkit/activity_widgets.py:83
+msgid "Stop"
 msgstr ""
 
-#: activity.py:54
-msgid "Montage"
+#: toolkit/activity_widgets.py:95
+msgid "Undo"
 msgstr ""
 
-#: activity.py:58
-msgid "Lessons"
+#: toolkit/activity_widgets.py:103
+msgid "Redo"
 msgstr ""
 
-#: activity.py:87
-msgid "Set frame"
+#: toolkit/activity_widgets.py:110
+msgid "Copy"
 msgstr ""
 
-#: activity.py:92
-msgid "Clear frame"
+#: toolkit/activity_widgets.py:117
+msgid "Paste"
 msgstr ""
 
-#: activity.py:97
-msgid "Reset"
+#: toolkit/activity_widgets.py:127
+msgid "Private"
 msgstr ""
 
-#: activity.py:126
-msgid "Play backward / Pause"
+#: toolkit/activity_widgets.py:134
+msgid "My Neighborhood"
 msgstr ""
 
-#: activity.py:132
-msgid "Play forward / Pause"
+#: toolkit/activity_widgets.py:166
+msgid "Keep"
 msgstr ""
 
-#: activity.py:151
-msgid "Snapshot"
+#: toolkit/activity_widgets.py:344
+msgid "Activity"
 msgstr ""
+
+#~ msgid "Montage"
+#~ msgstr "සමෝධානය"
