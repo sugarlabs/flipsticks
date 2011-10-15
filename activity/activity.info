@@ -18,5 +18,5 @@ icon      = activity-flipsticks
 exec      = sugar-activity activity.flipsticksActivity
 
 # support original activity.info fields
-activity_version = 8
+activity_version = 9
 bundle_id = org.worldwideworkshop.olpc.FlipSticks
