@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 13:29+0000\n"
-"PO-Revision-Date: 2011-11-12 19:06+0200\n"
+"PO-Revision-Date: 2011-11-26 08:40+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: quz\n"
@@ -31,7 +31,7 @@ msgstr ""
 #  "Reiniciar"
 #: activity.py:113
 msgid "Reset"
-msgstr ""
+msgstr "Wakmanta qallarichiy"
 
 #  "Reproducir hacia atrás / Pausar"
 #: activity.py:142
@@ -61,12 +61,12 @@ msgstr ""
 #  "Tamaño:"
 #: montage.py:671
 msgid "Size:"
-msgstr ""
+msgstr "Sayaynin:"
 
 #  "Tamaño"
 #: theme.py:50
 msgid "Size"
-msgstr ""
+msgstr "Sayaynin"
 
 #  "Ángulo"
 #: theme.py:51
@@ -215,15 +215,16 @@ msgstr ""
 
 #  "Vecindario"
 #: toolkit/activity_widgets.py:134
+#, fuzzy
 msgid "My Neighborhood"
-msgstr ""
+msgstr "Suyucha"
 
 #  "Guardar"
 #: toolkit/activity_widgets.py:166
 msgid "Keep"
-msgstr ""
+msgstr "Kikinchata waqaychay"
 
 #  "Actividad"
 #: toolkit/activity_widgets.py:344
 msgid "Activity"
-msgstr ""
+msgstr "Ruwana"
