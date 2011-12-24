@@ -27,8 +27,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 13:29+0000\n"
-"PO-Revision-Date: 2011-12-06 04:45+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2011-12-21 22:19+0200\n"
+"Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgstr "Դասեր"
 
 #: activity.py:103
 msgid "Set frame"
-msgstr "Որոշել շրջանակը"
+msgstr "Սահմանել շրջանակը"
 
 #: activity.py:108
 msgid "Clear frame"
@@ -55,11 +55,11 @@ msgstr "Վերականգնել"
 
 #: activity.py:142
 msgid "Play backward / Pause"
-msgstr "Նվագարկել հետ / Դադար"
+msgstr "Գործարկել հակառակ հերթականությամբ / Դադար"
 
 #: activity.py:148
 msgid "Play forward / Pause"
-msgstr "Նվագարկել առաջ / Դադար"
+msgstr "Գրարկել սկզբից դեպի վերջ / Դադար"
 
 #: activity.py:167
 msgid "Snapshot"
@@ -67,7 +67,7 @@ msgstr "Ճեպապատկեր"
 
 #: activity/activity.info:2
 msgid "Flip Sticks"
-msgstr "Շրջել Ձողիկներ"
+msgstr "Շրջուն Ձողիկներ"
 
 #: montage.py:651
 msgid "Angle:"
@@ -89,13 +89,14 @@ msgstr "Անկյուն"
 msgid "Lesson Plans"
 msgstr "Դասի Պլանը"
 
+# Դասերի պլանն` անգլերեն
 #: theme.py:53
 msgid "lp-en"
 msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr "Ներմուծել Շրջանակ Մեկը"
+msgstr "Ներմուծել Շրջանակ \"Մեկ\"-ը"
 
 #: theme.py:55
 msgid "Head"
@@ -143,35 +144,35 @@ msgstr "Իրան"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr "Աջ Ազդր"
+msgstr "Աջ կոնք"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr "Աջ Վերին Սրունք"
+msgstr "Աջ ազդր"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr "Աջ Ստորին Սրունք"
+msgstr "Աջ Սրունք"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr "Աջ Ոտք"
+msgstr "Աջ Ոտնաթաթ"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr "Ձախ Ազդր"
+msgstr "Ձախ կոնք"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr "Ձախ Վերին Սրունք"
+msgstr "Ձախ ազդր"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr "Ձախ Վերին Սրունք"
+msgstr "Ձախ Սրունք"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr "Ձախ Ոտք"
+msgstr "Ձախ Ոտնաթաթ"
 
 #: toolkit/activity_widgets.py:83
 msgid "Stop"
@@ -179,7 +180,7 @@ msgstr "Կանգնեցնել"
 
 #: toolkit/activity_widgets.py:95
 msgid "Undo"
-msgstr "Չեղյալ համարել"
+msgstr "Ետարկել"
 
 #: toolkit/activity_widgets.py:103
 msgid "Redo"
@@ -187,11 +188,11 @@ msgstr "Կրկին կատարել"
 
 #: toolkit/activity_widgets.py:110
 msgid "Copy"
-msgstr "կրկնօրինակել"
+msgstr "Պատճենել"
 
 #: toolkit/activity_widgets.py:117
 msgid "Paste"
-msgstr "Տեղադրել"
+msgstr "Փակցնել"
 
 #: toolkit/activity_widgets.py:127
 msgid "Private"
@@ -199,7 +200,7 @@ msgstr "Անձնական"
 
 #: toolkit/activity_widgets.py:134
 msgid "My Neighborhood"
-msgstr "Իմ հարեվանությունը"
+msgstr "Իմ հարևանությունը"
 
 #: toolkit/activity_widgets.py:166
 msgid "Keep"
