@@ -28,7 +28,7 @@ from gettext import gettext as _
 from sugar.activity.activity import get_bundle_path
 
 import model
-import screen
+import screenflip
 import kinematic
 import theme
 from theme import *
@@ -590,7 +590,7 @@ class View(gtk.EventBox):
         for i in range(len(model.keys)):
             self.keys_overlap_stack.append(i)
 
-        self.key = screen.ScreenFrame()
+        self.key = screenflip.ScreenFrame()
 
         self.kfselected = 0
         self.jointpressed = None
