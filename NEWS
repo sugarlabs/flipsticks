@@ -1,3 +1,8 @@
+11
+
+* Update translations
+* Workaround Sugar's PYTHONPATH setting behaviour
+
 10
 
 - Return langs back by generating locale/ directory

@@ -11,12 +11,13 @@ description = Flipsticks is a keyframe animation activity that lets you pose
 homepage  = http://wiki.sugarlabs.org/go/Activities/Flip_Sticks
 license   = GPLv2+
 
-version   = 10
+version   = %(activity_version)s
 stability = stable
 
 icon      = activity-flipsticks
 exec      = sugar-activity activity.flipsticksActivity
+requires  = sdk/sugar-toolkit
 
 # support original activity.info fields
-activity_version = 10
+activity_version = 11
 bundle_id = org.worldwideworkshop.olpc.FlipSticks
