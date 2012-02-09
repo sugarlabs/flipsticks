@@ -42,21 +42,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-07 01:02-0500\n"
+"POT-Creation-Date: 2011-08-04 13:29+0000\n"
 "PO-Revision-Date: 2010-02-16 07:15+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: sq\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.1\n"
-
-#: activity/activity.info:2
-#, fuzzy
-msgid "Flip Sticks"
-msgstr "FlipSticks"
 
 #: activity.py:54
 msgid "Lessons"
@@ -85,6 +80,11 @@ msgstr "Luaj përpara / Ndalo"
 #: activity.py:167
 msgid "Snapshot"
 msgstr "Fotografi i çastit"
+
+#: activity/activity.info:2
+#, fuzzy
+msgid "Flip Sticks"
+msgstr "FlipSticks"
 
 #: montage.py:651
 msgid "Angle:"
