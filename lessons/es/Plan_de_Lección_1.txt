@@ -1,0 +1,64 @@
+Plan de Lección 1: Exploración de Flipsticks
+Desde la pantalla principal de su XO, haga clic en el icono de Flipsticks para abrirlo. También puede abrir Flipsticks desde el Centro MaMaMedia creativo.
+
+Moldear su figura Stick  haciendo clic directamente en ella:
+
+Lo primero que notará es una figura en el "escenario" área.
+
+  - Coloque en poses diferentes haciendo clic y arrastrando sobre los puntos rojos
+    en su cuerpo
+  - Utilice el punto amarillo que le gire.
+  - El uso del punto verde para trasladarlo a un lugar diferente en la pantalla
+
+Moldear su figura Stick en la LISTA DE PARTES DEL CUERPO
+
+  - Mira la lista de texto de partes del cuerpo en el lado izquierdo de la pantalla.
+  - Haga clic en una parte, como "jefe" o "brazo izquierdo" y mirar el
+    números para "ángulo" y "Tamaño" que aparecen en la parte superior de la lista.
+  - Haga clic en el "ángulo" a continuación, escriba el número en un nuevo número en su
+    teclado para mover esa parte de su palo de la figura
+  - Haga clic en "Tamaño", a continuación, escriba el número en un nuevo número en su teclado
+    para hacer la parte más grande o más pequeño.
+  - Pulse la tecla "enter" del teclado para guardar su nuevo número.
+  - Observe cómo el palo de la figura ha cambiado.
+
+GUARDE SU REPRESENTACION como fotogramas.
+  
+  - Cuando te gusta la forma en que la figura se ve, guárdalo como un "fotograma"
+  - Los fotogramas son los cinco círculos debajo de la ventana de escenario.
+  - Haga clic en un círculo fotograma clave para elegir - se vuelven de color rosa para que
+    Sé que está listo. Luego haga clic en el "marco Set" con una marca en él
+    para salvar a usted representa en este fotograma clave.
+  - Mueva el palo de la figura en una nueva postura, a continuación, guárdelo haciendo clic en
+    otro círculo de fotogramas y haciendo clic en el "marco Set".
+  - Llenar los cinco fotogramas clave con diferentes poses.
+
+VER SU ANIMACIÓN!
+  
+  - Para reproducir la animación, pulse el botón Play (flecha hacia la derecha en la parte superior de la
+    pantalla) botón. Su figura se moverá a través de las poses que ha creado.
+  - Observa cómo el equipo se suma adicional entre usted plantea en fotogramas clave,
+    así que la animación se reproduce sin problemas.
+  - Pulsar en el botón Reproducir de nuevo si le gustaría dejar de
+  - Pulse el botón Reproducir hacia atrás (flecha izquierda) para jugar al revés
+  - Pulse el botón Reproducir hacia atrás de nuevo, si usted desea parar.
+
+Editar la animación
+
+REORDENAR LAS POSES O MOLDES: Usted puede cambiar el orden de poses o moldes de los fotogramas clave haciendo clic en cada círculo y arrastrando hacia la izquierda o la derecha. Pulse Play para ver cómo la figura se mueve cuando los cuadros están en un orden diferente.
+
+AJUSTAR LA VELOCIDAD: Hay un control de velocidad "slider" al lado de los botones de reproducción. Haga que su animación se mueven más rápido o más lento haciendo clic en el pequeño círculo en la barra de velocidad y arrastrando a la izquierda (para ir más lento) o derecha (para ir más rápido).
+
+REAJUSTE DE LA FIGURA STICK: Si desea iniciar una nueva entrada desde la posición original de pie, haga clic en el botón de reinicio con la cruz sobre él.
+
+LIMPIAR MARCOS: si desea borrar los fotogramas clave y empezar de nuevo, haga clic en el botón que parece un círculo con una línea a través de él.
+
+Guardar y compartir la ANIMACIÓN
+
+Tómese tiempo para explorar y hacer muchos movimientos diferentes con su figura.
+
+Compartir la animación que hiciste con tus amigos y compañeros de la selección del modo de intercambio de los países vecinos: haga clic en el botón de actividad (el botón más a la izquierda) y seleccione el icono de Vecindario en el primer botón.
+
+Utilice el botón de instantáneas para dar vuelta a su primera pose en una imagen que se puede utilizar en otros programas, como Paint o Puzzle Jigshaw.
+
+Después de mirar unos a los otros animaciones Flipsticks, discutir lo que era difícil y lo que era fácil de hacer ellos. ¿Qué te gustaría para programar su figura Flipsticks hacer a continuación?

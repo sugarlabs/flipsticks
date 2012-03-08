@@ -1,0 +1,42 @@
+Plan de Lección 2: Introducción a la Geometría
+
+La geometría es el estudio de las curvas, ángulos y formas. Los profesores o estudiantes que estén familiarizados con la geometría puede conducir a nuevos estudiantes en el ejercicio siguiente.
+
+EXPLORAR LO BÁSICO SOBRE ángulos y líneas rectas
+
+Pregunte a los alumnos: ¿Qué sabe usted acerca de la geometría? Luego explican que podrás explorar algunos conceptos básicos sobre los ángulos y líneas rectas.
+
+ - El uso de un pizarrón o papel, dibujar un círculo y explique que
+   un círculo perfecto es de 360 ​​grados alrededor.
+ - Dibuja una línea recta horizontal a través del círculo y explique
+   que la línea es un ángulo de 180 grados.
+ - Dibuja una línea recta vertical que pasa por el centro del círculo;
+   pedir a los alumnos lo que ellos notan en la forma que creados por
+   cruzar la línea recta horizontal.
+ - Señale cómo cortar el círculo en cuatro cuartos forma 90
+   ángulos del grado. Explica que un ángulo de 90 grados se llama un
+   ángulo recto
+ - Dibuja una línea diagonal que corta uno de los cuatro trimestres del
+   círculo por la mitad otra vez. Explica que un medio ángulo del tamaño de
+   el ángulo de 90 grados es un ángulo de 45 grados.
+ - Hable con la clase por qué medir ángulos matemáticos y
+   lo que podría ser la importancia de hacer esto
+
+AHORA USE FLIPSTICKS PARA EXPLORAR MÁS ÁNGULOS
+
+Desde la pantalla principal de su XO, haga clic sobre el icono de Flipsticks para abrirlo. También puede abrir Flipsticks de la actividad del Centro MaMaMedia creativo.
+
+Vaya a la lista de partes del cuerpo y haga clic en el "brazo derecho", a continuación, mueva el cursor donde dice "ángulo" y escriba un 0. Pulse la tecla "enter" del teclado.
+
+Haga clic en el "brazo inferior derecho" y escriba 0. Pulse la tecla "enter" del teclado. Ahora usted debería tener una línea recta. Este debería ser el primer movimiento de la figura.
+
+Haga clic en el círculo primer fotograma clave y luego el botón Ver para salvar a esta postura. Haga clic en el círculo segundo fotograma clave, y luego volver a la lista de partes del cuerpo. Haga clic en el "brazo inferior derecho" y el tipo en el 45. Pulse la tecla "enter" del teclado. Haga clic en el botón Ver para salvar a esta postura.
+
+Haga clic en el círculo de fotogramas clave en tercer lugar, a continuación, volver a la lista de partes del cuerpo. Haga clic en el "brazo inferior derecho" y escriba en el 270. Pulse la tecla "enter" del teclado. Haga clic en el botón Ver para salvar a esta postura.
+
+Haga clic en el círculo quinto fotograma clave, y luego volver a la lista de partes del cuerpo. Haga clic en el "brazo inferior derecho" y el tipo en el año 360. Pulse la tecla "enter" del teclado. Haga clic en el botón Ver para salvar a esta postura.
+
+Pulse el botón de reproducción y discutir lo que usted nota sobre los movimientos de esta cifra está haciendo. ¿Qué tamaño de los ángulos se hacen? ¿Cuál es la forma final que se ha hecho? ¿Cuántas anbles 90 grados hay? ¿Cuántos ángulos de 45 grados hay?
+
+Un estudiante debe tener constancia  de esta discusión en la computadora portátil XO en la documentación del programa.
+
