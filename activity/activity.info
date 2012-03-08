@@ -19,5 +19,5 @@ exec      = sugar-activity activity.flipsticksActivity
 requires  = sdk/sugar-toolkit
 
 # support original activity.info fields
-activity_version = 11
+activity_version = 12
 bundle_id = org.worldwideworkshop.olpc.FlipSticks
