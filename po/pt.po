@@ -35,10 +35,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 13:29+0000\n"
-"PO-Revision-Date: 2012-01-23 06:20+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2012-03-16 00:52+0200\n"
+"Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: pt\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +47,7 @@ msgstr ""
 
 #: activity.py:54
 msgid "Lessons"
-msgstr "Aulas"
+msgstr "Lições"
 
 #: activity.py:103
 #, fuzzy
@@ -66,20 +66,19 @@ msgstr "Reiniciar"
 
 #: activity.py:142
 msgid "Play backward / Pause"
-msgstr ""
+msgstr "Tocar para trás / Pausar"
 
 #: activity.py:148
 msgid "Play forward / Pause"
-msgstr ""
+msgstr "Tocar para a frente / Pausar"
 
 #: activity.py:167
-#, fuzzy
 msgid "Snapshot"
-msgstr "Captura"
+msgstr "Capturar"
 
 #: activity/activity.info:2
 msgid "Flip Sticks"
-msgstr ""
+msgstr "Flip Sticks"
 
 #: montage.py:651
 msgid "Angle:"
@@ -98,18 +97,16 @@ msgid "Angle"
 msgstr "Ângulo"
 
 #: theme.py:52
-#, fuzzy
 msgid "Lesson Plans"
-msgstr "Plano Lição"
+msgstr "Planos de Lição"
 
 #: theme.py:53
 msgid "lp-en"
 msgstr ""
 
 #: theme.py:54
-#, fuzzy
 msgid "Export Frame One"
-msgstr "Exportar moldura um"
+msgstr "Exportar Moldura Um"
 
 #: theme.py:55
 msgid "Head"
@@ -120,89 +117,72 @@ msgid "Neck"
 msgstr "Pescoço"
 
 #: theme.py:57
-#, fuzzy
 msgid "Right Shoulder"
 msgstr "Ombro Direito"
 
 #: theme.py:58
-#, fuzzy
 msgid "Upper Right Arm"
-msgstr "Braço Topo Direito"
+msgstr "Braço Direito"
 
 #: theme.py:59
-#, fuzzy
 msgid "Lower Right Arm"
-msgstr "Braço Fundo Direito"
+msgstr "Antebraço Direito"
 
 #: theme.py:60
-#, fuzzy
 msgid "Right Hand"
-msgstr "Mão Direito"
+msgstr "Mão Direita"
 
 #: theme.py:61
-#, fuzzy
 msgid "Left Shoulder"
 msgstr "Ombro Esquerdo"
 
 #: theme.py:62
-#, fuzzy
 msgid "Upper Left Arm"
-msgstr "Braço Topo Esquerdo"
+msgstr "Braço Esquerdo"
 
 #: theme.py:63
-#, fuzzy
 msgid "Lower Left Arm"
-msgstr "Braço Fundo Esquerdo"
+msgstr "Antebraço Esquerdo"
 
 #: theme.py:64
-#, fuzzy
 msgid "Left Hand"
-msgstr "Mão Esquerdo"
+msgstr "Mão Esquerda"
 
 #: theme.py:65
-#, fuzzy
 msgid "Torso"
 msgstr "Tronco"
 
 #: theme.py:66
-#, fuzzy
 msgid "Right Hip"
 msgstr "Anca Direita"
 
 #: theme.py:67
-#, fuzzy
 msgid "Upper Right Leg"
-msgstr "Perna Topo Direita"
+msgstr "Coxa Direita"
 
 #: theme.py:68
-#, fuzzy
 msgid "Lower Right Leg"
-msgstr "Perna Fundo Direita"
+msgstr "Perna Direita"
 
 #: theme.py:69
-#, fuzzy
 msgid "Right Foot"
-msgstr "Pé Direita"
+msgstr "Pé Direito"
 
 #: theme.py:70
-#, fuzzy
 msgid "Left Hip"
 msgstr "Anca Esquerda"
 
 #: theme.py:71
-#, fuzzy
 msgid "Upper Left Leg"
-msgstr "Perna Topo Esquerda"
+msgstr "Coxa Esquerda"
 
 #: theme.py:72
-#, fuzzy
 msgid "Lower Left Leg"
-msgstr "Perna Fundo Esquerda"
+msgstr "Perna Esquerda"
 
 #: theme.py:73
-#, fuzzy
 msgid "Left Foot"
-msgstr "Pé Esquerda"
+msgstr "Pé Esquerdo"
 
 #: toolkit/activity_widgets.py:83
 msgid "Stop"
