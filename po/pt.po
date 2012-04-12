@@ -35,10 +35,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 13:29+0000\n"
-"PO-Revision-Date: 2012-03-16 00:52+0200\n"
+"PO-Revision-Date: 2012-04-12 23:46+0200\n"
 "Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,17 +50,14 @@ msgid "Lessons"
 msgstr "Lições"
 
 #: activity.py:103
-#, fuzzy
 msgid "Set frame"
-msgstr "Definir moldura"
+msgstr "Colocar moldura"
 
 #: activity.py:108
-#, fuzzy
 msgid "Clear frame"
 msgstr "Limpar moldura"
 
 #: activity.py:113
-#, fuzzy
 msgid "Reset"
 msgstr "Reiniciar"
 
@@ -209,14 +206,13 @@ msgid "Private"
 msgstr "Privado"
 
 #: toolkit/activity_widgets.py:134
-#, fuzzy
 msgid "My Neighborhood"
-msgstr "Vizinhança"
+msgstr "A Minha Vizinhança"
 
 #: toolkit/activity_widgets.py:166
 msgid "Keep"
-msgstr "Manter"
+msgstr "Guardar"
 
 #: toolkit/activity_widgets.py:344
 msgid "Activity"
-msgstr "Actividade"
+msgstr "Atividade"
