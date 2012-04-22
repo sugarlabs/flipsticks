@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-08-04 13:29+0000\n"
-"PO-Revision-Date: 2011-08-10 21:40+0200\n"
-"Last-Translator: <usuariotenek03@gmail.com>\n"
+"PO-Revision-Date: 2011-08-29 03:18+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -159,7 +159,7 @@ msgstr "Kuba'"
 
 #: toolkit/activity_widgets.py:95
 msgid "Undo"
-msgstr "pakluw"
+msgstr "Pakluw"
 
 #: toolkit/activity_widgets.py:103
 msgid "Redo"

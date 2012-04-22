@@ -2,156 +2,223 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Loba Yeasmeen <loba@ankur.org.bd>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: honey VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-11 22:04+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2011-08-04 13:29+0000\n"
+"PO-Revision-Date: 2009-06-24 16:14-0800\n"
+"Last-Translator: Loba Yeasmeen <loba@ankur.org.bd>\n"
+"Language-Team: Bengali <ankur-bd-l10n@googlegroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.3.0\n"
 
+#: activity.py:54
+msgid "Lessons"
+msgstr "পাঠ"
+
+#: activity.py:103
+msgid "Set frame"
+msgstr "ফ্রেম নির্ধারণ করো"
+
+#: activity.py:108
+msgid "Clear frame"
+msgstr "ফ্রেম অসারণ করো"
+
+#: activity.py:113
+msgid "Reset"
+msgstr "রিসেট"
+
+#: activity.py:142
+msgid "Play backward / Pause"
+msgstr "পিছনের দিকে চালাও / বিরতী"
+
+#: activity.py:148
+msgid "Play forward / Pause"
+msgstr "সামনের দিকে চালাও / বিরতী"
+
+#: activity.py:167
+msgid "Snapshot"
+msgstr "স্ন্যাপশট"
+
 #: activity/activity.info:2
-msgid "FlipSticks"
-msgstr ""
+msgid "Flip Sticks"
+msgstr "Flip Sticks"
 
-#: montage.py:657
+#: montage.py:651
 msgid "Angle:"
-msgstr ""
+msgstr "কোন:"
 
-#: montage.py:677
+#: montage.py:671
 msgid "Size:"
-msgstr ""
+msgstr "আকার:"
 
 #: theme.py:50
 msgid "Size"
-msgstr ""
+msgstr "আকার"
 
 #: theme.py:51
 msgid "Angle"
-msgstr ""
+msgstr "কোন"
 
 #: theme.py:52
 msgid "Lesson Plans"
-msgstr ""
+msgstr "পাঠ পরিকল্পনা"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr ""
+msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr ""
+msgstr "প্রথম ফ্রেম এক্সপোর্ট করো"
 
 #: theme.py:55
 msgid "Head"
-msgstr ""
+msgstr "মাথা"
 
 #: theme.py:56
 msgid "Neck"
-msgstr ""
+msgstr "গলা"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr ""
+msgstr "ডান কাঁধ"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr ""
+msgstr "ডান হাতে উপরের অংশ"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr ""
+msgstr "ডান হাতের নিচের অংশ"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr ""
+msgstr "ডান হাত"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr ""
+msgstr "বাম কাঁধ"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr ""
+msgstr "বাম হাতের উপরের অংশ"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr ""
+msgstr "বাম হাতের নিচের অংশ"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr ""
+msgstr "বাম হাত"
 
 #: theme.py:65
 msgid "Torso"
-msgstr ""
+msgstr "শরীর"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr ""
+msgstr "ডান কোমর"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr ""
+msgstr "ডান পায়ের উপরের অংশ"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr ""
+msgstr "ডান পায়ের নিচের অংশ"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr ""
+msgstr "ডান পা"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr ""
+msgstr "বাম কোমর"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr ""
+msgstr "বাম পয়ের উপরের অংশ"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr ""
+msgstr "বাম পায়ের নিচের অংশ"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr ""
+msgstr "বাম পা"
 
-#: activity.py:54
-msgid "Montage"
-msgstr ""
+#: toolkit/activity_widgets.py:83
+msgid "Stop"
+msgstr "থামুন"
 
-#: activity.py:58
-msgid "Lessons"
-msgstr ""
+#: toolkit/activity_widgets.py:95
+msgid "Undo"
+msgstr "আগের অবস্থায় ফিরিয়ে আনুন"
 
-#: activity.py:87
-msgid "Set frame"
-msgstr ""
+#: toolkit/activity_widgets.py:103
+msgid "Redo"
+msgstr "পুনরায় করুন"
 
-#: activity.py:92
-msgid "Clear frame"
-msgstr ""
+#: toolkit/activity_widgets.py:110
+msgid "Copy"
+msgstr "অনুলিপি করা"
 
-#: activity.py:97
-msgid "Reset"
-msgstr ""
+#: toolkit/activity_widgets.py:117
+msgid "Paste"
+msgstr "প্রতিলেপন করা"
 
-#: activity.py:126
-msgid "Play backward / Pause"
-msgstr ""
+#: toolkit/activity_widgets.py:127
+msgid "Private"
+msgstr "একান্ত"
 
-#: activity.py:132
-msgid "Play forward / Pause"
-msgstr ""
+#: toolkit/activity_widgets.py:134
+msgid "My Neighborhood"
+msgstr "আমার প্রতিবেশি"
 
-#: activity.py:151
-msgid "Snapshot"
-msgstr ""
+#: toolkit/activity_widgets.py:166
+msgid "Keep"
+msgstr "রাখুন"
+
+#: toolkit/activity_widgets.py:344
+msgid "Activity"
+msgstr "প্রক্রিয়া"
+
+#~ msgid "Montage"
+#~ msgstr "মনটাজ"
