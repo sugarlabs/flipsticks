@@ -26,16 +26,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 13:29+0000\n"
-"PO-Revision-Date: 2011-12-21 22:19+0200\n"
-"Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
+"POT-Creation-Date: 2012-06-22 00:32-0400\n"
+"PO-Revision-Date: 2012-07-10 21:49+0200\n"
+"Last-Translator: anush.mkrtchyan <anush.mkrtchyan@ca1492.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.0.5\n"
+
+#: activity/activity.info:2
+msgid "Flip Sticks"
+msgstr "Շրջուն Ձողիկներ"
 
 #: activity.py:54
 msgid "Lessons"
@@ -65,15 +69,11 @@ msgstr "Գրարկել սկզբից դեպի վերջ / Դադար"
 msgid "Snapshot"
 msgstr "Ճեպապատկեր"
 
-#: activity/activity.info:2
-msgid "Flip Sticks"
-msgstr "Շրջուն Ձողիկներ"
-
-#: montage.py:651
+#: montage.py:652
 msgid "Angle:"
 msgstr "Անկյուն."
 
-#: montage.py:671
+#: montage.py:672
 msgid "Size:"
 msgstr "Չափս."
 
@@ -174,38 +174,41 @@ msgstr "Ձախ Սրունք"
 msgid "Left Foot"
 msgstr "Ձախ Ոտնաթաթ"
 
-#: toolkit/activity_widgets.py:83
+#: toolkit/activity_widgets.py:84
 msgid "Stop"
 msgstr "Կանգնեցնել"
 
-#: toolkit/activity_widgets.py:95
+#: toolkit/activity_widgets.py:96
 msgid "Undo"
 msgstr "Ետարկել"
 
-#: toolkit/activity_widgets.py:103
+#: toolkit/activity_widgets.py:104
 msgid "Redo"
 msgstr "Կրկին կատարել"
 
-#: toolkit/activity_widgets.py:110
+#: toolkit/activity_widgets.py:111
 msgid "Copy"
 msgstr "Պատճենել"
 
-#: toolkit/activity_widgets.py:117
+#: toolkit/activity_widgets.py:118
 msgid "Paste"
 msgstr "Փակցնել"
 
-#: toolkit/activity_widgets.py:127
+#: toolkit/activity_widgets.py:128
 msgid "Private"
 msgstr "Անձնական"
 
-#: toolkit/activity_widgets.py:134
+#: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
 msgstr "Իմ հարևանությունը"
 
-#: toolkit/activity_widgets.py:166
-msgid "Keep"
-msgstr "Պահել"
+#: toolkit/activity_widgets.py:213
+msgid "Description"
+msgstr "Նկարագրություն"
 
-#: toolkit/activity_widgets.py:344
+#: toolkit/activity_widgets.py:393
 msgid "Activity"
 msgstr "Գործունեություն"
+
+#~ msgid "Keep"
+#~ msgstr "Պահել"
