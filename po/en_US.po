@@ -30,8 +30,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-07 00:35-0400\n"
-"PO-Revision-Date: 2012-06-07 17:24+0200\n"
+"POT-Creation-Date: 2012-09-27 14:48-0400\n"
+"PO-Revision-Date: 2012-10-07 23:46+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_US\n"
@@ -41,9 +41,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
 msgstr "Flip Sticks"
+
+#. TRANS: "summary" option from activity.info file
+msgid "Using keyframes, program a stick figure to twist and dance"
+msgstr "Using keyframes, program a stick figure to twist and dance"
+
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Flipsticks is a keyframe animation activity that lets you pose and program a "
+"stick figure to walk, run, rotate, twist, tumble and dance. You can save "
+"your animations to the journal and will soon be able to share them via the "
+"mesh. Flipsticks can be used to explore concepts in geometry, computer "
+"programming and animation; it helps develop spatial and analytical thinking "
+"skills."
+msgstr ""
+"Flipsticks is a keyframe animation activity that lets you pose and program a "
+"stick figure to walk, run, rotate, twist, tumble and dance. You can save "
+"your animations to the journal and will soon be able to share them via the "
+"mesh. Flipsticks can be used to explore concepts in geometry, computer "
+"programming and animation; it helps develop spatial and analytical thinking "
+"skills."
 
 #: activity.py:54
 msgid "Lessons"
