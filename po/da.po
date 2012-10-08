@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-07 00:35-0400\n"
-"PO-Revision-Date: 2012-06-08 04:34+0200\n"
+"POT-Creation-Date: 2012-09-27 14:48-0400\n"
+"PO-Revision-Date: 2012-10-08 17:00+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: da\n"
@@ -17,9 +17,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
 msgstr "Flipsticks"
+
+#. TRANS: "summary" option from activity.info file
+msgid "Using keyframes, program a stick figure to twist and dance"
+msgstr ""
+"Få en tændstikmand til at dreje og danse med nøglebilleder og programmering"
+
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Flipsticks is a keyframe animation activity that lets you pose and program a "
+"stick figure to walk, run, rotate, twist, tumble and dance. You can save "
+"your animations to the journal and will soon be able to share them via the "
+"mesh. Flipsticks can be used to explore concepts in geometry, computer "
+"programming and animation; it helps develop spatial and analytical thinking "
+"skills."
+msgstr ""
+"Flipsticks er en aktivetet med nøglebillede-animation, der lader dig "
+"fremstille og programmere en tændstikfigur, så den går, roterer, drejer, "
+"tumle rundt og danse. Du kan gemme dine animationer til journalen og snart "
+"vil du kunne dele dem via gitteret. Flipsticks kan bruges til at udforske "
+"begreber i geometri, computerprogrammering og animation; det hjælper med at "
+"udvikle evner inden for rumslig og analytisk tænkning."
 
 #: activity.py:54
 msgid "Lessons"
