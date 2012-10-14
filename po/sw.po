@@ -42,7 +42,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 13:29+0000\n"
+"POT-Creation-Date: 2012-09-27 14:48-0400\n"
 "PO-Revision-Date: 2011-07-19 15:18+0200\n"
 "Last-Translator: Christian <kryskaka@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,6 +52,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.0.1\n"
+
+#. TRANS: "name" option from activity.info file
+msgid "Flip Sticks"
+msgstr "flick vijiti"
+
+#. TRANS: "summary" option from activity.info file
+msgid "Using keyframes, program a stick figure to twist and dance"
+msgstr ""
+
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Flipsticks is a keyframe animation activity that lets you pose and program a "
+"stick figure to walk, run, rotate, twist, tumble and dance. You can save "
+"your animations to the journal and will soon be able to share them via the "
+"mesh. Flipsticks can be used to explore concepts in geometry, computer "
+"programming and animation; it helps develop spatial and analytical thinking "
+"skills."
+msgstr ""
 
 #: activity.py:54
 msgid "Lessons"
@@ -81,15 +99,11 @@ msgstr "kucheza mbele/ pause"
 msgid "Snapshot"
 msgstr "picture"
 
-#: activity/activity.info:2
-msgid "Flip Sticks"
-msgstr "flick vijiti"
-
-#: montage.py:651
+#: montage.py:652
 msgid "Angle:"
 msgstr "angle"
 
-#: montage.py:671
+#: montage.py:672
 msgid "Size:"
 msgstr "Michezo"
 
@@ -189,38 +203,41 @@ msgstr "chini mguu ya kushoto"
 msgid "Left Foot"
 msgstr "mguu ya kushoto"
 
-#: toolkit/activity_widgets.py:83
+#: toolkit/activity_widgets.py:84
 msgid "Stop"
 msgstr "kuacha"
 
-#: toolkit/activity_widgets.py:95
+#: toolkit/activity_widgets.py:96
 msgid "Undo"
 msgstr "tengua"
 
-#: toolkit/activity_widgets.py:103
+#: toolkit/activity_widgets.py:104
 msgid "Redo"
 msgstr "Rudia"
 
-#: toolkit/activity_widgets.py:110
+#: toolkit/activity_widgets.py:111
 msgid "Copy"
 msgstr "Nakili"
 
-#: toolkit/activity_widgets.py:117
+#: toolkit/activity_widgets.py:118
 msgid "Paste"
 msgstr "kuweka"
 
-#: toolkit/activity_widgets.py:127
+#: toolkit/activity_widgets.py:128
 msgid "Private"
 msgstr "binafsi"
 
-#: toolkit/activity_widgets.py:134
+#: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
 msgstr "Jirani yangu"
 
-#: toolkit/activity_widgets.py:166
-msgid "Keep"
-msgstr "kuweka"
+#: toolkit/activity_widgets.py:213
+msgid "Description"
+msgstr ""
 
-#: toolkit/activity_widgets.py:344
+#: toolkit/activity_widgets.py:393
 msgid "Activity"
 msgstr "shughuli"
+
+#~ msgid "Keep"
+#~ msgstr "kuweka"

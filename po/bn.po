@@ -38,7 +38,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: honey VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 13:29+0000\n"
+"POT-Creation-Date: 2012-09-27 14:48-0400\n"
 "PO-Revision-Date: 2009-06-24 16:14-0800\n"
 "Last-Translator: Loba Yeasmeen <loba@ankur.org.bd>\n"
 "Language-Team: Bengali <ankur-bd-l10n@googlegroups.com>\n"
@@ -47,6 +47,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Translate Toolkit 1.3.0\n"
+
+#. TRANS: "name" option from activity.info file
+msgid "Flip Sticks"
+msgstr "Flip Sticks"
+
+#. TRANS: "summary" option from activity.info file
+msgid "Using keyframes, program a stick figure to twist and dance"
+msgstr ""
+
+#. TRANS: "description" option from activity.info file
+msgid ""
+"Flipsticks is a keyframe animation activity that lets you pose and program a "
+"stick figure to walk, run, rotate, twist, tumble and dance. You can save "
+"your animations to the journal and will soon be able to share them via the "
+"mesh. Flipsticks can be used to explore concepts in geometry, computer "
+"programming and animation; it helps develop spatial and analytical thinking "
+"skills."
+msgstr ""
 
 #: activity.py:54
 msgid "Lessons"
@@ -76,15 +94,11 @@ msgstr "সামনের দিকে চালাও / বিরতী"
 msgid "Snapshot"
 msgstr "স্ন্যাপশট"
 
-#: activity/activity.info:2
-msgid "Flip Sticks"
-msgstr "Flip Sticks"
-
-#: montage.py:651
+#: montage.py:652
 msgid "Angle:"
 msgstr "কোন:"
 
-#: montage.py:671
+#: montage.py:672
 msgid "Size:"
 msgstr "আকার:"
 
@@ -184,41 +198,44 @@ msgstr "বাম পায়ের নিচের অংশ"
 msgid "Left Foot"
 msgstr "বাম পা"
 
-#: toolkit/activity_widgets.py:83
+#: toolkit/activity_widgets.py:84
 msgid "Stop"
 msgstr "থামুন"
 
-#: toolkit/activity_widgets.py:95
+#: toolkit/activity_widgets.py:96
 msgid "Undo"
 msgstr "আগের অবস্থায় ফিরিয়ে আনুন"
 
-#: toolkit/activity_widgets.py:103
+#: toolkit/activity_widgets.py:104
 msgid "Redo"
 msgstr "পুনরায় করুন"
 
-#: toolkit/activity_widgets.py:110
+#: toolkit/activity_widgets.py:111
 msgid "Copy"
 msgstr "অনুলিপি করা"
 
-#: toolkit/activity_widgets.py:117
+#: toolkit/activity_widgets.py:118
 msgid "Paste"
 msgstr "প্রতিলেপন করা"
 
-#: toolkit/activity_widgets.py:127
+#: toolkit/activity_widgets.py:128
 msgid "Private"
 msgstr "একান্ত"
 
-#: toolkit/activity_widgets.py:134
+#: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
 msgstr "আমার প্রতিবেশি"
 
-#: toolkit/activity_widgets.py:166
-msgid "Keep"
-msgstr "রাখুন"
+#: toolkit/activity_widgets.py:213
+msgid "Description"
+msgstr ""
 
-#: toolkit/activity_widgets.py:344
+#: toolkit/activity_widgets.py:393
 msgid "Activity"
 msgstr "প্রক্রিয়া"
+
+#~ msgid "Keep"
+#~ msgstr "রাখুন"
 
 #~ msgid "Montage"
 #~ msgstr "মনটাজ"
