@@ -119,12 +119,13 @@ class View(gtk.EventBox):
 
     def exportframe(self):
         self.frames = kinematic.makeframes()
-        fsecs = self.frames.keys()
-        firstpixindex = fsecs[0]
+        if not self.frames:
+            return
+        firstpixindex = self.frames.keys()[0]
 
         x, y, width, height = self.mfdraw.get_allocation()
         pixmap = gtk.gdk.Pixmap(self.mfdraw.window, width, height)
-        self._draw_frame(fsecs[0], pixmap)
+        self._draw_frame(firstpixindex, pixmap)
         pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, width, height)
         gtk.gdk.Pixbuf.get_from_drawable(pixbuf, pixmap, pixmap.get_colormap(), 0, 0, 0, 0, width, height)
 
