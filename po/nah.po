@@ -2,28 +2,31 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2017-10-18 03:09+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: nah\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.7.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1508296184.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
-msgstr ""
+msgstr "Kuatsitsin"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
 msgstr ""
+"Tekiuijtos tlaixkopinkanextilistli, xijchiua se figura ika kuatsitsin pampa "
+"kilakatsos uan mijtotis"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -34,10 +37,17 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Flipsticks ya se piltekitsin kuali tlen tlaixkopinkanextilistli katli "
+"mitskauas chiuas  se figuraa ika kuatsitsin pampa nejnemis, motlalos, "
+"milakatsos, uetsis uan mijtotis. uelis tikajukuis nopa tekitsin yejyektsin "
+"ipan Diario uan nimaya uelis tij moyauas ika pan red Malla. Flipsticks uelis "
+"chiuas pampa temosconceptos ika  geometría, programación de computadoras "
+"uan tlaltopaknemili;xipaleui tlen kuali kichiuas se kuali  tlaixpanili uan "
+"tlajnejneuilili."
 
 #: activity.py:54
 msgid "Lessons"
-msgstr ""
+msgstr "Tlanextili"
 
 #: activity.py:103
 msgid "Set frame"

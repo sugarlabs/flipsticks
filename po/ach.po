@@ -7,23 +7,24 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2011-04-13 03:12+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2017-04-09 17:29+0000\n"
+"Last-Translator: chanchumgpa <chanchumgpa@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ach\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Pootle 2.0.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1491758951.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
-msgstr ""
+msgstr "Ngwir Ludi"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
-msgstr ""
+msgstr "Tic ki purempalagony, yik namba me lut wek nywen ci myel"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -34,174 +35,177 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Ludingwiro obedo purempalagony me tic matware mamiyo Iniketo kwede purugram "
+"namba me lut pi wot, ngwec, wir, nywen, mede ci imyel. In itwero laro jamini "
+"mapol matye katware dok i i yore ci kare manok binywako gi kun beo ki waya. "
+"Ludiwiro gitwero tic kwede pi yaro kamaleng jami mogo ma i cura me jometri, "
+"yubu purugram me kompiuta ki tware; man konyo yiko kit me kabedo kiwat ki "
+"diro tam madwong me dolo tee."
 
 #: activity.py:54
 msgid "Lessons"
-msgstr ""
+msgstr "Pwony mapol"
 
 #: activity.py:103
 msgid "Set frame"
-msgstr ""
+msgstr "Ter purem"
 
 #: activity.py:108
 msgid "Clear frame"
-msgstr ""
+msgstr "Jwa purem"
 
 #: activity.py:113
 msgid "Reset"
-msgstr "እንደነበረ አድረግ"
+msgstr "Ter nitit"
 
 #: activity.py:142
 msgid "Play backward / Pause"
-msgstr ""
+msgstr "Tuk kun dokcen/cung manok"
 
 #: activity.py:148
 msgid "Play forward / Pause"
-msgstr ""
+msgstr "Tuk wot anyim/ cung manok"
 
 #: activity.py:167
 msgid "Snapshot"
-msgstr ""
+msgstr "Cal amaka"
 
 #: montage.py:652
 msgid "Angle:"
-msgstr ""
+msgstr "Gwic adek:"
 
 #: montage.py:672
 msgid "Size:"
-msgstr "መጠን:"
+msgstr "Cajji:"
 
 #: theme.py:50
 msgid "Size"
-msgstr "መጠን"
+msgstr "Cajji"
 
 #: theme.py:51
 msgid "Angle"
-msgstr ""
+msgstr "Lgwic adek"
 
 #: theme.py:52
 msgid "Lesson Plans"
-msgstr ""
+msgstr "Byek me Pwonye"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr ""
+msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr ""
+msgstr "Kob Purem Acel"
 
 #: theme.py:55
 msgid "Head"
-msgstr ""
+msgstr "Wic"
 
 #: theme.py:56
 msgid "Neck"
-msgstr ""
+msgstr "Ngut"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr ""
+msgstr "Ngut gwok tungcem"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr ""
+msgstr "Bad Tungcem ma I kore"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr ""
+msgstr "Bad Tungcem ma I piny"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr ""
+msgstr "Cing Tungcem"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr ""
+msgstr "Ngut gwok Tungcam"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr ""
+msgstr "Bad Tungcam ma I malu"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr ""
+msgstr "Bad Tungcam ma I piny"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr ""
+msgstr "Cing Tungcam"
 
 #: theme.py:65
 msgid "Torso"
-msgstr ""
+msgstr "Dyere"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr ""
+msgstr "Pyer Tungcem"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr ""
+msgstr "Tyen Tungcem ma Lamal"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr ""
+msgstr "Tyen Tungcem Mapiny"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr ""
+msgstr "Wityen Tungcem"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr ""
+msgstr "Pyer Tungcam"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr ""
+msgstr "Kor Tyen Tungcam ma I malu"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr ""
+msgstr "Tyen Tungcam ma I piny"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr ""
+msgstr "Yityen Tungcam"
 
 #: toolkit/activity_widgets.py:84
 msgid "Stop"
-msgstr "ቁም ቁሚ አቁም አቁሚ"
+msgstr "Cung"
 
 #: toolkit/activity_widgets.py:96
 msgid "Undo"
-msgstr ""
+msgstr "Pe i tim"
 
 #: toolkit/activity_widgets.py:104
 msgid "Redo"
-msgstr ""
+msgstr "Nwo timo"
 
 #: toolkit/activity_widgets.py:111
 msgid "Copy"
-msgstr "ቅጂ ቅዳ"
+msgstr "Lok"
 
 #: toolkit/activity_widgets.py:118
 msgid "Paste"
-msgstr "መለጠፍ"
+msgstr "Dani"
 
 #: toolkit/activity_widgets.py:128
 msgid "Private"
-msgstr ""
+msgstr "Pirken"
 
 #: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
-msgstr ""
+msgstr "Ejirani Mamega"
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
-msgstr ""
+msgstr "Lok ikome"
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"
-msgstr "ድርጊት"
-
-#~ msgid "Keep"
-#~ msgstr "ማቆየት"
+msgstr "Tic atia"

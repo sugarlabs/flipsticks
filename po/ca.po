@@ -2,65 +2,31 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2017-10-18 02:38+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1508294293.000000\n"
 
 #. TRANS: "name" option from activity.info file
-#, fuzzy
 msgid "Flip Sticks"
-msgstr "FlipSticks"
+msgstr "Foliscopi amb bastonets"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
 msgstr ""
+"Mitjançant fotogrames, programeu una figura de bastonets per tal que giri i "
+"balli"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -71,6 +37,13 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Foliscopi amb bastonets és una activitat d'animació de fotogrames que us "
+"permet recol·locar i programar una figura perquè camini, corri, giri, caigui "
+"i balli. Podeu desar les vostres animacions al diari, des d'on aviat les "
+"podeu compartir a través de la malla. El foliscopi amb bastonets es pot "
+"utilitzar per a l'exploració de conceptes geomètrics, la programació "
+"informàtica i l'animació; ajuda el desenvolupament del pensament espacial i "
+"analític."
 
 #: activity.py:54
 msgid "Lessons"
@@ -78,23 +51,23 @@ msgstr "Lliçons"
 
 #: activity.py:103
 msgid "Set frame"
-msgstr "Defineix Marc"
+msgstr "Estableix el fotograma"
 
 #: activity.py:108
 msgid "Clear frame"
-msgstr ""
+msgstr "Neteja el fotograma"
 
 #: activity.py:113
 msgid "Reset"
-msgstr "Reinicia"
+msgstr "Restableix"
 
 #: activity.py:142
 msgid "Play backward / Pause"
-msgstr ""
+msgstr "Reprodueix cap endarrere / pausa"
 
 #: activity.py:148
 msgid "Play forward / Pause"
-msgstr ""
+msgstr "Reprodueix cap endavant / pausa"
 
 #: activity.py:167
 msgid "Snapshot"
@@ -118,15 +91,15 @@ msgstr "Angle"
 
 #: theme.py:52
 msgid "Lesson Plans"
-msgstr ""
+msgstr "Planificació de la lliçó"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr ""
+msgstr "Lliçó-anglès"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr ""
+msgstr "Exporta el primer fotograma"
 
 #: theme.py:55
 msgid "Head"
@@ -138,104 +111,104 @@ msgstr "Coll"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr ""
+msgstr "Espatlla dreta"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr ""
+msgstr "Braç dret"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr ""
+msgstr "Avantbraç dret"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr ""
+msgstr "Mà dreta"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr ""
+msgstr "Espatlla dreta"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr ""
+msgstr "Braç esquerre"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr ""
+msgstr "Avantbraç esquerre"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr ""
+msgstr "Mà esquerra"
 
 #: theme.py:65
 msgid "Torso"
-msgstr ""
+msgstr "Tòrax"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr ""
+msgstr "Maluc dret"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr ""
+msgstr "Cuixa dreta"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr ""
+msgstr "Cama dreta"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr ""
+msgstr "Peu dret"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr ""
+msgstr "Maluc esquerre"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr ""
+msgstr "Cuixa esquerra"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr ""
+msgstr "Cama esquerra"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr ""
+msgstr "Peu esquerre"
 
 #: toolkit/activity_widgets.py:84
 msgid "Stop"
-msgstr ""
+msgstr "Atura"
 
 #: toolkit/activity_widgets.py:96
 msgid "Undo"
-msgstr ""
+msgstr "Desfés"
 
 #: toolkit/activity_widgets.py:104
 msgid "Redo"
-msgstr ""
+msgstr "Refés"
 
 #: toolkit/activity_widgets.py:111
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: toolkit/activity_widgets.py:118
 msgid "Paste"
-msgstr ""
+msgstr "Enganxa"
 
 #: toolkit/activity_widgets.py:128
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 
 #: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
-msgstr ""
+msgstr "El meu veïnat"
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
-msgstr ""
+msgstr "Descripció"
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"
-msgstr ""
+msgstr "Activitat"

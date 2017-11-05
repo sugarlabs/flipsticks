@@ -2,60 +2,25 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2011-07-19 15:18+0200\n"
-"Last-Translator: Christian <kryskaka@gmail.com>\n"
+"PO-Revision-Date: 2017-10-18 03:08+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1508296089.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
-msgstr "flick vijiti"
+msgstr "Flick vijiti"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
@@ -77,35 +42,36 @@ msgstr "Lessons"
 
 #: activity.py:103
 msgid "Set frame"
-msgstr "kuweka mfumo"
+msgstr "Kuweka mfumo"
 
 #: activity.py:108
 msgid "Clear frame"
-msgstr "kuvuta mfumo"
+msgstr "Kuvuta mfumo"
 
 #: activity.py:113
 msgid "Reset"
-msgstr "kuweka tena"
+msgstr "Kuweka tena"
 
 #: activity.py:142
 msgid "Play backward / Pause"
-msgstr "kucheza nyuma / Pause"
+msgstr "Kucheza nyuma / Pause"
 
 #: activity.py:148
 msgid "Play forward / Pause"
-msgstr "kucheza mbele/ pause"
+msgstr "Kucheza mbele/ pause"
 
 #: activity.py:167
+#, fuzzy
 msgid "Snapshot"
-msgstr "picture"
+msgstr "Picture"
 
 #: montage.py:652
 msgid "Angle:"
-msgstr "angle"
+msgstr "Angle:"
 
 #: montage.py:672
 msgid "Size:"
-msgstr "Michezo"
+msgstr "Michezo:"
 
 #: theme.py:50
 msgid "Size"
@@ -113,7 +79,7 @@ msgstr "Michezo"
 
 #: theme.py:51
 msgid "Angle"
-msgstr "angle"
+msgstr "Angle"
 
 #: theme.py:52
 msgid "Lesson Plans"
@@ -121,95 +87,95 @@ msgstr "Mipango ya Somo"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr "IP-en"
+msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr "kubeba mfumo la kwanza nje"
+msgstr "Kubeba mfumo la kwanza nje"
 
 #: theme.py:55
 msgid "Head"
-msgstr "kichwa"
+msgstr "Kichwa"
 
 #: theme.py:56
 msgid "Neck"
-msgstr "shingo"
+msgstr "Shingo"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr "haki bega"
+msgstr "Haki bega"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr "juu kulia mkono"
+msgstr "Juu kulia mkono"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr "mkono wa kulia chini"
+msgstr "Mkono wa kulia chini"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr "mkono wa haki"
+msgstr "Mkono wa haki"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr "bega ya kushoto "
+msgstr "Bega ya kushoto"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr "mkono wa kulia wa kushoto juu"
+msgstr "Mkono wa kulia wa kushoto juu"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr "mkono wa kulia wa kushoto chini"
+msgstr "Mkono wa kulia wa kushoto chini"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr "mkono wa kulia wa kushoto"
+msgstr "Mkono wa kulia wa kushoto"
 
 #: theme.py:65
 msgid "Torso"
-msgstr "kiwiliwili"
+msgstr "Kiwiliwili"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr "hip ya haki"
+msgstr "Hip ya haki"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr "mguu ya haki juu"
+msgstr "Mguu ya haki juu"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr "chini mguu wa haki"
+msgstr "Chini mguu wa haki"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr "mguu wa haki"
+msgstr "Mguu wa haki"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr "hip ya kushoto"
+msgstr "Hip ya kushoto"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr "juu mguu ya kushoto"
+msgstr "Juu mguu ya kushoto"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr "chini mguu ya kushoto"
+msgstr "Chini mguu ya kushoto"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr "mguu ya kushoto"
+msgstr "Mguu ya kushoto"
 
 #: toolkit/activity_widgets.py:84
 msgid "Stop"
-msgstr "kuacha"
+msgstr "Kuacha"
 
 #: toolkit/activity_widgets.py:96
 msgid "Undo"
-msgstr "tengua"
+msgstr "Tengua"
 
 #: toolkit/activity_widgets.py:104
 msgid "Redo"
@@ -221,11 +187,11 @@ msgstr "Nakili"
 
 #: toolkit/activity_widgets.py:118
 msgid "Paste"
-msgstr "kuweka"
+msgstr "Kuweka"
 
 #: toolkit/activity_widgets.py:128
 msgid "Private"
-msgstr "binafsi"
+msgstr "Binafsi"
 
 #: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
@@ -237,7 +203,7 @@ msgstr ""
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"
-msgstr "shughuli"
+msgstr "Shughuli"
 
 #~ msgid "Keep"
 #~ msgstr "kuweka"
