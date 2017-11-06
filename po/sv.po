@@ -2,57 +2,30 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2011-02-26 09:10+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2017-03-28 23:32+0000\n"
+"Last-Translator: Anders <anders.jonsson@norsjovallen.se>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1490743947.000000\n"
 
 #. TRANS: "name" option from activity.info file
-#, fuzzy
 msgid "Flip Sticks"
-msgstr "FlipSticks"
+msgstr "Flipsticks"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
 msgstr ""
+"Använd nyckelrutor för att programmera en streckgubbe att röra sig och dansa"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -63,6 +36,12 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Flipsticks är en animeringsaktivitet för nyckelrutor som låter dig ställa "
+"upp och programmera en streckgubbe att gå, springa, rotera, vrida sig, falla "
+"och dansa. Du kan spara dina animeringar till dagboken och kommer snart "
+"kunna dela dem via meshnätet. Flipsticks kan användas för att utforska "
+"koncept inom geometri, programmering och animering; det hjälper till att "
+"utveckla spatialt och analytiskt tänkande."
 
 #: activity.py:54
 msgid "Lessons"
@@ -198,7 +177,7 @@ msgstr "Vänster fot"
 
 #: toolkit/activity_widgets.py:84
 msgid "Stop"
-msgstr ""
+msgstr "Stoppa"
 
 #: toolkit/activity_widgets.py:96
 msgid "Undo"
@@ -206,7 +185,7 @@ msgstr "Ångra"
 
 #: toolkit/activity_widgets.py:104
 msgid "Redo"
-msgstr ""
+msgstr "Gör om"
 
 #: toolkit/activity_widgets.py:111
 msgid "Copy"
@@ -222,11 +201,11 @@ msgstr "Privat"
 
 #: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
-msgstr ""
+msgstr "Mina grannar"
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"

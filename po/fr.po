@@ -2,56 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2012-07-15 12:47+0200\n"
-"Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
+"PO-Revision-Date: 2017-05-29 16:26+0000\n"
+"Last-Translator: François <francois.jarriges@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1496075191.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
@@ -60,6 +25,8 @@ msgstr "Flip Sticks"
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
 msgstr ""
+"En utilisant des images clés, programme un bonhomme bâton pour qu'il bouge "
+"et qu'il danse"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -70,6 +37,13 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Flipsticks est une activité d'animation à base d'images clés, qui te permet "
+"de faire prendre des poses à un bonhomme bâton, pour qu'il marche, coure, "
+"tourne, trébuche ou danse. Tu peux enregistrer tes animations dans le "
+"journal et les partager ensuite dans ton réseau de voisinage. Flipsticks "
+"peut être utilisé pour explorer des concepts de géométrie, de programmation "
+"et d'animation; il permet ainsi de développer des compétences spatiales et "
+"analytiques."
 
 #: activity.py:54
 msgid "Lessons"
@@ -77,11 +51,11 @@ msgstr "Leçons"
 
 #: activity.py:103
 msgid "Set frame"
-msgstr "Définir le cadre"
+msgstr "Définir l'image clé"
 
 #: activity.py:108
 msgid "Clear frame"
-msgstr "Effacer le cadre"
+msgstr "Effacer l'image clé"
 
 #: activity.py:113
 msgid "Reset"
@@ -101,11 +75,11 @@ msgstr "Capture"
 
 #: montage.py:652
 msgid "Angle:"
-msgstr "Angle :"
+msgstr "Angle:"
 
 #: montage.py:672
 msgid "Size:"
-msgstr "Taille :"
+msgstr "Taille:"
 
 #: theme.py:50
 msgid "Size"
@@ -121,11 +95,11 @@ msgstr "Plan de cours"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr "lp-en"
+msgstr "lp-fr"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr "Exporte le premier cadre"
+msgstr "Exporte la première image clé"
 
 #: theme.py:55
 msgid "Head"

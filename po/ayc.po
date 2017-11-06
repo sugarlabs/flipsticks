@@ -7,24 +7,25 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2013-04-25 01:36+0200\n"
-"Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
+"PO-Revision-Date: 2017-10-18 02:37+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ayc\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.5\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1508294247.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
-msgstr "lawaqallunaka"
+msgstr "Lawaqallunaka"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
 msgstr ""
-"fotograma wakichatampi lawaqallunakampi muytayaña ukata thuquñataki wakichma"
+"Fotograma wakichatampi lawaqallunakampi muytayaña ukata thuquñataki wakichma"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -87,7 +88,7 @@ msgstr "Taña"
 
 #: theme.py:51
 msgid "Angle"
-msgstr "K'uchu:"
+msgstr "K'uchu"
 
 #: theme.py:52
 msgid "Lesson Plans"

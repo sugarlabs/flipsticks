@@ -2,56 +2,21 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2010-02-16 07:15+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2016-11-28 12:35+0000\n"
+"Last-Translator: Besnik_b <besnik@programeshqip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: sq\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1480336508.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #, fuzzy
@@ -61,6 +26,7 @@ msgstr "FlipSticks"
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
 msgstr ""
+"Programoni, përmes kornizash, një figurë të përdridhet dhe të hedhë valle"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -71,10 +37,17 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Flipsticks është një veprimtari animacioni kuadrosh që ju lejon të pozoni "
+"dhe programoni një figurë të bërë me thupra që të ecë, vrapojë, rrotullohet, "
+"përdridhet, rrëzohet dhe hedhë valle. Animacionet tuaja mund t’i ruani në "
+"ditar dhe së shpejti do të jeni në gjendje t’i ndani ato përmes rrjetës. "
+"Flipsticks mund të përdoret për të eksploruar koncepte nga gjeometria, "
+"programimi në kompjuter dhe animacioni; ndihmon në zhvillimin e të menduarit "
+"hapësinor dhe analitik."
 
 #: activity.py:54
 msgid "Lessons"
-msgstr "Mësimet"
+msgstr "Mësime"
 
 #: activity.py:103
 msgid "Set frame"
@@ -82,23 +55,23 @@ msgstr "Vendos kornizën"
 
 #: activity.py:108
 msgid "Clear frame"
-msgstr "Shlyje kornizë"
+msgstr "Pastroje kornizën"
 
 #: activity.py:113
 msgid "Reset"
-msgstr "Rivendos"
+msgstr "Riktheje te parazgjedhjet"
 
 #: activity.py:142
 msgid "Play backward / Pause"
-msgstr "Luaj prapa / Ndalo"
+msgstr "Luaje mbrapsht / Pushim"
 
 #: activity.py:148
 msgid "Play forward / Pause"
-msgstr "Luaj përpara / Ndalo"
+msgstr "Luaje përpara / Pushim"
 
 #: activity.py:167
 msgid "Snapshot"
-msgstr "Fotografi i çastit"
+msgstr "Fotografim"
 
 #: montage.py:652
 msgid "Angle:"
@@ -106,11 +79,11 @@ msgstr "Kënd:"
 
 #: montage.py:672
 msgid "Size:"
-msgstr "Madhësia:"
+msgstr "Madhësi:"
 
 #: theme.py:50
 msgid "Size"
-msgstr "Madhësia"
+msgstr "Madhësi"
 
 #: theme.py:51
 msgid "Angle"
@@ -118,7 +91,7 @@ msgstr "Kënd"
 
 #: theme.py:52
 msgid "Lesson Plans"
-msgstr "Planet e mësimit"
+msgstr "Plane Mësimi"
 
 #: theme.py:53
 msgid "lp-en"
@@ -126,19 +99,19 @@ msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr "Eksport Kornizën e Parë"
+msgstr "Eksporto Kornizën Një"
 
 #: theme.py:55
 msgid "Head"
-msgstr "Koka"
+msgstr "Kryet"
 
 #: theme.py:56
 msgid "Neck"
-msgstr "Qafa"
+msgstr "Zverku"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr "Shpatulla e djatht"
+msgstr "Supi i Djathtë"
 
 #: theme.py:58
 msgid "Upper Right Arm"
@@ -146,7 +119,7 @@ msgstr "Krahun i Sipërme i Djathtë"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr "Krahun i Ulët i Djathtë"
+msgstr "Parakrahu i Djathtë"
 
 #: theme.py:60
 msgid "Right Hand"
@@ -154,7 +127,7 @@ msgstr "Dora e Djathtë"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr "Supe e Majtë"
+msgstr "Supi i Majtë"
 
 #: theme.py:62
 msgid "Upper Left Arm"
@@ -162,11 +135,11 @@ msgstr "Krahun i Sipërme i Majtë"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr "Krahun i Ulët i Majtë"
+msgstr "Parakrahu i Majtë"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr "Dora e majt"
+msgstr "Dora e Majtë"
 
 #: theme.py:65
 msgid "Torso"
@@ -178,11 +151,11 @@ msgstr "Këllku i Djathtë"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr "Këmba e Sipërme e Djathtë"
+msgstr "Kofsha e Djathtë"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr "Këmba e Ulët e Djathtë"
+msgstr "Kërciri i Djathtë"
 
 #: theme.py:69
 msgid "Right Foot"
@@ -190,15 +163,15 @@ msgstr "Këmba e Djathtë"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr "Këllku iMajtë"
+msgstr "Këllku i Majtë"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr "Këmba e Sipërme e Majtë"
+msgstr "Kofsha e Majtë"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr "Këmba e Ulët e Majtë"
+msgstr "Kërciri i Majtë"
 
 #: theme.py:73
 msgid "Left Foot"
@@ -206,39 +179,39 @@ msgstr "Këmba e Majtë"
 
 #: toolkit/activity_widgets.py:84
 msgid "Stop"
-msgstr ""
+msgstr "Ndale"
 
 #: toolkit/activity_widgets.py:96
 msgid "Undo"
-msgstr ""
+msgstr "Zhbëje"
 
 #: toolkit/activity_widgets.py:104
 msgid "Redo"
-msgstr ""
+msgstr "Ribëje"
 
 #: toolkit/activity_widgets.py:111
 msgid "Copy"
-msgstr ""
+msgstr "Kopjoje"
 
 #: toolkit/activity_widgets.py:118
 msgid "Paste"
-msgstr ""
+msgstr "Ngjite"
 
 #: toolkit/activity_widgets.py:128
 msgid "Private"
-msgstr ""
+msgstr "Private"
 
 #: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
-msgstr ""
+msgstr "Lagjja Ime"
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
-msgstr ""
+msgstr "Përshkrim"
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"
-msgstr ""
+msgstr "Veprimtari"
 
 #~ msgid "Montage"
 #~ msgstr "Montazh"
