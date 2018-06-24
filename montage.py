@@ -22,7 +22,6 @@ from gi.repository import Gtk
 from gi.repository import GObject
 import math
 import logging
-from GObject import SIGNAL_RUN_FIRST, TYPE_PYOBJECT
 from gettext import gettext as _
 
 from sugar3.activity.activity import get_bundle_path
@@ -38,7 +37,7 @@ logger = logging.getLogger('flipsticks')
 
 class View(Gtk.EventBox):
     __gsignals__ = {
-        'frame-changed': (SIGNAL_RUN_FIRST, None, [TYPE_PYOBJECT])}
+        'frame-changed': (GObject.SIGNAL_RUN_FIRST, None, [GObject.TYPE_PYOBJECT])}
 
     def set_keyframe(self, value):
         i, key = value
@@ -69,8 +68,8 @@ class View(Gtk.EventBox):
     def setplayspeed(self, value):
         self.waittime = int((100 - value) * 5)
         if self.playing:
-            gobject.source_remove(self.playing)
-            self.playing = gobject.timeout_add(self.waittime, self.playframe)
+            GObject.source_remove(self.playing)
+            self.playing = GObject.timeout_add(self.waittime, self.playframe)
 
     def playbackwards(self):
         if self.playing:
@@ -124,10 +123,10 @@ class View(Gtk.EventBox):
         firstpixindex = self.frames.keys()[0]
 
         x, y, width, height = self.mfdraw.get_allocation()
-        pixmap = gtk.gdk.Pixmap(self.mfdraw.window, width, height)
+        pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         self._draw_frame(firstpixindex, pixmap)
-        pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, width, height)
-        gtk.gdk.Pixbuf.get_from_drawable(pixbuf, pixmap, pixmap.get_colormap(), 0, 0, 0, 0, width, height)
+        pixbuf = GdkPixbuf.Pixbuf(GdkPixbuf.Colorspace.RGB, False, 8, width, height)
+        GdkPixbuf.Pixbuf.get_from_drawable(pixbuf, pixmap, pixmap.get_colormap(), 0, 0, 0, 0, width, height)
 
         model.screen_shot(pixbuf)
 
@@ -138,19 +137,19 @@ class View(Gtk.EventBox):
 
     def expose_event(self, widget, event):
         x, y, width, height = event.area
-        widget.window.draw_drawable(widget.get_style().fg_gc[gtk.STATE_NORMAL],
+        widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
                                     self.pixmap, x, y, x, y, width, height)
         return False
 
     def kf_expose_event(self, widget, event):
         x, y, width, height = event.area
-        widget.window.draw_drawable(widget.get_style().fg_gc[gtk.STATE_NORMAL],
+        widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
                                     self.kfpixmap, x, y, x, y, width, height)
         return False
 
     def configure_event(self, widget, event):
         x, y, width, height = self.mfdraw.get_allocation()
-        self.pixmap = gtk.gdk.Pixmap(self.mfdraw.window, width, height)
+        self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         self.drawmainframe()
         return True
 
@@ -164,8 +163,8 @@ class View(Gtk.EventBox):
         else:
             x = event.x
             y = event.y
-            state = event.state
-        if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
+            state = event.get_state()
+        if state & Gdk.ModifierType.BUTTON1_MASK and self.pixmap != None:
             if self.jointpressed:
                 if _inarea(widget, x, y):
                     #self.key.joints[self.jointpressed] = (x,y) # old hack way
@@ -244,8 +243,8 @@ class View(Gtk.EventBox):
         else:
             x = event.x
             y = event.y
-            state = event.state
-        if state & gtk.gdk.BUTTON1_MASK and self.pixmap != None:
+            state = event.get_state()
+        if state & Gdk.ModifierType.BUTTON1_MASK and self.pixmap != None:
             if self.kfpressed >= 0:
                 if _inarea(widget, x, y):
                     xdiff = int(x - self.kf_mouse_pos)
@@ -255,12 +254,12 @@ class View(Gtk.EventBox):
                         frame.move(xdiff)
 
                         if self._emit_move_handle:
-                            gobject.source_remove(self._emit_move_handle)
+                            GObject.source_remove(self._emit_move_handle)
                             if self._emit_move_key != self.kfpressed:
                                 self._emit_move(self._emit_move_key)
 
                         self._emit_move_key = self.kfpressed
-                        self._emit_move_handle = gobject.timeout_add(
+                        self._emit_move_handle = GObject.timeout_add(
                                 MOVEMIT_TIMEOUT, self._emit_move,
                                 self.kfpressed)
 
@@ -403,9 +402,9 @@ class View(Gtk.EventBox):
         black = cm.alloc_color('black')
         blue = cm.alloc_color('blue')
         green = cm.alloc_color('green')
-        drawgc.fill = gtk.gdk.SOLID
+        drawgc.fill = Gdk.SOLID
         x, y, width, height = self.mfdraw.get_allocation()
-        #self.pixmap = gtk.gdk.Pixmap(self.mfdraw.window, width, height)
+        #self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_foreground(white)
         self.pixmap.draw_rectangle(drawgc, True, 0, 0, width, height)
@@ -479,9 +478,9 @@ class View(Gtk.EventBox):
         pink = cm.alloc_color(PINK)
         bgcolor = cm.alloc_color(BACKGROUND)
         darkgreen = cm.alloc_color(BUTTON_BACKGROUND)
-        drawgc.fill = gtk.gdk.SOLID
+        drawgc.fill = Gdk.SOLID
         x, y, width, height = self.kfdraw.get_allocation()
-        self.kfpixmap = gtk.gdk.Pixmap(self.kfdraw.window, width, height)
+        self.kfpixmap = Gdk.Pixmap(self.kfdraw.window, width, height)
         # clear area
         drawgc.set_foreground(bgcolor)
         self.kfpixmap.draw_rectangle(drawgc, True, 0, 0, width, height)
@@ -533,9 +532,9 @@ class View(Gtk.EventBox):
         pink = cm.alloc_color(PINK)
         bgcolor = cm.alloc_color(BACKGROUND)
         darkgreen = cm.alloc_color(BUTTON_BACKGROUND)
-        drawgc.fill = gtk.gdk.SOLID
+        drawgc.fill = Gdk.SOLID
         x, y, width, height = self.fpdraw.get_allocation()
-        self.fppixmap = gtk.gdk.Pixmap(self.fpdraw.window, width, height)
+        self.fppixmap = Gdk.Pixmap(self.fpdraw.window, width, height)
         # clear area
         drawgc.set_foreground(white)
         self.fppixmap.draw_rectangle(drawgc, True, 0, 0, width, height)
@@ -545,17 +544,17 @@ class View(Gtk.EventBox):
         if data:
             if self.stickselected:
                 ebox = self.stickbuttons[self.stickselected]
-                ebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+                ebox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
                 label = ebox.get_child()
-                label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_FOREGROUND))
+                label.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
             self.stickselected = data
             self.selectstickebox()
 
     def selectstickebox(self):
         ebox = self.stickbuttons[self.stickselected]
-        ebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_FOREGROUND))
+        ebox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
         label = ebox.get_child()
-        label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        label.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
 
         if self.stickselected in self.key.sticks:
             size = self.key.sticks[self.stickselected][1]
@@ -577,7 +576,7 @@ class View(Gtk.EventBox):
         self.size_adj.set_value(size)
 
     def __init__(self, activity):
-        gtk.EventBox.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.playing = False
         self.playingbackwards = False
@@ -603,161 +602,161 @@ class View(Gtk.EventBox):
 
         # screen
 
-        self.mfdraw = gtk.DrawingArea()
-        self.mfdraw.connect('expose_event', self.expose_event)
+        self.mfdraw = Gtk.DrawingArea()
+        self.mfdraw.connect('draw', self.expose_event)
         self.mfdraw.connect('configure_event', self.configure_event)
         self.mfdraw.connect('motion_notify_event', self.motion_notify_event)
         self.mfdraw.connect('button_press_event', self.button_press_event)
         self.mfdraw.connect('button_release_event', self.button_release_event)
-        self.mfdraw.set_events(gtk.gdk.EXPOSURE_MASK
-                               | gtk.gdk.LEAVE_NOTIFY_MASK
-                               | gtk.gdk.BUTTON_PRESS_MASK
-                               | gtk.gdk.BUTTON_RELEASE_MASK
-                               | gtk.gdk.POINTER_MOTION_MASK
-                               | gtk.gdk.POINTER_MOTION_HINT_MASK)
+        self.mfdraw.set_events(Gdk.EventMask.EXPOSURE_MASK
+                               | Gdk.EventMask.LEAVE_NOTIFY_MASK
+                               | Gdk.EventMask.BUTTON_PRESS_MASK
+                               | Gdk.EventMask.BUTTON_RELEASE_MASK
+                               | Gdk.EventMask.POINTER_MOTION_MASK
+                               | Gdk.EventMask.POINTER_MOTION_HINT_MASK)
         self.mfdraw.set_size_request(DRAWWIDTH, DRAWHEIGHT)
 
-        screen_box = gtk.EventBox()
-        screen_box.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BACKGROUND))
+        screen_box = Gtk.EventBox()
+        screen_box.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BACKGROUND))
         screen_box.set_border_width(PAD / 2)
         screen_box.add(self.mfdraw)
 
-        screen_pink = gtk.EventBox()
-        screen_pink.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(PINK))
+        screen_pink = Gtk.EventBox()
+        screen_pink.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(PINK))
         screen_pink.set_border_width(PAD)
         screen_pink.add(screen_box)
 
         # keyframes
 
-        self.kfdraw = gtk.DrawingArea()
+        self.kfdraw = Gtk.DrawingArea()
         self.kfdraw.set_size_request(KEYFRAMEWIDTH, KEYFRAMEHEIGHT)
-        self.kfdraw.connect('expose_event', self.kf_expose_event)
+        self.kfdraw.connect('draw', self.kf_expose_event)
         self.kfdraw.connect('configure_event', self.kf_configure_event)
         self.kfdraw.connect('motion_notify_event', self.kf_motion_notify_event)
         self.kfdraw.connect('button_press_event', self.kf_button_press_event)
         self.kfdraw.connect('button_release_event', self.kf_button_release_event)
-        self.kfdraw.set_events(gtk.gdk.EXPOSURE_MASK
-                               | gtk.gdk.LEAVE_NOTIFY_MASK
-                               | gtk.gdk.BUTTON_PRESS_MASK
-                               | gtk.gdk.BUTTON_RELEASE_MASK
-                               | gtk.gdk.POINTER_MOTION_MASK
-                               | gtk.gdk.POINTER_MOTION_HINT_MASK)
+        self.kfdraw.set_events(Gdk.EventMask.EXPOSURE_MASK
+                               | Gdk.EventMask.LEAVE_NOTIFY_MASK
+                               | Gdk.EventMask.BUTTON_PRESS_MASK
+                               | Gdk.EventMask.BUTTON_RELEASE_MASK
+                               | Gdk.EventMask.POINTER_MOTION_MASK
+                               | Gdk.EventMask.POINTER_MOTION_HINT_MASK)
 
-        kfdraw_box = gtk.EventBox()
+        kfdraw_box = Gtk.EventBox()
         kfdraw_box.set_border_width(PAD)
         kfdraw_box.add(self.kfdraw)
 
         # control box
 
-        angle_box = gtk.HBox()
-        anglelabel = gtk.Label(_('Angle:'))
-        anglelabel.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        angle_box = Gtk.HBox()
+        anglelabel = Gtk.Label(label=_('Angle:'))
+        anglelabel.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
         anglelabel.set_size_request(60, -1)
         angle_box.pack_start(anglelabel, False, False, 5)
-        self.angleentry = gtk.Entry()
+        self.angleentry = Gtk.Entry()
         self.angleentry.set_max_length(3)
         self.angleentry.set_width_chars(3)
         self.angleentry.connect('activate', self.enterangle_callback, self.angleentry)
-        self.angleentry.modify_bg(gtk.STATE_INSENSITIVE,
-                gtk.gdk.color_parse(BUTTON_FOREGROUND))
+        self.angleentry.modify_bg(Gtk.StateType.INSENSITIVE,
+                Gdk.color_parse(BUTTON_FOREGROUND))
         angle_box.pack_start(self.angleentry, False, False, 0)
-        self.anglel_adj = gtk.Adjustment(0, 0, 360, 1, 60, 0)
+        self.anglel_adj = Gtk.Adjustment(0, 0, 360, 1, 60, 0)
         self.anglel_adj.connect('value_changed', self._anglel_adj_cb)
-        self.anglel_slider = gtk.HScale(self.anglel_adj)
+        self.anglel_slider = Gtk.Scale.new(0, self.anglel_adj)
         self.anglel_slider.set_draw_value(False)
         for state, color in COLOR_BG_BUTTONS:
-            self.anglel_slider.modify_bg(state, gtk.gdk.color_parse(color))
-        angle_box.pack_start(self.anglel_slider)
+            self.anglel_slider.modify_bg(state, Gdk.color_parse(color))
+        angle_box.pack_start(self.anglel_slider, True, True, 0)
 
-        size_box = gtk.HBox()
-        sizelabel = gtk.Label(_('Size:'))
-        sizelabel.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        size_box = Gtk.HBox()
+        sizelabel = Gtk.Label(label=_('Size:'))
+        sizelabel.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
         sizelabel.set_size_request(60, -1)
         size_box.pack_start(sizelabel, False, False, 5)
-        self.sizeentry = gtk.Entry()
+        self.sizeentry = Gtk.Entry()
         self.sizeentry.set_max_length(3)
         self.sizeentry.set_width_chars(3)
         self.sizeentry.connect('activate', self.enterlen_callback, self.sizeentry)
-        self.sizeentry.modify_bg(gtk.STATE_INSENSITIVE,
-                gtk.gdk.color_parse(BUTTON_FOREGROUND))
+        self.sizeentry.modify_bg(Gtk.StateType.INSENSITIVE,
+                Gdk.color_parse(BUTTON_FOREGROUND))
         size_box.pack_start(self.sizeentry, False, False, 0)
-        self.size_adj = gtk.Adjustment(0, 0, 200, 1, 30, 0)
+        self.size_adj = Gtk.Adjustment(0, 0, 200, 1, 30, 0)
         self.size_adj.connect('value_changed', self._size_adj_cb)
-        size_slider = gtk.HScale(self.size_adj)
+        size_slider = Gtk.Scale.new(0, self.size_adj)
         size_slider.set_draw_value(False)
         for state, color in COLOR_BG_BUTTONS:
-            size_slider.modify_bg(state, gtk.gdk.color_parse(color))
-        size_box.pack_start(size_slider)
+            size_slider.modify_bg(state, Gdk.color_parse(color))
+        size_box.pack_start(size_slider, True, True, 0)
 
-        control_head_box = gtk.VBox()
-        control_head_box.pack_start(angle_box)
-        control_head_box.pack_start(size_box)
+        control_head_box = Gtk.VBox()
+        control_head_box.pack_start(angle_box, True, True, 0)
+        control_head_box.pack_start(size_box, True, True, 0)
 
-        control_head = gtk.EventBox()
-        control_head.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_FOREGROUND))
+        control_head = Gtk.EventBox()
+        control_head.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
         control_head.add(control_head_box)
 
-        control_options = gtk.VBox()
+        control_options = Gtk.VBox()
         self.stickbuttons = {}
         self.sticklabels = {}
         for stickpartname in LABELLIST:
-            label = gtk.Label(STRINGS[stickpartname])
-            label.modify_fg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_FOREGROUND))
+            label = Gtk.Label(label=STRINGS[stickpartname])
+            label.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
             self.sticklabels[stickpartname] = label
-            ebox = gtk.EventBox()
-            ebox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
-            ebox.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+            ebox = Gtk.EventBox()
+            ebox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
+            ebox.set_events(Gdk.EventMask.BUTTON_PRESS_MASK)
             ebox.connect('button_press_event', self.selectstick, stickpartname)
             ebox.add(label)
             self.stickbuttons[stickpartname] = ebox
             control_options.pack_start(ebox, False, False, 0)
         self.selectstickebox()
 
-        control_scroll = gtk.ScrolledWindow()
+        control_scroll = Gtk.ScrolledWindow()
         control_scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         control_scroll.add_with_viewport(control_options)
-        control_options.get_parent().modify_bg(gtk.STATE_NORMAL,
-                gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        control_options.get_parent().modify_bg(Gtk.StateType.NORMAL,
+                Gdk.color_parse(BUTTON_BACKGROUND))
 
-        control_box = gtk.VBox()
+        control_box = Gtk.VBox()
         control_box.pack_start(control_head, False, False, 0)
-        control_box.pack_start(control_scroll)
+        control_box.pack_start(control_scroll, True, True, 0)
 
-        control_bg = gtk.EventBox()
-        control_bg.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BUTTON_BACKGROUND))
+        control_bg = Gtk.EventBox()
+        control_bg.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
         control_bg.set_border_width(PAD / 2)
         control_bg.add(control_box)
 
-        control_pink = gtk.EventBox()
-        control_pink.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(PINK))
+        control_pink = Gtk.EventBox()
+        control_pink.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(PINK))
         control_pink.set_border_width(PAD)
         control_pink.add(control_bg)
 
         # left control box
 
-        logo = gtk.Image()
+        logo = Gtk.Image()
         logo.set_from_file(os.path.join(self.iconsdir, 'logo.png'))
 
-        leftbox = gtk.VBox()
-        leftbox.pack_start(logo, False, False)
-        leftbox.pack_start(control_pink)
+        leftbox = Gtk.VBox()
+        leftbox.pack_start(logo, False, False, 0)
+        leftbox.pack_start(control_pink, True, True, 0)
 
         # desktop
 
-        hdesktop = gtk.HBox()
-        hdesktop.pack_start(leftbox, False)
-        hdesktop.pack_start(screen_pink, False, False)
+        hdesktop = Gtk.HBox()
+        hdesktop.pack_start(leftbox, False, False, 0)
+        hdesktop.pack_start(screen_pink, False, False, 0)
 
-        desktop = gtk.VBox()
-        desktop.pack_start(hdesktop)
+        desktop = Gtk.VBox()
+        desktop.pack_start(hdesktop, True, True, 0)
         desktop.pack_start(kfdraw_box, False, False, 0)
 
-        greenbox = gtk.EventBox()
-        greenbox.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(BACKGROUND))
+        greenbox = Gtk.EventBox()
+        greenbox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BACKGROUND))
         greenbox.set_border_width(PAD / 2)
         greenbox.add(desktop)
 
-        self.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse(YELLOW))
+        self.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(YELLOW))
         self.add(greenbox)
         self.show_all()
 
@@ -771,9 +770,9 @@ class View(Gtk.EventBox):
         cm = drawgc.get_colormap()
         white = cm.alloc_color('white')
         black = cm.alloc_color('black')
-        drawgc.fill = gtk.gdk.SOLID
+        drawgc.fill = Gdk.SOLID
         x, y, width, height = self.mfdraw.get_allocation()
-        #pixmap = gtk.gdk.Pixmap(self.mfdraw.window, width, height)
+        #pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_foreground(white)
         pixmap.draw_rectangle(drawgc, True, 0, 0, width, height)

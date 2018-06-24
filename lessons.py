@@ -15,6 +15,7 @@
 import os
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import GObject
 import locale
 import logging
 from glob import glob
@@ -41,7 +42,7 @@ class View(Gtk.EventBox):
     notebook = None
 
     def __init__(self):
-        Gtk.EventBox.__init__(self)
+        GObject.GObject.__init__(self)
 
         View.notebook = Gtk.Notebook()
         View.notebook.props.show_border = False
@@ -51,17 +52,17 @@ class View(Gtk.EventBox):
         for i in THEMES:
             view = Gtk.TextView()
             view.get_buffer().set_text(i.text)
-            view.set_wrap_mode(Gtk.WRAP_WORD)
+            view.set_wrap_mode(Gtk.WrapMode.WORD)
             view.set_editable(False)
 
             view_box = Gtk.EventBox()
             view_box.add(view)
-            view_box.modify_bg(Gtk.STATE_NORMAL, Gdk.Color.parse(theme.WHITE))
+            view_box.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(theme.WHITE))
             view_box.props.border_width = 10
 
             border_box = Gtk.EventBox()
             border_box.add(view_box)
-            border_box.modify_bg(Gtk.STATE_NORMAL, Gdk.Color.parse(theme.WHITE))
+            border_box.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(theme.WHITE))
 
             scrolled_window = Gtk.ScrolledWindow()
             scrolled_window.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
