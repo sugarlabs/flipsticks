@@ -12,11 +12,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk
+from gi.repository import Gtk
 from gettext import gettext as _
 
-from sugar.graphics.toggletoolbutton import ToggleToolButton
-from sugar.graphics.toolbutton import ToolButton
+from sugar3.graphics.toggletoolbutton import ToggleToolButton
+from sugar3.graphics.toolbutton import ToolButton
 
 from toolkit.activity import SharedActivity
 from toolkit.temposlider import TempoSlider
@@ -54,18 +54,18 @@ class flipsticksActivity(SharedActivity):
         lessons_button.set_tooltip(_('Lessons'))
         toolbox.toolbar.insert(lessons_button, -1)
 
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         separator.set_draw(False)
         toolbox.toolbar.insert(separator, -1)
 
-        self.notebook_toolbar = gtk.Notebook()
+        self.notebook_toolbar = Gtk.Notebook()
         self.notebook_toolbar.props.show_border = False
         self.notebook_toolbar.props.show_tabs = False
         self.notebook_toolbar.append_page(MontageToolbar(self.montage))
         self.notebook_toolbar.append_page(LessonsToolbar())
         self.notebook_toolbar.show()
 
-        notebook_item = gtk.ToolItem()
+        notebook_item = Gtk.ToolItem()
         notebook_item.set_expand(True)
         notebook_item.add(self.notebook_toolbar)
         notebook_item.show()
@@ -91,9 +91,9 @@ class flipsticksActivity(SharedActivity):
         self.notebook_toolbar.set_current_page(page)
         self.notebook.set_current_page(page)
 
-class MontageToolbar(gtk.Toolbar):
+class MontageToolbar(Gtk.Toolbar):
     def __init__(self, montage):
-        gtk.Toolbar.__init__(self)
+        Gtk.Toolbar.__init__(self)
         self.montage = montage
 
         # edit buttons
@@ -113,24 +113,24 @@ class MontageToolbar(gtk.Toolbar):
         resetframe.set_tooltip(_('Reset'))
         self.insert(resetframe, -1)
 
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         self.insert(separator,-1)
 
         # play/pause buttons
 
-        play_img_1 = gtk.Image()
+        play_img_1 = Gtk.Image()
         play_img_1.set_from_icon_name('media-playback-start-back',
-                gtk.ICON_SIZE_LARGE_TOOLBAR)
-        pause_img_1 = gtk.Image()
+                Gtk.ICON_SIZE_LARGE_TOOLBAR)
+        pause_img_1 = Gtk.Image()
         pause_img_1.set_from_icon_name('media-playback-pause',
-                gtk.ICON_SIZE_LARGE_TOOLBAR)
+                Gtk.ICON_SIZE_LARGE_TOOLBAR)
 
-        play_img_2 = gtk.Image()
+        play_img_2 = Gtk.Image()
         play_img_2.set_from_icon_name('media-playback-start',
-                gtk.ICON_SIZE_LARGE_TOOLBAR)
-        pause_img_2 = gtk.Image()
+                Gtk.ICON_SIZE_LARGE_TOOLBAR)
+        pause_img_2 = Gtk.Image()
         pause_img_2.set_from_icon_name('media-playback-pause',
-                gtk.ICON_SIZE_LARGE_TOOLBAR)
+                Gtk.ICON_SIZE_LARGE_TOOLBAR)
 
         paly_1 = ToggleToolButton('media-playback-start-back')
         play_2 = ToggleToolButton('media-playback-start')
@@ -153,11 +153,11 @@ class MontageToolbar(gtk.Toolbar):
         tempo.adjustment.connect("value-changed", self._tempo_cb)
         tempo.set_size_request(200, -1)
         tempo.set_value(50)
-        tempo_item = gtk.ToolItem()
+        tempo_item = Gtk.ToolItem()
         tempo_item.add(tempo)
         self.insert(tempo_item, -1)
 
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         self.insert(separator,-1)
 
         # export buttons
@@ -195,13 +195,13 @@ class MontageToolbar(gtk.Toolbar):
             widget.set_icon_widget(images[0])
             self.montage.stop()
 
-class LessonsToolbar(gtk.Toolbar):
+class LessonsToolbar(Gtk.Toolbar):
     def __init__(self):
-        gtk.Toolbar.__init__(self)
+        Gtk.Toolbar.__init__(self)
         self._mask = False
 
         for lesson in lessons.THEMES:
-            button = gtk.ToggleToolButton()
+            button = Gtk.ToggleToolButton()
             button.set_label(lesson.name)
             button.connect('clicked', self._lessons_cb, lesson)
             self.insert(button, -1)

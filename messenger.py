@@ -24,7 +24,7 @@ try:
 except (ImportError, AttributeError):
     import simplejson as json
 
-from sugar.presence import presenceservice
+from sugar3.presence import presenceservice
 
 import model
 

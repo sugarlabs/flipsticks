@@ -18,14 +18,14 @@
 ### (c) 2007 World Wide Workshop Foundation
 
 import os
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 import math
-import gobject
 import logging
-from gobject import SIGNAL_RUN_FIRST, TYPE_PYOBJECT
+from GObject import SIGNAL_RUN_FIRST, TYPE_PYOBJECT
 from gettext import gettext as _
 
-from sugar.activity.activity import get_bundle_path
+from sugar3.activity.activity import get_bundle_path
 
 import model
 import screenflip
@@ -36,7 +36,7 @@ from theme import *
 logger = logging.getLogger('flipsticks')
 
 
-class View(gtk.EventBox):
+class View(Gtk.EventBox):
     __gsignals__ = {
         'frame-changed': (SIGNAL_RUN_FIRST, None, [TYPE_PYOBJECT])}
 
@@ -49,7 +49,7 @@ class View(gtk.EventBox):
             model.keys[i] = key
         self.restore()
 
-    keyframe = gobject.property(type=object, getter=None, setter=set_keyframe)
+    keyframe = GObject.property(type=object, getter=None, setter=set_keyframe)
 
     def reset(self):
         self.key.reset()
@@ -74,7 +74,7 @@ class View(gtk.EventBox):
 
     def playbackwards(self):
         if self.playing:
-            gobject.source_remove(self.playing)
+            GObject.source_remove(self.playing)
 
         self.frames = kinematic.makeframes()
         fsecs = self.frames.keys()
@@ -86,11 +86,11 @@ class View(gtk.EventBox):
         self.playingbackwards = True
 
         logger.debug('playbackwards speed=%s' % self.waittime)
-        self.playing = gobject.timeout_add(self.waittime, self.playframe)
+        self.playing = GObject.timeout_add(self.waittime, self.playframe)
 
     def playforwards(self):
         if self.playing:
-            gobject.source_remove(self.playing)
+            GObject.source_remove(self.playing)
 
         self.frames = kinematic.makeframes()
         fsecs = self.frames.keys()
@@ -102,13 +102,13 @@ class View(gtk.EventBox):
 
         logger.debug('playforwards speed=%s' % self.waittime)
         self.playingbackwards = False
-        self.playing = gobject.timeout_add(self.waittime, self.playframe)
+        self.playing = GObject.timeout_add(self.waittime, self.playframe)
 
     def stop(self):
         if not self.playing:
             return
 
-        gobject.source_remove(self.playing)
+        GObject.source_remove(self.playing)
         self.playing = None
 
         # set the main window to the keyframe
@@ -714,7 +714,7 @@ class View(gtk.EventBox):
         self.selectstickebox()
 
         control_scroll = gtk.ScrolledWindow()
-        control_scroll.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        control_scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         control_scroll.add_with_viewport(control_options)
         control_options.get_parent().modify_bg(gtk.STATE_NORMAL,
                 gtk.gdk.color_parse(BUTTON_BACKGROUND))
