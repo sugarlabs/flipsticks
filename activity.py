@@ -13,15 +13,21 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
 from gettext import gettext as _
 
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.toolbutton import ToolButton
+from sugar3.activity import activity
+from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.activity.widgets import ActivityToolbarButton
+from sugar3.activity.widgets import StopButton
+from sugar3.graphics.toolbarbox import ToolbarButton
+from sugar3.graphics import style
 
 from toolkit.activity import SharedActivity
-from toolkit.temposlider import TempoSlider
-from toolkit.toolbarbox import ToolbarBox
-from toolkit.activity_widgets import *
+# from toolkit.temposlider import TempoSlider
 
 import model
 import montage
@@ -31,7 +37,7 @@ from theme import *
 
 class flipsticksActivity(SharedActivity):
     def __init__(self, handle):
-        self.notebook = gtk.Notebook()
+        self.notebook = Gtk.Notebook()
         SharedActivity.__init__(self, self.notebook, SERVICE, handle)
 
         self.notebook.show()
@@ -44,19 +50,21 @@ class flipsticksActivity(SharedActivity):
         self.lessons.show()
         self.notebook.append_page(self.lessons)
 
-        toolbox = ToolbarBox()
-        toolbox.show()
+        toolbar_box = ToolbarBox()
 
-        toolbox.toolbar.insert(ActivityToolbarButton(self), -1)
+        activity_button = ActivityToolbarButton(self)
+        toolbar_box.toolbar.insert(activity_button, 0)
+        activity_button.show()
+        self.toolbar_box = toolbar_box
 
         lessons_button = ToggleToolButton('mamamedia')
         lessons_button.connect('toggled', self.__toggled_lessons_button_cb)
         lessons_button.set_tooltip(_('Lessons'))
-        toolbox.toolbar.insert(lessons_button, -1)
+        toolbar_box.toolbar.insert(lessons_button, -1)
 
         separator = Gtk.SeparatorToolItem()
         separator.set_draw(False)
-        toolbox.toolbar.insert(separator, -1)
+        toolbar_box.toolbar.insert(separator, -1)
 
         self.notebook_toolbar = Gtk.Notebook()
         self.notebook_toolbar.props.show_border = False
@@ -69,12 +77,19 @@ class flipsticksActivity(SharedActivity):
         notebook_item.set_expand(True)
         notebook_item.add(self.notebook_toolbar)
         notebook_item.show()
-        toolbox.toolbar.insert(notebook_item, -1)
+        toolbar_box.toolbar.insert(notebook_item, -1)
 
-        toolbox.toolbar.insert(StopButton(self), -1)
+        separator = Gtk.SeparatorToolItem()
+        separator.props.draw = False
+        separator.set_expand(True)
+        toolbar_box.toolbar.insert(separator, -1)
+        separator.show()
 
-        toolbox.show_all()
-        self.toolbar_box = toolbox
+        stop_button = StopButton(self)
+        toolbar_box.toolbar.insert(stop_button, -1)
+        stop_button.show()
+        self.set_toolbar_box(toolbar_box)
+        toolbar_box.show()
 
     def resume_instance(self, filepath):
         model.load(filepath)
@@ -93,7 +108,7 @@ class flipsticksActivity(SharedActivity):
 
 class MontageToolbar(Gtk.Toolbar):
     def __init__(self, montage):
-        Gtk.Toolbar.__init__(self)
+        GObject.GObject.__init__(self)
         self.montage = montage
 
         # edit buttons
@@ -120,17 +135,17 @@ class MontageToolbar(Gtk.Toolbar):
 
         play_img_1 = Gtk.Image()
         play_img_1.set_from_icon_name('media-playback-start-back',
-                Gtk.ICON_SIZE_LARGE_TOOLBAR)
+                Gtk.IconSize.LARGE_TOOLBAR)
         pause_img_1 = Gtk.Image()
         pause_img_1.set_from_icon_name('media-playback-pause',
-                Gtk.ICON_SIZE_LARGE_TOOLBAR)
+                Gtk.IconSize.LARGE_TOOLBAR)
 
         play_img_2 = Gtk.Image()
         play_img_2.set_from_icon_name('media-playback-start',
-                Gtk.ICON_SIZE_LARGE_TOOLBAR)
+                Gtk.IconSize.LARGE_TOOLBAR)
         pause_img_2 = Gtk.Image()
         pause_img_2.set_from_icon_name('media-playback-pause',
-                Gtk.ICON_SIZE_LARGE_TOOLBAR)
+                Gtk.IconSize.LARGE_TOOLBAR)
 
         paly_1 = ToggleToolButton('media-playback-start-back')
         play_2 = ToggleToolButton('media-playback-start')
@@ -149,16 +164,16 @@ class MontageToolbar(Gtk.Toolbar):
 
         # tempo button
 
-        tempo = TempoSlider(0, 99)
-        tempo.adjustment.connect("value-changed", self._tempo_cb)
-        tempo.set_size_request(200, -1)
-        tempo.set_value(50)
-        tempo_item = Gtk.ToolItem()
-        tempo_item.add(tempo)
-        self.insert(tempo_item, -1)
+        # tempo = TempoSlider(0, 99)
+        # tempo.adjustment.connect("value-changed", self._tempo_cb)
+        # tempo.set_size_request(200, -1)
+        # tempo.set_value(50)
+        # tempo_item = Gtk.ToolItem()
+        # tempo_item.add(tempo)
+        # self.insert(tempo_item, -1)
 
-        separator = Gtk.SeparatorToolItem()
-        self.insert(separator,-1)
+        # separator = Gtk.SeparatorToolItem()
+        # self.insert(separator,-1)
 
         # export buttons
 
@@ -197,7 +212,7 @@ class MontageToolbar(Gtk.Toolbar):
 
 class LessonsToolbar(Gtk.Toolbar):
     def __init__(self):
-        Gtk.Toolbar.__init__(self)
+        GObject.GObject.__init__(self)
         self._mask = False
 
         for lesson in lessons.THEMES:

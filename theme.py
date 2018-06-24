@@ -12,10 +12,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
 from gettext import gettext as _
 
-from sugar.graphics import style
+from sugar3.graphics import style
 
 GRAY = "#B7B7B7" # gray
 PINK = "#FF0099" # pink
@@ -26,25 +27,25 @@ BACKGROUND = "#66CC00" # light green
 BUTTON_FOREGROUND = "#CCFB99" # very light green
 BUTTON_BACKGROUND = "#027F01" # dark green
 COLOR_FG_BUTTONS = (
-    (gtk.STATE_NORMAL,"#CCFF99"),
-    (gtk.STATE_ACTIVE,"#CCFF99"),
-    (gtk.STATE_PRELIGHT,"#CCFF99"),
-    (gtk.STATE_SELECTED,"#CCFF99"),
-    (gtk.STATE_INSENSITIVE,"#CCFF99"),
+    (Gtk.StateType.NORMAL,"#CCFF99"),
+    (Gtk.StateType.ACTIVE,"#CCFF99"),
+    (Gtk.StateType.PRELIGHT,"#CCFF99"),
+    (Gtk.StateType.SELECTED,"#CCFF99"),
+    (Gtk.StateType.INSENSITIVE,"#CCFF99"),
     ) # very light green
 COLOR_BG_BUTTONS = (
-    (gtk.STATE_NORMAL,"#027F01"),
-    (gtk.STATE_ACTIVE,"#CCFF99"),
-    (gtk.STATE_PRELIGHT,"#016D01"),
-    (gtk.STATE_SELECTED,"#CCFF99"),
-    (gtk.STATE_INSENSITIVE,"#027F01"),
+    (Gtk.StateType.NORMAL,"#027F01"),
+    (Gtk.StateType.ACTIVE,"#CCFF99"),
+    (Gtk.StateType.PRELIGHT,"#016D01"),
+    (Gtk.StateType.SELECTED,"#CCFF99"),
+    (Gtk.StateType.INSENSITIVE,"#027F01"),
     )
 OLD_COLOR_BG_BUTTONS = (
-    (gtk.STATE_NORMAL,"#027F01"),
-    (gtk.STATE_ACTIVE,"#014D01"),
-    (gtk.STATE_PRELIGHT,"#016D01"),
-    (gtk.STATE_SELECTED,"#027F01"),
-    (gtk.STATE_INSENSITIVE,"#027F01"),
+    (Gtk.StateType.NORMAL,"#027F01"),
+    (Gtk.StateType.ACTIVE,"#014D01"),
+    (Gtk.StateType.PRELIGHT,"#016D01"),
+    (Gtk.StateType.SELECTED,"#027F01"),
+    (Gtk.StateType.INSENSITIVE,"#027F01"),
     )
 
 STRINGS = { 'size'              : _('Size'),
@@ -76,11 +77,11 @@ PAD = 10
 LOGO_WIDTH = 276
 TOLLBAR_HEIGHT = style.LARGE_ICON_SIZE
 
-KEYFRAMEWIDTH = gtk.gdk.screen_width() - PAD*3
+KEYFRAMEWIDTH = Gdk.Screen.width() - PAD*3
 KEYFRAMEHEIGHT = 80
 
-DRAWWIDTH = gtk.gdk.screen_width() - LOGO_WIDTH - PAD*4
-DRAWHEIGHT = gtk.gdk.screen_height() - KEYFRAMEHEIGHT - PAD*6 - TOLLBAR_HEIGHT
+DRAWWIDTH = Gdk.Screen.width() - LOGO_WIDTH - PAD*4
+DRAWHEIGHT = Gdk.Screen.height() - KEYFRAMEHEIGHT - PAD*6 - TOLLBAR_HEIGHT
 
 KEYFRAMES = []
 KEYFRAMES_NUMBER = 5

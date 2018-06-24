@@ -204,7 +204,7 @@ def screen_shot(pixbuf):
     filepath = os.path.join(tmpdir,filename)
     pixbuf.save(filepath,'png')
 
-    from sugar.datastore import datastore
+    from sugar3.datastore import datastore
     mediaObject = datastore.create()
     mediaObject.metadata['title'] = 'FlipSticks PNG'
     thumbData = _get_base64_pixbuf_data(pixbuf)
