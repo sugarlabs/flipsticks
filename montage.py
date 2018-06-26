@@ -20,6 +20,7 @@
 import os
 from gi.repository import Gtk
 from gi.repository import GObject
+import cairo
 import math
 import logging
 from gettext import gettext as _
@@ -123,10 +124,10 @@ class View(Gtk.EventBox):
         firstpixindex = self.frames.keys()[0]
 
         x, y, width, height = self.mfdraw.get_allocation()
-        pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
-        self._draw_frame(firstpixindex, pixmap)
+        surface = self.mfdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
+        self._draw_frame(firstpixindex, surface)
         pixbuf = GdkPixbuf.Pixbuf(GdkPixbuf.Colorspace.RGB, False, 8, width, height)
-        GdkPixbuf.Pixbuf.get_from_drawable(pixbuf, pixmap, pixmap.get_colormap(), 0, 0, 0, 0, width, height)
+        GdkPixbuf.Pixbuf.get_from_drawable(pixbuf, surface, surface.get_colormap(), 0, 0, 0, 0, width, height)
 
         model.screen_shot(pixbuf)
 
@@ -393,53 +394,53 @@ class View(Gtk.EventBox):
             return
 
         area = self.toplevel.get_window()
-        drawgc = area.new_gc()
-        drawgc.line_width = 3
-        cm = drawgc.get_colormap()
-        red = cm.alloc_color('red')
-        yellow = cm.alloc_color('yellow')
-        white = cm.alloc_color('white')
-        black = cm.alloc_color('black')
-        blue = cm.alloc_color('blue')
-        green = cm.alloc_color('green')
-        drawgc.fill = Gdk.SOLID
+        drawgc = cairo.Context(self.surface)
+        drawgc.set_line_width(3)
+        red = Gdk.Color.parse('red')[1]
+        yellow = Gdk.Color.parse('yellow')[1]
+        white = Gdk.Color.parse('white')[1]
+        black = Gdk.Color.parse('black')[1]
+        blue = Gdk.Color.parse('blue')[1]
+        green = Gdk.Color.parse('green')[1]
         x, y, width, height = self.mfdraw.get_allocation()
         #self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
-        drawgc.set_foreground(white)
-        self.pixmap.draw_rectangle(drawgc, True, 0, 0, width, height)
+        drawgc.set_source_rgb(white.red, white.green, white.blue)
+        drawgc.rectangle(0, 0, width, height)
+        drawgc.fill()
 
-        drawgc.set_foreground(black)
+        drawgc.set_source_rgb(black.red, black.green, black.blue)
         hsize = self.key.sticks['HEAD'][1]  # really half of head size
         rhsize = self.key.parts['RIGHT HAND']
         lhsize = self.key.parts['LEFT HAND']
-        self.drawstickman(drawgc, self.pixmap, self.key.middle, self.key.joints, hsize, rhsize, lhsize)
+        self.drawstickman(drawgc, self.surface, self.key.middle, self.key.joints, hsize, rhsize, lhsize)
         # draw circle for middle
-        drawgc.set_foreground(green)
+        drawgc.set_source_rgb(green.red, green.green, green.blue)
         if self.middlepressed:
-            drawgc.set_foreground(blue)
+            drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
         x, y = self.key.middle
-        self.pixmap.draw_arc(drawgc, True, x - 5, y - 5, 10, 10, 0, 360 * 64)
+        drawgc.arc(x, y, 5, 0, 2*pi)
+        drawgc.fill()
         # draw circle for rotate (should be halfway between middle and groin
         (rx, ry) = self.key.getrotatepoint()
-        drawgc.set_foreground(yellow)
+        drawgc.set_source_rgb(yellow.red, yellow.green, yellow.blue)
         if self.rotatepressed:
-            drawgc.set_foreground(blue)
-        self.pixmap.draw_arc(drawgc, True, rx - 5, ry - 5, 10, 10, 0, 360 * 64)
+            drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
+        drawgc.arc(rx, ry, 5, 0, 2*pi)
         # draw circles for joints
-        drawgc.set_foreground(black)
+        drawgc.set_source_rgb(black.red, black.green, black.blue)
         for jname in self.key.joints:
             if jname == 'head':
                     continue
             x, y = self.key.joints[jname]
             if self.jointpressed == jname:
-                drawgc.set_foreground(blue)
-                self.pixmap.draw_arc(drawgc, True, x - 5, y - 5, 10, 10, 0, 360 * 64)
-                drawgc.set_foreground(black)
+                drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
+                drawgc.arc(x, y, 5, 0, 2*pi)
+                drawgc.set_source_rgb(black.red, black.green, black.blue)
             else:
-                drawgc.set_foreground(red)
-                self.pixmap.draw_arc(drawgc, True, x - 5, y - 5, 10, 10, 0, 360 * 64)
-                drawgc.set_foreground(black)
+                drawgc.set_source_rgb(red.red, red.green, red.blue)
+                drawgc.arc(x, y, 5, 0, 2*pi)
+                drawgc.set_source_rgb(black.red, black.green, black.blue)
         self.mfdraw.queue_draw()
 
     def drawstickman(self, drawgc, pixmap, middle, joints, hsize, rhsize, lhsize):
@@ -451,93 +452,111 @@ class View(Gtk.EventBox):
         rightleg = [joints['groin'], joints['righthip'], joints['rightknee'],
                     joints['rightheel'], joints['righttoe']]
         # draw lines
-        pixmap.draw_lines(drawgc, leftarm)
-        pixmap.draw_lines(drawgc, rightarm)
-        pixmap.draw_lines(drawgc, torso)
-        pixmap.draw_lines(drawgc, leftleg)
-        pixmap.draw_lines(drawgc, rightleg)
+        for i in (length(leftarm)-1):
+            drawgc.move_to(leftarm[i])
+            drawgc.line_to(leftarm[i+1])
+            drawgc.stroke()
+        for i in (length(rightarm)-1):
+            drawgc.move_to(rightarm[i])
+            drawgc.line_to(rightarm[i+1])
+            drawgc.stroke()
+        for i in (length(torso)-1):
+            drawgc.move_to(torso[i])
+            drawgc.line_to(torso[i+1])
+            drawgc.stroke()
+        for i in (length(leftleg)-1):
+            drawgc.move_to(leftleg[i])
+            drawgc.line_to(leftleg[i+1])
+            drawgc.stroke()
+        for i in (length(rightleg)-1):
+            drawgc.move_to(rightleg[i])
+            drawgc.line_to(rightleg[i+1])
+            drawgc.stroke()
         # draw head
         x, y = joints['head']
-        pixmap.draw_arc(drawgc, True, x - hsize, y - hsize, hsize * 2, hsize * 2, 0, 360 * 64)
+        drawgc.arc(x, y, hsize, 0, 2*pi)
+        drawgc.fill()
         # draw circles for hands
         x, y = joints['righthand']
-        pixmap.draw_arc(drawgc, True, x - int(rhsize / 2.0), y - int(rhsize / 2.0), rhsize, rhsize, 0, 360 * 64)
+        drawgc.arc(x, y, int(rhsize/2.0), 0, 2*pi)
+        drawgc.fill()
         x, y = joints['lefthand']
-        pixmap.draw_arc(drawgc, True, x - int(lhsize / 2.0), y - int(lhsize / 2.0), lhsize, lhsize, 0, 360 * 64)
-        
+        drawgc.arc(x, y, int(lhsize/2.0), 0, 2*pi)
+
     def drawkeyframe(self):
         area = self.toplevel.get_window()
-        drawgc = area.new_gc()
-        drawgc.line_width = 2
-        cm = drawgc.get_colormap()
-        red = cm.alloc_color('red')
-        white = cm.alloc_color('white')
-        black = cm.alloc_color('black')
-        blue = cm.alloc_color('blue')
-        green = cm.alloc_color('green')
-        pink = cm.alloc_color(PINK)
-        bgcolor = cm.alloc_color(BACKGROUND)
-        darkgreen = cm.alloc_color(BUTTON_BACKGROUND)
-        drawgc.fill = Gdk.SOLID
+        drawgc = cairo.Context(self.surface)
+        drawgc.set_line_width(2)
+        red = Gdk.Color.parse('red')[1]
+        yellow = Gdk.Color.parse('yellow')[1]
+        white = Gdk.Color.parse('white')[1]
+        black = Gdk.Color.parse('black')[1]
+        blue = Gdk.Color.parse('blue')[1]
+        green = Gdk.Color.parse('green')[1]
+        pink = Gdk.Color.parse(PINK)[1]
+        bgcolor = Gdk.Color.parse(BACKGROUND)[1]
+        darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
         x, y, width, height = self.kfdraw.get_allocation()
-        self.kfpixmap = Gdk.Pixmap(self.kfdraw.window, width, height)
+        self.kfsurface = self.kfdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
         # clear area
-        drawgc.set_foreground(bgcolor)
-        self.kfpixmap.draw_rectangle(drawgc, True, 0, 0, width, height)
+        drawgc.set_source_rgb(bgcolor.red, bgcolor.green, bgcolor.blue)
+        drawgc.rectangle(0, 0, width, height)
+        drawgc.fill()
         # draw line in middle
-        drawgc.set_foreground(darkgreen)
-        self.kfpixmap.draw_rectangle(drawgc, True, 10, int(height / 2.0) - 5, width - 20, 10)
+        drawgc.set_source_rgb(darkgreen.red, darkgreen.green, darkgreen.blue)
+        drawgc.rectangle(10, int(height / 2.0) - 5, width - 20, 10)
+        drawgc.fill()
         x = 10
         y = int(height / 2.0)
-        self.kfpixmap.draw_arc(drawgc, True, x - 5, y - 5, 10, 10, 0, 360 * 64)
+        drawgc.arc(x, y, 5, 0, 2*pi)
+        drawgc.fill()
         x = width - 10
-        self.kfpixmap.draw_arc(drawgc, True, x - 5, y - 5, 10, 10, 0, 360 * 64)
+        drawgc.arc(x, y, 5, 0, 2*pi)
+        drawgc.fill()
 
         # draw the keyframe circles
         for i in list(reversed(self.keys_overlap_stack)):
             # first the outer circle
             x = model.keys[i].x
             if i == self.kfselected:
-                drawgc.set_foreground(pink)
+                drawgc.set_source_rgb(pink.red, pink.green, pink.blue)
+
             else:
-                drawgc.set_foreground(darkgreen)
-            self.kfpixmap.draw_arc(drawgc, True, x - KEYFRAME_RADIUS,
-                    y - KEYFRAME_RADIUS, KEYFRAME_RADIUS * 2, KEYFRAME_RADIUS * 2,
-                    0, 360 * 64)
+                drawgc.set_source_rgb(darkgreen.red, darkgreen.green, darkgreen.blue)
+            drawgc.arc(x, y, KEYFRAME_RADIUS, 0, 2*pi)
+            drawgc.fill()
             # then the inner circle
-            drawgc.set_foreground(white)
-            self.kfpixmap.draw_arc(drawgc, True, x - KEYFRAME_RADIUS + 5,
-                    y - KEYFRAME_RADIUS + 5, (KEYFRAME_RADIUS - 5) * 2,
-                    (KEYFRAME_RADIUS - 5) * 2, 0, 360 * 64)
+            drawgc.set_source_rgb(white.red, white.green, white.blue)
+            sdrawgc.arc(x+5, y+5, (KEYFRAME_RADIUS - 5), 0, 2*pi)
             if model.keys[i].scaled_sticks:
                 # draw a man in the circle
-                drawgc.set_foreground(black)
+                drawgc.set_source_rgb(black.red, black.green, black.blue)
                 hsize = model.keys[i].scaled_sticks['HEAD'][1]
                 rhsize = int(model.keys[i].parts['RIGHT HAND'] * 0.2)
                 lhsize = int(model.keys[i].parts['LEFT HAND'] * 0.2)
-                self.drawstickman(drawgc, self.kfpixmap, (x, y), model.keys[i].scaled_joints, hsize, rhsize, lhsize)
+                self.drawstickman(drawgc, self.kfsurface, (x, y), model.keys[i].scaled_joints, hsize, rhsize, lhsize)
                 #self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         self.kfdraw.queue_draw()
 
     def drawfp(self):
-        area = self.toplevel.window
-        drawgc = area.new_gc()
-        drawgc.line_width = 1
-        cm = drawgc.get_colormap()
-        red = cm.alloc_color('red')
-        white = cm.alloc_color('white')
-        black = cm.alloc_color('black')
-        blue = cm.alloc_color('blue')
-        green = cm.alloc_color('green')
-        pink = cm.alloc_color(PINK)
-        bgcolor = cm.alloc_color(BACKGROUND)
-        darkgreen = cm.alloc_color(BUTTON_BACKGROUND)
-        drawgc.fill = Gdk.SOLID
+        area = self.toplevel.get_window()
+        drawgc = cairo.Context(self.surface)
+        drawgc.set_line_width(1)
+        red = Gdk.Color.parse('red')[1]
+        yellow = Gdk.Color.parse('yellow')[1]
+        white = Gdk.Color.parse('white')[1]
+        black = Gdk.Color.parse('black')[1]
+        blue = Gdk.Color.parse('blue')[1]
+        green = Gdk.Color.parse('green')[1]
+        pink = Gdk.Color.parse(PINK)[1]
+        bgcolor = Gdk.Color.parse(BACKGROUND)[1]
+        darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
+
         x, y, width, height = self.fpdraw.get_allocation()
-        self.fppixmap = Gdk.Pixmap(self.fpdraw.window, width, height)
+        self.fpsurface = self.fpdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
         # clear area
-        drawgc.set_foreground(white)
-        self.fppixmap.draw_rectangle(drawgc, True, 0, 0, width, height)
+        drawgc.set_source_rgb(white.red, white.green, white.blue)
+        drawgc.rectangle(0, 0, width, height)
         self.fpdraw.queue_draw()
 
     def selectstick(self, widget, event, data=None):
@@ -760,29 +779,28 @@ class View(Gtk.EventBox):
         self.add(greenbox)
         self.show_all()
 
-    def _draw_frame(self, index, pixmap):
+    def _draw_frame(self, index, surface):
         joints = self.frames[index].joints
         parts = self.frames[index].parts
         # draw on the main drawing area
-        area = self.toplevel.window
-        drawgc = area.new_gc()
-        drawgc.line_width = 3
-        cm = drawgc.get_colormap()
-        white = cm.alloc_color('white')
-        black = cm.alloc_color('black')
-        drawgc.fill = Gdk.SOLID
+        area = self.toplevel.get_window()
+        drawgc = cairo.Context(surface)
+        drawgc.set_line_width(3)
+        white = Gdk.Color.parse('white')
+        black = Gdk.Color.parse('black')
         x, y, width, height = self.mfdraw.get_allocation()
         #pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
-        drawgc.set_foreground(white)
-        pixmap.draw_rectangle(drawgc, True, 0, 0, width, height)
+        drawgc.set_source_rgb(white.red, white.green, white.blue)
+        drawgc.rectangle(0, 0, width, height)
+        drawgc.fill()
 
-        drawgc.set_foreground(black)
+        drawgc.set_source_rgb(black.red, black.green, black.blue)
         hsize = self.frames[index].hsize
         middle = self.frames[index].middle
         rhsize = parts['RIGHT HAND']
         lhsize = parts['LEFT HAND']
-        self.drawstickman(drawgc, pixmap, middle, joints, hsize, rhsize, lhsize)
+        self.drawstickman(drawgc, surface, middle, joints, hsize, rhsize, lhsize)
 
     def _inkeyframe(self, x, y):
         dy = math.pow(abs(y - KEYFRAMEHEIGHT / 2), 2)
@@ -798,11 +816,11 @@ class View(Gtk.EventBox):
         return -1
 
     def _anglel_adj_cb(self, adj):
-        self.angleentry.set_text(str(int(adj.value)))
+        self.angleentry.set_text(str(int(adj.get_value())))
         self.enterangle_callback(None, self.angleentry)
 
     def _size_adj_cb(self, adj):
-        self.sizeentry.set_text(str(int(adj.value)))
+        self.sizeentry.set_text(str(int(adj.get_value())))
         self.enterlen_callback(None, self.sizeentry)
 
     def _emit_move(self, key):
