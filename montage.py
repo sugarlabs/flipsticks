@@ -136,20 +136,20 @@ class View(Gtk.EventBox):
         self.updateentrybox()
 
     def expose_event(self, widget, event):
-        x, y, width, height = event.area
-        widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
-                                    self.pixmap, x, y, x, y, width, height)
+        # x, y, width, height = event.get_allocation()
+        # widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
+        #                             self.pixmap, x, y, x, y, width, height)
         return False
 
     def kf_expose_event(self, widget, event):
-        x, y, width, height = event.area
-        widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
-                                    self.kfpixmap, x, y, x, y, width, height)
+        # x, y, width, height = event.area
+        # widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
+        #                             self.kfpixmap, x, y, x, y, width, height)
         return False
 
     def configure_event(self, widget, event):
         x, y, width, height = self.mfdraw.get_allocation()
-        self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
+        self.surface = self.mfdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
         self.drawmainframe()
         return True
 
@@ -159,12 +159,12 @@ class View(Gtk.EventBox):
 
     def motion_notify_event(self, widget, event):
         if event.is_hint:
-            x, y, state = event.window.get_pointer()
+            (win, x, y, state) = event.window.get_pointer()
         else:
             x = event.x
             y = event.y
             state = event.get_state()
-        if state & Gdk.ModifierType.BUTTON1_MASK and self.pixmap != None:
+        if state & Gdk.ModifierType.BUTTON1_MASK and self.surface != None:
             if self.jointpressed:
                 if _inarea(widget, x, y):
                     #self.key.joints[self.jointpressed] = (x,y) # old hack way
@@ -244,7 +244,7 @@ class View(Gtk.EventBox):
             x = event.x
             y = event.y
             state = event.get_state()
-        if state & Gdk.ModifierType.BUTTON1_MASK and self.pixmap != None:
+        if state & Gdk.ModifierType.BUTTON1_MASK and self.surface != None:
             if self.kfpressed >= 0:
                 if _inarea(widget, x, y):
                     xdiff = int(x - self.kf_mouse_pos)
@@ -268,7 +268,7 @@ class View(Gtk.EventBox):
         return True
 
     def button_press_event(self, widget, event):
-        if event.button == 1 and self.pixmap != None:
+        if event.button == 1 and self.surface != None:
             joint = self.key.injoint(event.x, event.y)
             if joint:
                 self.jointpressed = joint
@@ -288,7 +288,7 @@ class View(Gtk.EventBox):
             self.drawmainframe()
 
     def kf_button_press_event(self, widget, event):
-        if event.button == 1 and self.pixmap != None:
+        if event.button == 1 and self.surface != None:
             kfnum = self._inkeyframe(event.x, event.y)
             if kfnum >= 0:
                 self.kf_mouse_pos = event.x
@@ -318,7 +318,7 @@ class View(Gtk.EventBox):
             if self.playframenum == -1:
                 return True
 
-        self._draw_frame(self.playframenum, self.pixmap)
+        self._draw_frame(self.playframenum, self.surface)
         # draw circle for middle
         #green = cm.alloc_color('green')
         #drawgc.set_foreground(green)
@@ -389,10 +389,10 @@ class View(Gtk.EventBox):
         self.drawmainframe()
 
     def drawmainframe(self):
-        if not self.pixmap:
+        if not self.surface:
             return
 
-        area = self.toplevel.window
+        area = self.toplevel.get_window()
         drawgc = area.new_gc()
         drawgc.line_width = 3
         cm = drawgc.get_colormap()
@@ -466,7 +466,7 @@ class View(Gtk.EventBox):
         pixmap.draw_arc(drawgc, True, x - int(lhsize / 2.0), y - int(lhsize / 2.0), lhsize, lhsize, 0, 360 * 64)
         
     def drawkeyframe(self):
-        area = self.toplevel.window
+        area = self.toplevel.get_window()
         drawgc = area.new_gc()
         drawgc.line_width = 2
         cm = drawgc.get_colormap()
@@ -582,7 +582,7 @@ class View(Gtk.EventBox):
         self.playingbackwards = False
         self.toplevel = activity
         self.stickselected = 'RIGHT SHOULDER'
-        self.pixmap = None
+        self.surface = None
         self._emit_move_handle = None
 
         self.setplayspeed(50)
