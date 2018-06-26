@@ -26,7 +26,7 @@ import logging
 from gettext import gettext as _
 
 from sugar3.activity.activity import get_bundle_path
-
+from math import pi
 import model
 import screenflip
 import kinematic
@@ -124,7 +124,7 @@ class View(Gtk.EventBox):
         firstpixindex = self.frames.keys()[0]
 
         x, y, width, height = self.mfdraw.get_allocation()
-        surface = self.mfdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
+        surface = self.mfdraw.get_window().create_similar_surface(Gdk.Content.ColorAlpha, width, height)
         self._draw_frame(firstpixindex, surface)
         pixbuf = GdkPixbuf.Pixbuf(GdkPixbuf.Colorspace.RGB, False, 8, width, height)
         GdkPixbuf.Pixbuf.get_from_drawable(pixbuf, surface, surface.get_colormap(), 0, 0, 0, 0, width, height)
@@ -149,8 +149,9 @@ class View(Gtk.EventBox):
         return False
 
     def configure_event(self, widget, event):
-        x, y, width, height = self.mfdraw.get_allocation()
-        self.surface = self.mfdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
+        width = self.mfdraw.get_allocated_width()
+        height = self.mfdraw.get_allocated_height()
+        self.surface = self.mfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         self.drawmainframe()
         return True
 
@@ -402,7 +403,8 @@ class View(Gtk.EventBox):
         black = Gdk.Color.parse('black')[1]
         blue = Gdk.Color.parse('blue')[1]
         green = Gdk.Color.parse('green')[1]
-        x, y, width, height = self.mfdraw.get_allocation()
+        width = self.mfdraw.get_allocated_width()
+        height = self.mfdraw.get_allocated_height()
         #self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
@@ -452,25 +454,25 @@ class View(Gtk.EventBox):
         rightleg = [joints['groin'], joints['righthip'], joints['rightknee'],
                     joints['rightheel'], joints['righttoe']]
         # draw lines
-        for i in (length(leftarm)-1):
-            drawgc.move_to(leftarm[i])
-            drawgc.line_to(leftarm[i+1])
+        for i in range(len(leftarm)-1):
+            drawgc.move_to(leftarm[i][0], leftarm[i][1])
+            drawgc.line_to(leftarm[i+1][0], leftarm[i+1][1])
             drawgc.stroke()
-        for i in (length(rightarm)-1):
-            drawgc.move_to(rightarm[i])
-            drawgc.line_to(rightarm[i+1])
+        for i in range(len(rightarm)-1):
+            drawgc.move_to(rightarm[i][0], rightarm[i][1])
+            drawgc.line_to(rightarm[i+1][0], rightarm[i+1][1])
             drawgc.stroke()
-        for i in (length(torso)-1):
-            drawgc.move_to(torso[i])
-            drawgc.line_to(torso[i+1])
+        for i in range(len(torso)-1):
+            drawgc.move_to(torso[i][0], torso[i][1])
+            drawgc.line_to(torso[i+1][0], torso[i+1][1])
             drawgc.stroke()
-        for i in (length(leftleg)-1):
-            drawgc.move_to(leftleg[i])
-            drawgc.line_to(leftleg[i+1])
+        for i in range(len(leftleg)-1):
+            drawgc.move_to(leftleg[i][0], leftleg[i][1])
+            drawgc.line_to(leftleg[i+1][0], leftleg[i+1][1])
             drawgc.stroke()
-        for i in (length(rightleg)-1):
-            drawgc.move_to(rightleg[i])
-            drawgc.line_to(rightleg[i+1])
+        for i in range(len(rightleg)-1):
+            drawgc.move_to(rightleg[i][0], rightleg[i][1])
+            drawgc.line_to(rightleg[i+1][0], rightleg[i+1][1])
             drawgc.stroke()
         # draw head
         x, y = joints['head']
@@ -496,8 +498,9 @@ class View(Gtk.EventBox):
         pink = Gdk.Color.parse(PINK)[1]
         bgcolor = Gdk.Color.parse(BACKGROUND)[1]
         darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
-        x, y, width, height = self.kfdraw.get_allocation()
-        self.kfsurface = self.kfdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
+        width = self.kfdraw.get_allocated_width()
+        height = self.kfdraw.get_allocated_height()
+        self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         # clear area
         drawgc.set_source_rgb(bgcolor.red, bgcolor.green, bgcolor.blue)
         drawgc.rectangle(0, 0, width, height)
@@ -527,7 +530,7 @@ class View(Gtk.EventBox):
             drawgc.fill()
             # then the inner circle
             drawgc.set_source_rgb(white.red, white.green, white.blue)
-            sdrawgc.arc(x+5, y+5, (KEYFRAME_RADIUS - 5), 0, 2*pi)
+            drawgc.arc(x+5, y+5, (KEYFRAME_RADIUS - 5), 0, 2*pi)
             if model.keys[i].scaled_sticks:
                 # draw a man in the circle
                 drawgc.set_source_rgb(black.red, black.green, black.blue)
@@ -552,8 +555,9 @@ class View(Gtk.EventBox):
         bgcolor = Gdk.Color.parse(BACKGROUND)[1]
         darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
 
-        x, y, width, height = self.fpdraw.get_allocation()
-        self.fpsurface = self.fpdraw.window.create_similar_surface(Gdk.Content.ColorAlpha, width, height)
+        width = self.fpdraw.get_allocated_width()
+        height = self.fpdraw.get_allocated_height()
+        self.fpsurface = self.fpdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
         drawgc.rectangle(0, 0, width, height)
@@ -788,7 +792,8 @@ class View(Gtk.EventBox):
         drawgc.set_line_width(3)
         white = Gdk.Color.parse('white')
         black = Gdk.Color.parse('black')
-        x, y, width, height = self.mfdraw.get_allocation()
+        width = self.mfdraw.get_allocated_width()
+        height = self.mfdraw.get_allocated_height()
         #pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
@@ -830,7 +835,9 @@ class View(Gtk.EventBox):
 
 
 def _inarea(widget, x, y):
-    x_, y_, width, height = widget.get_allocation()
+    # x_, y_, width, height = widget.get_allocation()
+    width = widget.get_allocated_width()
+    height = height.get_allocated_height()
     if x < 0 or y < 0 or x >= width or y >= height:
         return False
     return True
