@@ -436,6 +436,7 @@ class View(Gtk.EventBox):
         if self.rotatepressed:
             drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
         drawgc.arc(rx, ry, 5, 0, 2*pi)
+        drawgc.fill()
         # draw circles for joints
         drawgc.set_source_rgb(black.red, black.green, black.blue)
         for jname in self.key.joints:
@@ -445,10 +446,12 @@ class View(Gtk.EventBox):
             if self.jointpressed == jname:
                 drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
                 drawgc.arc(x, y, 5, 0, 2*pi)
+                drawgc.fill()
                 drawgc.set_source_rgb(black.red, black.green, black.blue)
             else:
                 drawgc.set_source_rgb(red.red, red.green, red.blue)
                 drawgc.arc(x, y, 5, 0, 2*pi)
+                drawgc.fill()
                 drawgc.set_source_rgb(black.red, black.green, black.blue)
         self.mfdraw.queue_draw()
 
