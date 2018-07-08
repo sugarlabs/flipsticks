@@ -136,16 +136,20 @@ class View(Gtk.EventBox):
         self.syncmaintokf()
         self.updateentrybox()
 
-    def expose_event(self, widget, event):
+    def __draw_cb(self, widget, cr):
         # x, y, width, height = event.get_allocation()
         # widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
         #                             self.pixmap, x, y, x, y, width, height)
+        cr.set_source_surface(self.surface, 0, 0)
+        cr.paint()
         return False
 
-    def kf_expose_event(self, widget, event):
+    def __kf_draw_cb(self, widget, cr):
         # x, y, width, height = event.area
         # widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
         #                             self.kfpixmap, x, y, x, y, width, height)
+        cr.set_source_surface(self.kfsurface, 0, 0)
+        cr.paint()
         return False
 
     def configure_event(self, widget, event):
@@ -156,6 +160,9 @@ class View(Gtk.EventBox):
         return True
 
     def kf_configure_event(self, widget, event):
+        width = self.mfdraw.get_allocated_width()
+        height = self.mfdraw.get_allocated_height()
+        self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         self.drawkeyframe()
         return True
 
@@ -241,7 +248,7 @@ class View(Gtk.EventBox):
 
     def kf_motion_notify_event(self, widget, event):
         if event.is_hint:
-            x, y, state = event.window.get_pointer()
+            (win, x, y, state) = event.window.get_pointer()
         else:
             x = event.x
             y = event.y
@@ -487,7 +494,7 @@ class View(Gtk.EventBox):
 
     def drawkeyframe(self):
         area = self.toplevel.get_window()
-        drawgc = cairo.Context(self.surface)
+        drawgc = cairo.Context(self.kfsurface)
         drawgc.set_line_width(2)
         red = Gdk.Color.parse('red')[1]
         yellow = Gdk.Color.parse('yellow')[1]
@@ -500,7 +507,7 @@ class View(Gtk.EventBox):
         darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
         width = self.kfdraw.get_allocated_width()
         height = self.kfdraw.get_allocated_height()
-        self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
+        # self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         # clear area
         drawgc.set_source_rgb(bgcolor.red, bgcolor.green, bgcolor.blue)
         drawgc.rectangle(0, 0, width, height)
@@ -626,7 +633,7 @@ class View(Gtk.EventBox):
         # screen
 
         self.mfdraw = Gtk.DrawingArea()
-        self.mfdraw.connect('draw', self.expose_event)
+        self.mfdraw.connect('draw', self.__draw_cb)
         self.mfdraw.connect('configure_event', self.configure_event)
         self.mfdraw.connect('motion_notify_event', self.motion_notify_event)
         self.mfdraw.connect('button_press_event', self.button_press_event)
@@ -653,7 +660,7 @@ class View(Gtk.EventBox):
 
         self.kfdraw = Gtk.DrawingArea()
         self.kfdraw.set_size_request(KEYFRAMEWIDTH, KEYFRAMEHEIGHT)
-        self.kfdraw.connect('draw', self.kf_expose_event)
+        self.kfdraw.connect('draw', self.__kf_draw_cb)
         self.kfdraw.connect('configure_event', self.kf_configure_event)
         self.kfdraw.connect('motion_notify_event', self.kf_motion_notify_event)
         self.kfdraw.connect('button_press_event', self.kf_button_press_event)
@@ -837,7 +844,7 @@ class View(Gtk.EventBox):
 def _inarea(widget, x, y):
     # x_, y_, width, height = widget.get_allocation()
     width = widget.get_allocated_width()
-    height = height.get_allocated_height()
+    height = widget.get_allocated_height()
     if x < 0 or y < 0 or x >= width or y >= height:
         return False
     return True
