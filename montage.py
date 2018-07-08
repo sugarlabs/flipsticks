@@ -137,17 +137,11 @@ class View(Gtk.EventBox):
         self.updateentrybox()
 
     def __draw_cb(self, widget, cr):
-        # x, y, width, height = event.get_allocation()
-        # widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
-        #                             self.pixmap, x, y, x, y, width, height)
         cr.set_source_surface(self.surface, 0, 0)
         cr.paint()
         return False
 
     def __kf_draw_cb(self, widget, cr):
-        # x, y, width, height = event.area
-        # widget.window.draw_drawable(widget.get_style().fg_gc[Gtk.StateType.NORMAL],
-        #                             self.kfpixmap, x, y, x, y, width, height)
         cr.set_source_surface(self.kfsurface, 0, 0)
         cr.paint()
         return False
@@ -160,9 +154,6 @@ class View(Gtk.EventBox):
         return True
 
     def kf_configure_event(self, widget, event):
-        width = self.mfdraw.get_allocated_width()
-        height = self.mfdraw.get_allocated_height()
-        self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         self.drawkeyframe()
         return True
 
@@ -497,6 +488,9 @@ class View(Gtk.EventBox):
 
     def drawkeyframe(self):
         area = self.toplevel.get_window()
+        width = self.kfdraw.get_allocated_width()
+        height = self.kfdraw.get_allocated_height()
+        self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         drawgc = cairo.Context(self.kfsurface)
         drawgc.set_line_width(2)
         red = Gdk.Color.parse('red')[1]
@@ -508,15 +502,12 @@ class View(Gtk.EventBox):
         pink = Gdk.Color.parse(PINK)[1]
         bgcolor = Gdk.Color.parse(BACKGROUND)[1]
         darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
-        width = self.kfdraw.get_allocated_width()
-        height = self.kfdraw.get_allocated_height()
-        # self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         # clear area
-        drawgc.set_source_rgb(bgcolor.red, bgcolor.green, bgcolor.blue)
+        drawgc.set_source_rgb((1/65536.0)*bgcolor.red, (1/65536.0)*bgcolor.green, (1/65536.0)*bgcolor.blue)
         drawgc.rectangle(0, 0, width, height)
         drawgc.fill()
         # draw line in middle
-        drawgc.set_source_rgb(darkgreen.red, darkgreen.green, darkgreen.blue)
+        drawgc.set_source_rgb((1/65536.0)*darkgreen.red, (1/65536.0)*darkgreen.green, (1/65536.0)*darkgreen.blue)
         drawgc.rectangle(10, int(height / 2.0) - 5, width - 20, 10)
         drawgc.fill()
         x = 10
@@ -532,15 +523,17 @@ class View(Gtk.EventBox):
             # first the outer circle
             x = model.keys[i].x
             if i == self.kfselected:
-                drawgc.set_source_rgb(pink.red, pink.green, pink.blue)
+                drawgc.set_source_rgb((1/65536.0)*pink.red, (1/65536.0)*pink.green, (1/65536.0)*pink.blue)
 
             else:
-                drawgc.set_source_rgb(darkgreen.red, darkgreen.green, darkgreen.blue)
-            drawgc.arc(x, y, KEYFRAME_RADIUS, 0, 2*pi)
-            drawgc.fill()
+                drawgc.set_source_rgb((1/65536.0)*darkgreen.red, (1/65536.0)*darkgreen.green, (1/65536.0)*darkgreen.blue)
+            drawgc.set_line_width(5)
+            drawgc.arc(x, y, KEYFRAME_RADIUS-2, 0, 2*pi)
+            drawgc.stroke()
             # then the inner circle
             drawgc.set_source_rgb(white.red, white.green, white.blue)
-            drawgc.arc(x+5, y+5, (KEYFRAME_RADIUS - 5), 0, 2*pi)
+            drawgc.arc(x, y, (KEYFRAME_RADIUS - 5), 0, 2*pi)
+            drawgc.fill()
             if model.keys[i].scaled_sticks:
                 # draw a man in the circle
                 drawgc.set_source_rgb(black.red, black.green, black.blue)
@@ -553,7 +546,10 @@ class View(Gtk.EventBox):
 
     def drawfp(self):
         area = self.toplevel.get_window()
-        drawgc = cairo.Context(self.surface)
+        width = self.fpdraw.get_allocated_width()
+        height = self.fpdraw.get_allocated_height()
+        self.fpsurface = self.fpdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
+        drawgc = cairo.Context(self.fpsurface)
         drawgc.set_line_width(1)
         red = Gdk.Color.parse('red')[1]
         yellow = Gdk.Color.parse('yellow')[1]
@@ -565,9 +561,6 @@ class View(Gtk.EventBox):
         bgcolor = Gdk.Color.parse(BACKGROUND)[1]
         darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
 
-        width = self.fpdraw.get_allocated_width()
-        height = self.fpdraw.get_allocated_height()
-        self.fpsurface = self.fpdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
         drawgc.rectangle(0, 0, width, height)
