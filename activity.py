@@ -28,7 +28,7 @@ from sugar3.graphics.toolbarbox import ToolbarButton
 from sugar3.graphics import style
 
 from toolkit.activity import SharedActivity
-# from toolkit.temposlider import TempoSlider
+from toolkit.temposlider import TempoSlider
 
 import model
 import montage
@@ -165,16 +165,16 @@ class MontageToolbar(Gtk.Toolbar):
 
         # tempo button
 
-        # tempo = TempoSlider(0, 99)
-        # tempo.adjustment.connect("value-changed", self._tempo_cb)
-        # tempo.set_size_request(200, -1)
-        # tempo.set_value(50)
-        # tempo_item = Gtk.ToolItem()
-        # tempo_item.add(tempo)
-        # self.insert(tempo_item, -1)
+        tempo = TempoSlider(0, 99)
+        tempo.adjustment.connect("value-changed", self._tempo_cb)
+        tempo.set_size_request(200, -1)
+        tempo.set_value(50)
+        tempo_item = Gtk.ToolItem()
+        tempo_item.add(tempo)
+        self.insert(tempo_item, -1)
 
-        # separator = Gtk.SeparatorToolItem()
-        # self.insert(separator,-1)
+        separator = Gtk.SeparatorToolItem()
+        self.insert(separator,-1)
 
         # export buttons
 
@@ -198,7 +198,7 @@ class MontageToolbar(Gtk.Toolbar):
         self.montage.reset()
 
     def _tempo_cb(self, widget):
-        self.montage.setplayspeed(widget.value)
+        self.montage.setplayspeed(widget.get_value())
 
     def _play_cb(self, widget, buttons, images, play):
         if widget.get_active():
