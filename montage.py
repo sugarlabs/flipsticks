@@ -123,7 +123,8 @@ class View(Gtk.EventBox):
             return
         firstpixindex = self.frames.keys()[0]
 
-        x, y, width, height = self.mfdraw.get_allocation()
+        width = widget.get_allocated_width()
+        height = widget.get_allocated_height()
         surface = self.mfdraw.get_window().create_similar_surface(Gdk.Content.ColorAlpha, width, height)
         self._draw_frame(firstpixindex, surface)
         pixbuf = GdkPixbuf.Pixbuf(GdkPixbuf.Colorspace.RGB, False, 8, width, height)
@@ -799,11 +800,11 @@ class View(Gtk.EventBox):
         height = self.mfdraw.get_allocated_height()
         #pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
-        drawgc.set_source_rgb(white.red, white.green, white.blue)
+        drawgc.set_source_rgb(0, 0, 0)
         drawgc.rectangle(0, 0, width, height)
         drawgc.fill()
 
-        drawgc.set_source_rgb(black.red, black.green, black.blue)
+        drawgc.set_source_rgb(1, 1, 1)
         hsize = self.frames[index].hsize
         middle = self.frames[index].middle
         rhsize = parts['RIGHT HAND']
@@ -838,7 +839,6 @@ class View(Gtk.EventBox):
 
 
 def _inarea(widget, x, y):
-    # x_, y_, width, height = widget.get_allocation()
     width = widget.get_allocated_width()
     height = widget.get_allocated_height()
     if x < 0 or y < 0 or x >= width or y >= height:
