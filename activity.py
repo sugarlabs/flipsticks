@@ -80,12 +80,6 @@ class flipsticksActivity(SharedActivity):
         notebook_item.show()
         toolbar_box.toolbar.insert(notebook_item, -1)
 
-        separator = Gtk.SeparatorToolItem()
-        separator.props.draw = False
-        separator.set_expand(True)
-        toolbar_box.toolbar.insert(separator, -1)
-        separator.show()
-
         stop_button = StopButton(self)
         toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.show()
