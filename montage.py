@@ -486,6 +486,7 @@ class View(Gtk.EventBox):
         drawgc.fill()
         x, y = joints['lefthand']
         drawgc.arc(x, y, int(lhsize/2.0), 0, 2*pi)
+        drawgc.fill()
 
     def drawkeyframe(self):
         area = self.toplevel.get_window()

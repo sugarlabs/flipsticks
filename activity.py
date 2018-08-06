@@ -90,7 +90,7 @@ class flipsticksActivity(SharedActivity):
         toolbar_box.toolbar.insert(stop_button, -1)
         stop_button.show()
         self.set_toolbar_box(toolbar_box)
-        toolbar_box.show()
+        toolbar_box.show_all()
 
     def resume_instance(self, filepath):
         model.load(filepath)
