@@ -123,8 +123,8 @@ class View(Gtk.EventBox):
             return
         firstpixindex = self.frames.keys()[0]
 
-        width = widget.get_allocated_width()
-        height = widget.get_allocated_height()
+        width = self.window.get_width()
+        height = self.window.get_height()
         surface = self.mfdraw.get_window().create_similar_surface(Gdk.Content.ColorAlpha, width, height)
         self._draw_frame(firstpixindex, surface)
         pixbuf = GdkPixbuf.Pixbuf(GdkPixbuf.Colorspace.RGB, False, 8, width, height)
