@@ -103,7 +103,7 @@ class flipsticksActivity(SharedActivity):
 
 class MontageToolbar(Gtk.Toolbar):
     def __init__(self, montage):
-        GObject.GObject.__init__(self)
+        Gtk.Toolbar.__init__(self)
         self.montage = montage
 
         # edit buttons
@@ -207,7 +207,7 @@ class MontageToolbar(Gtk.Toolbar):
 
 class LessonsToolbar(Gtk.Toolbar):
     def __init__(self):
-        GObject.GObject.__init__(self)
+        Gtk.Toolbar.__init__(self)
         self._mask = False
 
         for lesson in lessons.THEMES:
