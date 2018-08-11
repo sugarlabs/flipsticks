@@ -123,8 +123,8 @@ class View(Gtk.EventBox):
             return
         firstpixindex = self.frames.keys()[0]
 
-        width = self.window.get_width()
-        height = self.window.get_height()
+        width = widget.get_allocated_width()
+        height = wdget.get_allocated_height()
         surface = self.mfdraw.get_window().create_similar_surface(Gdk.Content.ColorAlpha, width, height)
         self._draw_frame(firstpixindex, surface)
         pixbuf = GdkPixbuf.Pixbuf(GdkPixbuf.Colorspace.RGB, False, 8, width, height)
@@ -529,7 +529,7 @@ class View(Gtk.EventBox):
 
             else:
                 drawgc.set_source_rgb((1/65536.0)*darkgreen.red, (1/65536.0)*darkgreen.green, (1/65536.0)*darkgreen.blue)
-            drawgc.set_line_width(5)
+            drawgc.set_line_width(3)
             drawgc.arc(x, y, KEYFRAME_RADIUS-2, 0, 2*pi)
             drawgc.stroke()
             # then the inner circle
