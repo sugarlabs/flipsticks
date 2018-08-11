@@ -795,17 +795,17 @@ class View(Gtk.EventBox):
         area = self.toplevel.get_window()
         drawgc = cairo.Context(surface)
         drawgc.set_line_width(3)
-        white = Gdk.Color.parse('white')
-        black = Gdk.Color.parse('black')
+        white = Gdk.Color.parse('white')[1]
+        black = Gdk.Color.parse('black')[1]
         width = self.mfdraw.get_allocated_width()
         height = self.mfdraw.get_allocated_height()
         #pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
-        drawgc.set_source_rgb(0, 0, 0)
+        drawgc.set_source_rgb(white.red, white.green, white.blue)
         drawgc.rectangle(0, 0, width, height)
         drawgc.fill()
 
-        drawgc.set_source_rgb(1, 1, 1)
+        drawgc.set_source_rgb(black.red, black.green, black.blue)
         hsize = self.frames[index].hsize
         middle = self.frames[index].middle
         rhsize = parts['RIGHT HAND']
