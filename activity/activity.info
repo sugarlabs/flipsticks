@@ -15,7 +15,7 @@ version   = 13
 stability = stable
 
 icon      = activity-flipsticks
-exec      = sugar-activity activity.flipsticksActivity
+exec      = sugar-activity3 activity.flipsticksActivity
 requires  = sdk/sugar-toolkit
 
 # support original activity.info fields
