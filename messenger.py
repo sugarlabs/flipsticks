@@ -15,7 +15,7 @@
 import dbus
 import pickle
 import logging
-from dbus.gobject_service import ExportedGObject
+from dbus.gi_service import ExportedGObject
 from dbus.service import method, signal
 
 try:
