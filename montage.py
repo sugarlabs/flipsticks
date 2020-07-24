@@ -529,7 +529,7 @@ class View(Gtk.EventBox):
 
             else:
                 drawgc.set_source_rgb((1/65536.0)*darkgreen.red, (1/65536.0)*darkgreen.green, (1/65536.0)*darkgreen.blue)
-            drawgc.set_line_width(5)
+            drawgc.set_line_width(3)
             drawgc.arc(x, y, KEYFRAME_RADIUS-2, 0, 2*pi)
             drawgc.stroke()
             # then the inner circle
