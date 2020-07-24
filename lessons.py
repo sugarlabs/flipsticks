@@ -33,7 +33,7 @@ class Lesson:
         self.index = index
         self.name = os.path.splitext(os.path.basename(filename).lstrip(
                 '.-_1234567890').replace('_', ' '))[0]
-        self.text = file(filename, 'r').read()
+        self.text = open(filename, 'r').read()
 
     def change(self):
         View.notebook.set_current_page(self.index)
