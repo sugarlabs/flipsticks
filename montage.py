@@ -77,7 +77,7 @@ class View(Gtk.EventBox):
             GObject.source_remove(self.playing)
 
         self.frames = kinematic.makeframes()
-        fsecs = self.frames.keys()
+        fsecs = list(self.frames.keys())
         fsecs.sort()
         if fsecs:
             self.playframenum = fsecs[-1]
@@ -93,7 +93,7 @@ class View(Gtk.EventBox):
             GObject.source_remove(self.playing)
 
         self.frames = kinematic.makeframes()
-        fsecs = self.frames.keys()
+        fsecs = list(self.frames.keys())
         fsecs.sort()
         if fsecs:
             self.playframenum = fsecs[0]
@@ -121,7 +121,7 @@ class View(Gtk.EventBox):
         self.frames = kinematic.makeframes()
         if not self.frames:
             return
-        firstpixindex = self.frames.keys()[0]
+        firstpixindex = list(self.frames.keys())[0]
 
         width = widget.get_allocated_width()
         height = widget.get_allocated_height()
@@ -327,7 +327,7 @@ class View(Gtk.EventBox):
         #self.pixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         self.mfdraw.queue_draw()
 
-        fsecs = self.frames.keys()
+        fsecs = list(self.frames.keys())
         fsecs.sort()
         if self.playingbackwards:
             # decrement playframenum

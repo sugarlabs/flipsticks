@@ -41,7 +41,7 @@ def makeframes():
     if not frames:
         return {}
 
-    fsecs = frames.keys()
+    fsecs = list(frames.keys())
     fsecs.sort()
 
     # set border frames
@@ -49,7 +49,7 @@ def makeframes():
     frames[theme.KEYFRAMEWIDTH] = frames[fsecs[-1]]
 
     # now fill in frames between
-    fsecs = frames.keys()
+    fsecs = list(frames.keys())
     fsecs.sort()
 
     # frame interval

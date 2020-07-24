@@ -71,7 +71,7 @@ class StoredFrame(KeyFrame):
                 if not h:
                     return None
                 out = {}
-                for i, j in h.items():
+                for i, j in list(h.items()):
                     out[i] = array2tuple(j)
                 return out
 
