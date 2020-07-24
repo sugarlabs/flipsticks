@@ -120,7 +120,7 @@ class Activity(activity.Activity):
         if hasattr(activity.Activity, 'get_shared_activity'):
             return activity.Activity.get_shared_activity(self)
         else:
-            return self._shared_activity
+            return self.shared_activity
 
     def notify_alert(self, title, msg):
         """Raise standard notify alert"""
@@ -303,7 +303,7 @@ class SharedActivity(Activity):
         if self.shared_activity is None:
             logging.error('Failed to share or join activity')
             return
-        self._conn = self._shared_activity.telepathy_conn
+        self._conn = self.shared_activity.telepathy_conn
         self._tubes_chan = self.shared_activity.telepathy_tubes_chan
         self._text_chan = self.shared_activity.telepathy_text_chan
 
