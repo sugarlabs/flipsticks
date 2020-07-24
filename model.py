@@ -139,10 +139,10 @@ def save(filename):
     for i in keys:
         out.append(i.collect())
 
-    file(filename, 'w').write(json.dumps(out))
+    open(filename, 'w').write(json.dumps(out))
 
 def load(filename):
-    inc = json.loads(file(filename, 'r').read())
+    inc = json.loads(open(filename, 'r').read())
 
     for i, data in enumerate(inc):
         keys[i] = StoredFrame(data)
