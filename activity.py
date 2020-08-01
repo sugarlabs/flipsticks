@@ -56,7 +56,6 @@ class flipsticksActivity(SharedActivity):
         activity_button = ActivityToolbarButton(self)
         toolbar_box.toolbar.insert(activity_button, 0)
         activity_button.show()
-        self.toolbar_box = toolbar_box
 
         lessons_button = ToggleToolButton('mamamedia')
         lessons_button.connect('toggled', self.__toggled_lessons_button_cb)
