@@ -156,6 +156,8 @@ class Activity(activity.Activity):
         if self._cursor != cursor:
             self._cursor = cursor
             self.get_window().set_cursor(self._cursor)
+            Gdk.flush()
+
 
     def __init__(self, canvas, handle):
         """
