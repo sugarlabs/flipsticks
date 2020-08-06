@@ -203,7 +203,7 @@ def screen_shot(pixbuf):
 
     filename = 'fp%03d.png' % i
     filepath = os.path.join(tmpdir,filename)
-    pixbuf.save(filepath,'png')
+    pixbuf.savev(filepath, 'png', (), ())
 
     mediaObject = datastore.create()
     mediaObject.metadata['title'] = 'FlipSticks PNG'
@@ -214,15 +214,14 @@ def screen_shot(pixbuf):
     mediaObject.file_path = filepath
     datastore.write(mediaObject)
 
-def _save_data_to_buffer_cb(buf, data):
-    data[0] += buf
-    return True
 
 def _get_base64_pixbuf_data(pixbuf):
-    data = [""]
-    pixbuf.save_to_callback(_save_data_to_buffer_cb, "png", {}, data)
+    """Converts a pixbuf in a string."""
+
+    # Save_to_bufferv return: (bool, string)
+    data = pixbuf.save_to_bufferv("png", [], [])
     import base64
-    return base64.b64encode(str(data[0]))
+    return base64.b64encode(data[1])
 
 for i in range(5):
     key = StoredFrame()
