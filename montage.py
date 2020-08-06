@@ -123,12 +123,11 @@ class View(Gtk.EventBox):
             return
         firstpixindex = list(self.frames.keys())[0]
 
-        width = widget.get_allocated_width()
-        height = widget.get_allocated_height()
-        surface = self.mfdraw.get_window().create_similar_surface(Gdk.Content.ColorAlpha, width, height)
+        window = self.mfdraw.get_window()
+        x, y, width, height = window.get_geometry()
+        surface = self.mfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
         self._draw_frame(firstpixindex, surface)
-        pixbuf = GdkPixbuf.Pixbuf(GdkPixbuf.Colorspace.RGB, False, 8, width, height)
-        GdkPixbuf.Pixbuf.get_from_drawable(pixbuf, surface, surface.get_colormap(), 0, 0, 0, 0, width, height)
+        pixbuf = Gdk.pixbuf_get_from_window(window, x, y, width, height)
 
         model.screen_shot(pixbuf)
 
