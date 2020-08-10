@@ -12,8 +12,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import dbus
-import pickle
 import logging
 from dbus.gi_service import ExportedGObject
 from dbus.service import method, signal
@@ -23,8 +21,6 @@ try:
     json.dumps
 except (ImportError, AttributeError):
     import simplejson as json
-
-from sugar3.presence import presenceservice
 
 import model
 
