@@ -14,18 +14,13 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from gi.repository import Gdk
-from gi.repository import GObject
 from gettext import gettext as _
 
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.toolbutton import ToolButton
-from sugar3.activity import activity
 from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.activity.widgets import StopButton
-from sugar3.graphics.toolbarbox import ToolbarButton
-from sugar3.graphics import style
 
 from toolkit.activity import SharedActivity
 from toolkit.temposlider import TempoSlider
