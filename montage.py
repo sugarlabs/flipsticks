@@ -21,6 +21,7 @@ import os
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GObject
+from gi.repository import GLib
 import cairo
 import math
 import logging
@@ -70,12 +71,12 @@ class View(Gtk.EventBox):
     def setplayspeed(self, value):
         self.waittime = int((100 - value) * 5)
         if self.playing:
-            GObject.source_remove(self.playing)
-            self.playing = GObject.timeout_add(self.waittime, self.playframe)
+            GLib.source_remove(self.playing)
+            self.playing = GLib.timeout_add(self.waittime, self.playframe)
 
     def playbackwards(self):
         if self.playing:
-            GObject.source_remove(self.playing)
+            GLib.source_remove(self.playing)
 
         self.frames = kinematic.makeframes()
         fsecs = list(self.frames.keys())
@@ -87,11 +88,11 @@ class View(Gtk.EventBox):
         self.playingbackwards = True
 
         logger.debug('playbackwards speed=%s' % self.waittime)
-        self.playing = GObject.timeout_add(self.waittime, self.playframe)
+        self.playing = GLib.timeout_add(self.waittime, self.playframe)
 
     def playforwards(self):
         if self.playing:
-            GObject.source_remove(self.playing)
+            GLib.source_remove(self.playing)
 
         self.frames = kinematic.makeframes()
         fsecs = list(self.frames.keys())
@@ -103,13 +104,13 @@ class View(Gtk.EventBox):
 
         logger.debug('playforwards speed=%s' % self.waittime)
         self.playingbackwards = False
-        self.playing = GObject.timeout_add(self.waittime, self.playframe)
+        self.playing = GLib.timeout_add(self.waittime, self.playframe)
 
     def stop(self):
         if not self.playing:
             return
 
-        GObject.source_remove(self.playing)
+        GLib.source_remove(self.playing)
         self.playing = None
 
         # set the main window to the keyframe
@@ -255,12 +256,12 @@ class View(Gtk.EventBox):
                         frame.move(xdiff)
 
                         if self._emit_move_handle:
-                            GObject.source_remove(self._emit_move_handle)
+                            GLib.source_remove(self._emit_move_handle)
                             if self._emit_move_key != self.kfpressed:
                                 self._emit_move(self._emit_move_key)
 
                         self._emit_move_key = self.kfpressed
-                        self._emit_move_handle = GObject.timeout_add(
+                        self._emit_move_handle = GLib.timeout_add(
                                 MOVEMIT_TIMEOUT, self._emit_move,
                                 self.kfpressed)
 
