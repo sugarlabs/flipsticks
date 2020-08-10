@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2016-12-21 21:18+0000\n"
-"Last-Translator: unkuiri <unkuiri@gmail.com>\n"
+"PO-Revision-Date: 2017-11-29 11:38+0000\n"
+"Last-Translator: valente <valente.luis@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1482355122.000000\n"
+"X-POOTLE-MTIME: 1511955532.000000\n"
 
 #. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
@@ -36,6 +36,12 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Flipsticks é uma atividade de animação com quadros-chave que permite "
+"utilizar e programar uma figura stick (giz) para andar, correr, girar, "
+"torcer, cair e dançar. Pode guardar as animações que criar no diário e "
+"depois poderá partilhá-las na rede. Os flipsticks podem ser usados para "
+"explorar conceitos em geometria, programação de computadores e animação, "
+"ajudando a desenvolver competências de pensamento espacial e analítico."
 
 #: activity.py:54
 msgid "Lessons"
@@ -87,7 +93,7 @@ msgstr "Planos de Lição"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr ""
+msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
@@ -199,7 +205,7 @@ msgstr "A Minha Vizinhança"
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"

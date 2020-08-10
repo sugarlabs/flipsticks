@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2016-11-28 12:35+0000\n"
+"PO-Revision-Date: 2018-02-10 16:40+0000\n"
 "Last-Translator: Besnik_b <besnik@programeshqip.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: sq\n"
@@ -16,17 +16,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1480336508.000000\n"
+"X-POOTLE-MTIME: 1518280810.000000\n"
 
 #. TRANS: "name" option from activity.info file
-#, fuzzy
 msgid "Flip Sticks"
-msgstr "FlipSticks"
+msgstr ""
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
 msgstr ""
-"Programoni, përmes kornizash, një figurë të përdridhet dhe të hedhë valle"
+"Duke përdorur kuadro, programoni një figurë të përdridhet dhe të hedhë valle"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -38,12 +37,12 @@ msgid ""
 "skills."
 msgstr ""
 "Flipsticks është një veprimtari animacioni kuadrosh që ju lejon të pozoni "
-"dhe programoni një figurë të bërë me thupra që të ecë, vrapojë, rrotullohet, "
-"përdridhet, rrëzohet dhe hedhë valle. Animacionet tuaja mund t’i ruani në "
-"ditar dhe së shpejti do të jeni në gjendje t’i ndani ato përmes rrjetës. "
-"Flipsticks mund të përdoret për të eksploruar koncepte nga gjeometria, "
-"programimi në kompjuter dhe animacioni; ndihmon në zhvillimin e të menduarit "
-"hapësinor dhe analitik."
+"dhe programoni një figurë të bërë me thupra, që të ecë, vrapojë, "
+"rrotullohet, përdridhet, rrëzohet dhe hedhë valle. Animacionet tuaja mund t’"
+"i ruani në ditar dhe së shpejti do të jeni në gjendje t’i ndani ato me të "
+"tjerët përmes rrjetës. Flipsticks mund të përdoret për të eksploruar "
+"koncepte nga gjeometria, programimi në kompjuter dhe animacioni; ndihmon në "
+"zhvillimin e të menduarit hapësinor dhe analitik."
 
 #: activity.py:54
 msgid "Lessons"
@@ -51,11 +50,11 @@ msgstr "Mësime"
 
 #: activity.py:103
 msgid "Set frame"
-msgstr "Vendos kornizën"
+msgstr "Caktoni kuadër"
 
 #: activity.py:108
 msgid "Clear frame"
-msgstr "Pastroje kornizën"
+msgstr "Pastroje kuadrin"
 
 #: activity.py:113
 msgid "Reset"
@@ -99,47 +98,47 @@ msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr "Eksporto Kornizën Një"
+msgstr "Eksporto Kuadrin Një"
 
 #: theme.py:55
 msgid "Head"
-msgstr "Kryet"
+msgstr "Krye"
 
 #: theme.py:56
 msgid "Neck"
-msgstr "Zverku"
+msgstr "Zverk"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr "Supi i Djathtë"
+msgstr "Sup i Djathtë"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr "Krahun i Sipërme i Djathtë"
+msgstr "Krah i Sipërm i Djathtë"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr "Parakrahu i Djathtë"
+msgstr "Parakrah i Djathtë"
 
 #: theme.py:60
 msgid "Right Hand"
-msgstr "Dora e Djathtë"
+msgstr "Dorë e Djathtë"
 
 #: theme.py:61
 msgid "Left Shoulder"
-msgstr "Supi i Majtë"
+msgstr "Sup i Majtë"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr "Krahun i Sipërme i Majtë"
+msgstr "Krah i Sipërm i Majtë"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr "Parakrahu i Majtë"
+msgstr "Parakrah i Majtë"
 
 #: theme.py:64
 msgid "Left Hand"
-msgstr "Dora e Majtë"
+msgstr "Dorë e Majtë"
 
 #: theme.py:65
 msgid "Torso"
@@ -147,35 +146,35 @@ msgstr "Trung"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr "Këllku i Djathtë"
+msgstr "Këllk i Djathtë"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr "Kofsha e Djathtë"
+msgstr "Kofshë e Djathtë"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr "Kërciri i Djathtë"
+msgstr "Kërcir i Djathtë"
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr "Këmba e Djathtë"
+msgstr "Këmbë e Djathtë"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr "Këllku i Majtë"
+msgstr "Këllk i Majtë"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr "Kofsha e Majtë"
+msgstr "Kofshë e Majtë"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr "Kërciri i Majtë"
+msgstr "Kërcir i Majtë"
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr "Këmba e Majtë"
+msgstr "Këmbë e Majtë"
 
 #: toolkit/activity_widgets.py:84
 msgid "Stop"
