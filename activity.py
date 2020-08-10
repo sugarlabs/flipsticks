@@ -160,7 +160,7 @@ class MontageToolbar(Gtk.Toolbar):
 
         tempo = TempoSlider(0, 99)
         tempo.adjustment.connect("value-changed", self._tempo_cb)
-        tempo.set_size_request(200, -1)
+        tempo.set_size_request(100, -1)
         tempo.set_value(50)
         tempo_item = Gtk.ToolItem()
         tempo_item.add(tempo)
