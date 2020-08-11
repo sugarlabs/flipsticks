@@ -677,7 +677,7 @@ class View(Gtk.EventBox):
 
         # control box
 
-        angle_box = Gtk.HBox()
+        angle_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         anglelabel = Gtk.Label(label=_('Angle:'))
         anglelabel.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
         anglelabel.set_size_request(60, -1)
@@ -697,7 +697,7 @@ class View(Gtk.EventBox):
             self.anglel_slider.modify_bg(state, Gdk.color_parse(color))
         angle_box.pack_start(self.anglel_slider, True, True, 0)
 
-        size_box = Gtk.HBox()
+        size_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         sizelabel = Gtk.Label(label=_('Size:'))
         sizelabel.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
         sizelabel.set_size_request(60, -1)
@@ -717,7 +717,7 @@ class View(Gtk.EventBox):
             size_slider.modify_bg(state, Gdk.color_parse(color))
         size_box.pack_start(size_slider, True, True, 0)
 
-        control_head_box = Gtk.VBox()
+        control_head_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         control_head_box.pack_start(angle_box, True, True, 0)
         control_head_box.pack_start(size_box, True, True, 0)
 
@@ -725,7 +725,7 @@ class View(Gtk.EventBox):
         control_head.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
         control_head.add(control_head_box)
 
-        control_options = Gtk.VBox()
+        control_options = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.stickbuttons = {}
         self.sticklabels = {}
         for stickpartname in LABELLIST:
@@ -747,7 +747,7 @@ class View(Gtk.EventBox):
         control_options.get_parent().modify_bg(Gtk.StateType.NORMAL,
                 Gdk.color_parse(BUTTON_BACKGROUND))
 
-        control_box = Gtk.VBox()
+        control_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         control_box.pack_start(control_head, False, False, 0)
         control_box.pack_start(control_scroll, True, True, 0)
 
@@ -766,17 +766,17 @@ class View(Gtk.EventBox):
         logo = Gtk.Image()
         logo.set_from_file(os.path.join(self.iconsdir, 'logo.png'))
 
-        leftbox = Gtk.VBox()
+        leftbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         leftbox.pack_start(logo, False, False, 0)
         leftbox.pack_start(control_pink, True, True, 0)
 
         # desktop
 
-        hdesktop = Gtk.HBox()
+        hdesktop = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         hdesktop.pack_start(leftbox, False, False, 0)
         hdesktop.pack_start(screen_pink, False, False, 0)
 
-        desktop = Gtk.VBox()
+        desktop = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         desktop.pack_start(hdesktop, True, True, 0)
         desktop.pack_start(kfdraw_box, False, False, 0)
 
