@@ -205,6 +205,3 @@ msgstr "T'ojláb"
 
 #~ msgid "Keep"
 #~ msgstr "Dhaya'"
-
-#~ msgid "Keep"
-#~ msgstr "Dhaya'"
