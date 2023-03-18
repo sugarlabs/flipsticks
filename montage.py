@@ -12,10 +12,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-### flipsticks
-###
-### author: Ed Stoner (ed@whsd.net)
-### (c) 2007 World Wide Workshop Foundation
+# flipsticks
+#
+# author: Ed Stoner (ed@whsd.net)
+# (c) 2007 World Wide Workshop Foundation
 
 import os
 from gi.repository import Gtk
@@ -32,15 +32,16 @@ from math import pi
 import model
 import screenflip
 import kinematic
-import theme
-from theme import *
+import theme as theme
 
 logger = logging.getLogger('flipsticks')
 
 
 class View(Gtk.EventBox):
     __gsignals__ = {
-        'frame-changed': (GObject.SIGNAL_RUN_FIRST, None, [GObject.TYPE_PYOBJECT])}
+        'frame-changed': (GObject.SIGNAL_RUN_FIRST,
+                          None, [GObject.TYPE_PYOBJECT])
+    }
 
     def set_keyframe(self, value):
         i, key = value
@@ -127,7 +128,9 @@ class View(Gtk.EventBox):
 
         window = self.mfdraw.get_window()
         x, y, width, height = window.get_geometry()
-        surface = self.mfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
+        surface = self.mfdraw.get_window().create_similar_surface(
+            cairo.CONTENT_COLOR, width, height
+        )
         self._draw_frame(firstpixindex, surface)
         pixbuf = Gdk.pixbuf_get_from_window(window, x, y, width, height)
 
@@ -151,7 +154,9 @@ class View(Gtk.EventBox):
     def configure_event(self, widget, event):
         width = self.mfdraw.get_allocated_width()
         height = self.mfdraw.get_allocated_height()
-        self.surface = self.mfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
+        self.surface = self.mfdraw.get_window().create_similar_surface(
+            cairo.CONTENT_COLOR, width, height
+        )
         self.drawmainframe()
         return True
 
@@ -166,21 +171,23 @@ class View(Gtk.EventBox):
             x = event.x
             y = event.y
             state = event.get_state()
-        if state & Gdk.ModifierType.BUTTON1_MASK and self.surface != None:
+        if state & Gdk.ModifierType.BUTTON1_MASK and self.surface is not None:
             if self.jointpressed:
                 if _inarea(widget, x, y):
-                    #self.key.joints[self.jointpressed] = (x,y) # old hack way
+                    # self.key.joints[self.jointpressed] = (x,y)
+                    # old hack way
                     # first find the parents x,y
-                    (px, py) = model.getparentjoint(self.jointpressed, self.key.joints,
-                                                  self.key.middle)
+                    (px, py) = model.getparentjoint(self.jointpressed,
+                                                    self.key.joints,
+                                                    self.key.middle)
                     if x - px == 0:
-                        #computeangle = 0
+                        # computeangle = 0
                         b = 1
                     else:
                         b = float(px - x)
                     a = float(y - py)
                     computeangle = int(math.degrees(math.atan(a / b)))
-                    stickname = JOINTTOSTICK[self.jointpressed]
+                    stickname = theme.JOINTTOSTICK[self.jointpressed]
                     # add sum of parent angles to new angle
                     parents = model.getparentsticks(stickname)
                     panglesum = 0
@@ -188,7 +195,8 @@ class View(Gtk.EventBox):
                         (pangle, plen) = self.key.sticks[parentname]
                         panglesum += pangle
                     (angle, len) = self.key.sticks[stickname]
-                    #print 'X:%s,Y:%s,PX:%s,PY:%s,ANGLE:%s,NEWANGLE:%s' % (x,y,px,py,angle,newangle)
+                    # print 'X:%s,Y:%s,PX:%s,PY:%s,ANGLE:%s,NEWANGLE:%s' %
+                    #       (x,y,px,py,angle,newangle)
                     newangle = computeangle - panglesum
                     if (x < px) or (b == 1):
                         newangle = newangle + 180
@@ -209,7 +217,7 @@ class View(Gtk.EventBox):
                 if _inarea(widget, x, y):
                     (px, py) = self.key.middle
                     if x - px == 0:
-                        #computeangle = 0
+                        # computeangle = 0
                         b = 1
                     else:
                         b = float(px - x)
@@ -225,7 +233,9 @@ class View(Gtk.EventBox):
                     anglediff = newangle - angle
                     self.key.sticks[stickname] = (newangle, len)
                     # now rotate the other sticks off of the middle
-                    for stickname in ['NECK', 'RIGHT SHOULDER', 'LEFT SHOULDER']:
+                    for stickname in ['NECK',
+                                      'RIGHT SHOULDER',
+                                      'LEFT SHOULDER']:
                         (sangle, slen) = self.key.sticks[stickname]
                         newsangle = sangle + anglediff
                         if newsangle < 0:
@@ -236,7 +246,6 @@ class View(Gtk.EventBox):
                     self.key.setjoints()
                     self.drawmainframe()
                     self.updateentrybox()
-                    
         return True
 
     def kf_motion_notify_event(self, widget, event):
@@ -246,13 +255,15 @@ class View(Gtk.EventBox):
             x = event.x
             y = event.y
             state = event.get_state()
-        if state & Gdk.ModifierType.BUTTON1_MASK and self.surface != None:
+        if state & Gdk.ModifierType.BUTTON1_MASK and self.surface is not None:
             if self.kfpressed >= 0:
                 if _inarea(widget, x, y):
                     xdiff = int(x - self.kf_mouse_pos)
                     frame = model.keys[self.kfpressed]
-                    if frame.x + xdiff > KEYFRAME_RADIUS \
-                            and frame.x + xdiff < KEYFRAMEWIDTH - KEYFRAME_RADIUS:
+                    if ((frame.x + xdiff > theme.KEYFRAME_RADIUS)
+                        and (frame.x + xdiff < (theme.KEYFRAMEWIDTH
+                                                - theme.KEYFRAME_RADIUS))):
+
                         frame.move(xdiff)
 
                         if self._emit_move_handle:
@@ -262,15 +273,16 @@ class View(Gtk.EventBox):
 
                         self._emit_move_key = self.kfpressed
                         self._emit_move_handle = GLib.timeout_add(
-                                MOVEMIT_TIMEOUT, self._emit_move,
-                                self.kfpressed)
+                            theme.MOVEMIT_TIMEOUT,
+                            self._emit_move,
+                            self.kfpressed)
 
                         self.drawkeyframe()
                     self.kf_mouse_pos = x
         return True
 
     def button_press_event(self, widget, event):
-        if event.button == 1 and self.surface != None:
+        if event.button == 1 and self.surface is not None:
             joint = self.key.injoint(event.x, event.y)
             if joint:
                 self.jointpressed = joint
@@ -290,7 +302,7 @@ class View(Gtk.EventBox):
             self.drawmainframe()
 
     def kf_button_press_event(self, widget, event):
-        if event.button == 1 and self.surface != None:
+        if event.button == 1 and self.surface is not None:
             kfnum = self._inkeyframe(event.x, event.y)
             if kfnum >= 0:
                 self.kf_mouse_pos = event.x
@@ -322,10 +334,10 @@ class View(Gtk.EventBox):
 
         self._draw_frame(self.playframenum, self.surface)
         # draw circle for middle
-        #green = cm.alloc_color('green')
-        #drawgc.set_foreground(green)
-        #x,y = middle
-        #self.pixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
+        # green = cm.alloc_color('green')
+        # drawgc.set_foreground(green)
+        # x,y = middle
+        # self.pixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         self.mfdraw.queue_draw()
 
         fsecs = list(self.frames.keys())
@@ -394,7 +406,7 @@ class View(Gtk.EventBox):
         if not self.surface:
             return
 
-        area = self.toplevel.get_window()
+        # area = self.toplevel.get_window()
         drawgc = cairo.Context(self.surface)
         drawgc.set_line_width(3)
         red = Gdk.Color.parse('red')[1]
@@ -405,7 +417,7 @@ class View(Gtk.EventBox):
         green = Gdk.Color.parse('green')[1]
         width = self.mfdraw.get_allocated_width()
         height = self.mfdraw.get_allocated_height()
-        #self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
+        # self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
         drawgc.rectangle(0, 0, width, height)
@@ -415,110 +427,121 @@ class View(Gtk.EventBox):
         hsize = self.key.sticks['HEAD'][1]  # really half of head size
         rhsize = self.key.parts['RIGHT HAND']
         lhsize = self.key.parts['LEFT HAND']
-        self.drawstickman(drawgc, self.surface, self.key.middle, self.key.joints, hsize, rhsize, lhsize)
+        self.drawstickman(drawgc, self.surface, self.key.middle,
+                          self.key.joints, hsize, rhsize, lhsize)
         # draw circle for middle
         drawgc.set_source_rgb(green.red, green.green, green.blue)
         if self.middlepressed:
             drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
         x, y = self.key.middle
-        drawgc.arc(x, y, 5, 0, 2*pi)
+        drawgc.arc(x, y, 5, 0, 2 * pi)
         drawgc.fill()
         # draw circle for rotate (should be halfway between middle and groin
         (rx, ry) = self.key.getrotatepoint()
         drawgc.set_source_rgb(yellow.red, yellow.green, yellow.blue)
         if self.rotatepressed:
             drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
-        drawgc.arc(rx, ry, 5, 0, 2*pi)
+        drawgc.arc(rx, ry, 5, 0, 2 * pi)
         drawgc.fill()
         # draw circles for joints
         drawgc.set_source_rgb(black.red, black.green, black.blue)
         for jname in self.key.joints:
             if jname == 'head':
-                    continue
+                continue
             x, y = self.key.joints[jname]
             if self.jointpressed == jname:
                 drawgc.set_source_rgb(blue.red, blue.green, blue.blue)
-                drawgc.arc(x, y, 5, 0, 2*pi)
+                drawgc.arc(x, y, 5, 0, 2 * pi)
                 drawgc.fill()
                 drawgc.set_source_rgb(black.red, black.green, black.blue)
             else:
                 drawgc.set_source_rgb(red.red, red.green, red.blue)
-                drawgc.arc(x, y, 5, 0, 2*pi)
+                drawgc.arc(x, y, 5, 0, 2 * pi)
                 drawgc.fill()
                 drawgc.set_source_rgb(black.red, black.green, black.blue)
         self.mfdraw.queue_draw()
 
-    def drawstickman(self, drawgc, pixmap, middle, joints, hsize, rhsize, lhsize):
-        leftarm = [middle, joints['leftshoulder'], joints['leftelbow'], joints['lefthand']]
-        rightarm = [middle, joints['rightshoulder'], joints['rightelbow'], joints['righthand']]
+    def drawstickman(self, drawgc, pixmap, middle,
+                     joints, hsize, rhsize, lhsize):
+        leftarm = [middle, joints['leftshoulder'],
+                   joints['leftelbow'], joints['lefthand']]
+        rightarm = [middle, joints['rightshoulder'],
+                    joints['rightelbow'], joints['righthand']]
         torso = [joints['neck'], middle, joints['groin']]
-        leftleg = [joints['groin'], joints['lefthip'], joints['leftknee'],
-                   joints['leftheel'], joints['lefttoe']]
-        rightleg = [joints['groin'], joints['righthip'], joints['rightknee'],
-                    joints['rightheel'], joints['righttoe']]
+        leftleg = [joints['groin'], joints['lefthip'],
+                   joints['leftknee'], joints['leftheel'],
+                   joints['lefttoe']]
+        rightleg = [joints['groin'], joints['righthip'],
+                    joints['rightknee'], joints['rightheel'],
+                    joints['righttoe']]
         # draw lines
-        for i in range(len(leftarm)-1):
+        for i in range(len(leftarm) - 1):
             drawgc.move_to(leftarm[i][0], leftarm[i][1])
-            drawgc.line_to(leftarm[i+1][0], leftarm[i+1][1])
+            drawgc.line_to(leftarm[i + 1][0], leftarm[i + 1][1])
             drawgc.stroke()
-        for i in range(len(rightarm)-1):
+        for i in range(len(rightarm) - 1):
             drawgc.move_to(rightarm[i][0], rightarm[i][1])
-            drawgc.line_to(rightarm[i+1][0], rightarm[i+1][1])
+            drawgc.line_to(rightarm[i + 1][0], rightarm[i + 1][1])
             drawgc.stroke()
-        for i in range(len(torso)-1):
+        for i in range(len(torso) - 1):
             drawgc.move_to(torso[i][0], torso[i][1])
-            drawgc.line_to(torso[i+1][0], torso[i+1][1])
+            drawgc.line_to(torso[i + 1][0], torso[i + 1][1])
             drawgc.stroke()
-        for i in range(len(leftleg)-1):
+        for i in range(len(leftleg) - 1):
             drawgc.move_to(leftleg[i][0], leftleg[i][1])
-            drawgc.line_to(leftleg[i+1][0], leftleg[i+1][1])
+            drawgc.line_to(leftleg[i + 1][0], leftleg[i + 1][1])
             drawgc.stroke()
-        for i in range(len(rightleg)-1):
+        for i in range(len(rightleg) - 1):
             drawgc.move_to(rightleg[i][0], rightleg[i][1])
-            drawgc.line_to(rightleg[i+1][0], rightleg[i+1][1])
+            drawgc.line_to(rightleg[i + 1][0], rightleg[i + 1][1])
             drawgc.stroke()
         # draw head
         x, y = joints['head']
-        drawgc.arc(x, y, hsize, 0, 2*pi)
+        drawgc.arc(x, y, hsize, 0, 2 * pi)
         drawgc.fill()
         # draw circles for hands
         x, y = joints['righthand']
-        drawgc.arc(x, y, int(rhsize/2.0), 0, 2*pi)
+        drawgc.arc(x, y, int(rhsize / 2.0), 0, 2 * pi)
         drawgc.fill()
         x, y = joints['lefthand']
-        drawgc.arc(x, y, int(lhsize/2.0), 0, 2*pi)
+        drawgc.arc(x, y, int(lhsize / 2.0), 0, 2 * pi)
         drawgc.fill()
 
     def drawkeyframe(self):
-        area = self.toplevel.get_window()
+        # area = self.toplevel.get_window()
         width = self.kfdraw.get_allocated_width()
         height = self.kfdraw.get_allocated_height()
-        self.kfsurface = self.kfdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
+        self.kfsurface = self.kfdraw.get_window().create_similar_surface(
+            cairo.CONTENT_COLOR, width, height)
         drawgc = cairo.Context(self.kfsurface)
         drawgc.set_line_width(2)
-        red = Gdk.Color.parse('red')[1]
-        yellow = Gdk.Color.parse('yellow')[1]
+        # red = Gdk.Color.parse('red')[1]
+        # yellow = Gdk.Color.parse('yellow')[1]
         white = Gdk.Color.parse('white')[1]
         black = Gdk.Color.parse('black')[1]
-        blue = Gdk.Color.parse('blue')[1]
-        green = Gdk.Color.parse('green')[1]
-        pink = Gdk.Color.parse(PINK)[1]
-        bgcolor = Gdk.Color.parse(BACKGROUND)[1]
-        darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
+        # blue = Gdk.Color.parse('blue')[1]
+        # green = Gdk.Color.parse('green')[1]
+        pink = Gdk.Color.parse(theme.PINK)[1]
+        bgcolor = Gdk.Color.parse(theme.BACKGROUND)[1]
+        darkgreen = Gdk.Color.parse(theme.BUTTON_BACKGROUND)[1]
         # clear area
-        drawgc.set_source_rgb((1/65536.0)*bgcolor.red, (1/65536.0)*bgcolor.green, (1/65536.0)*bgcolor.blue)
+        drawgc.set_source_rgb((1 / 65536.0) * bgcolor.red,
+                              (1 / 65536.0) * bgcolor.green,
+                              (1 / 65536.0) * bgcolor.blue)
         drawgc.rectangle(0, 0, width, height)
         drawgc.fill()
         # draw line in middle
-        drawgc.set_source_rgb((1/65536.0)*darkgreen.red, (1/65536.0)*darkgreen.green, (1/65536.0)*darkgreen.blue)
+        drawgc.set_source_rgb((1 / 65536.0) * darkgreen.red,
+                              (1 / 65536.0) * darkgreen.green,
+                              (1 / 65536.0) * darkgreen.blue)
         drawgc.rectangle(10, int(height / 2.0) - 5, width - 20, 10)
         drawgc.fill()
         x = 10
         y = int(height / 2.0)
-        drawgc.arc(x, y, 5, 0, 2*pi)
+        drawgc.arc(x, y, 5, 0, 2 * pi)
         drawgc.fill()
         x = width - 10
-        drawgc.arc(x, y, 5, 0, 2*pi)
+        drawgc.arc(x, y, 5, 0, 2 * pi)
         drawgc.fill()
 
         # draw the keyframe circles
@@ -526,16 +549,20 @@ class View(Gtk.EventBox):
             # first the outer circle
             x = model.keys[i].x
             if i == self.kfselected:
-                drawgc.set_source_rgb((1/65536.0)*pink.red, (1/65536.0)*pink.green, (1/65536.0)*pink.blue)
+                drawgc.set_source_rgb((1 / 65536.0) * pink.red,
+                                      (1 / 65536.0) * pink.green,
+                                      (1 / 65536.0) * pink.blue)
 
             else:
-                drawgc.set_source_rgb((1/65536.0)*darkgreen.red, (1/65536.0)*darkgreen.green, (1/65536.0)*darkgreen.blue)
+                drawgc.set_source_rgb((1 / 65536.0) * darkgreen.red,
+                                      (1 / 65536.0) * darkgreen.green,
+                                      (1 / 65536.0) * darkgreen.blue)
             drawgc.set_line_width(3)
-            drawgc.arc(x, y, KEYFRAME_RADIUS-2, 0, 2*pi)
+            drawgc.arc(x, y, theme.KEYFRAME_RADIUS - 2, 0, 2 * pi)
             drawgc.stroke()
             # then the inner circle
             drawgc.set_source_rgb(white.red, white.green, white.blue)
-            drawgc.arc(x, y, (KEYFRAME_RADIUS - 5), 0, 2*pi)
+            drawgc.arc(x, y, (theme.KEYFRAME_RADIUS - 5), 0, 2 * pi)
             drawgc.fill()
             if model.keys[i].scaled_sticks:
                 # draw a man in the circle
@@ -543,26 +570,29 @@ class View(Gtk.EventBox):
                 hsize = model.keys[i].scaled_sticks['HEAD'][1]
                 rhsize = int(model.keys[i].parts['RIGHT HAND'] * 0.2)
                 lhsize = int(model.keys[i].parts['LEFT HAND'] * 0.2)
-                self.drawstickman(drawgc, self.kfsurface, (x, y), model.keys[i].scaled_joints, hsize, rhsize, lhsize)
-                #self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
+                self.drawstickman(drawgc, self.kfsurface, (x, y),
+                                  model.keys[i].scaled_joints, hsize,
+                                  rhsize, lhsize)
+                # self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         self.kfdraw.queue_draw()
 
     def drawfp(self):
-        area = self.toplevel.get_window()
+        # area = self.toplevel.get_window()
         width = self.fpdraw.get_allocated_width()
         height = self.fpdraw.get_allocated_height()
-        self.fpsurface = self.fpdraw.get_window().create_similar_surface(cairo.CONTENT_COLOR, width, height)
+        self.fpsurface = self.fpdraw.get_window().create_similar_surface(
+            cairo.CONTENT_COLOR, width, height)
         drawgc = cairo.Context(self.fpsurface)
         drawgc.set_line_width(1)
-        red = Gdk.Color.parse('red')[1]
-        yellow = Gdk.Color.parse('yellow')[1]
+        # red = Gdk.Color.parse('red')[1]
+        # yellow = Gdk.Color.parse('yellow')[1]
         white = Gdk.Color.parse('white')[1]
-        black = Gdk.Color.parse('black')[1]
-        blue = Gdk.Color.parse('blue')[1]
-        green = Gdk.Color.parse('green')[1]
-        pink = Gdk.Color.parse(PINK)[1]
-        bgcolor = Gdk.Color.parse(BACKGROUND)[1]
-        darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
+        # black = Gdk.Color.parse('black')[1]
+        # blue = Gdk.Color.parse('blue')[1]
+        # green = Gdk.Color.parse('green')[1]
+        # pink = Gdk.Color.parse(PINK)[1]
+        # bgcolor = Gdk.Color.parse(BACKGROUND)[1]
+        # darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
 
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
@@ -573,17 +603,21 @@ class View(Gtk.EventBox):
         if data:
             if self.stickselected:
                 ebox = self.stickbuttons[self.stickselected]
-                ebox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
+                ebox.modify_bg(Gtk.StateType.NORMAL,
+                               Gdk.color_parse(theme.BUTTON_BACKGROUND))
                 label = ebox.get_child()
-                label.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
+                label.modify_fg(Gtk.StateType.NORMAL,
+                                Gdk.color_parse(theme.BUTTON_FOREGROUND))
             self.stickselected = data
             self.selectstickebox()
 
     def selectstickebox(self):
         ebox = self.stickbuttons[self.stickselected]
-        ebox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
+        ebox.modify_bg(Gtk.StateType.NORMAL,
+                       Gdk.color_parse(theme.BUTTON_FOREGROUND))
         label = ebox.get_child()
-        label.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
+        label.modify_fg(Gtk.StateType.NORMAL,
+                        Gdk.color_parse(theme.BUTTON_BACKGROUND))
 
         if self.stickselected in self.key.sticks:
             size = self.key.sticks[self.stickselected][1]
@@ -643,27 +677,30 @@ class View(Gtk.EventBox):
                                | Gdk.EventMask.BUTTON_RELEASE_MASK
                                | Gdk.EventMask.POINTER_MOTION_MASK
                                | Gdk.EventMask.POINTER_MOTION_HINT_MASK)
-        self.mfdraw.set_size_request(DRAWWIDTH, DRAWHEIGHT)
+        self.mfdraw.set_size_request(theme.DRAWWIDTH, theme.DRAWHEIGHT)
 
         screen_box = Gtk.EventBox()
-        screen_box.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BACKGROUND))
-        screen_box.set_border_width(PAD / 2)
+        screen_box.modify_bg(Gtk.StateType.NORMAL,
+                             Gdk.color_parse(theme.BACKGROUND))
+        screen_box.set_border_width(theme.PAD / 2)
         screen_box.add(self.mfdraw)
 
         screen_pink = Gtk.EventBox()
-        screen_pink.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(PINK))
-        screen_pink.set_border_width(PAD)
+        screen_pink.modify_bg(Gtk.StateType.NORMAL,
+                              Gdk.color_parse(theme.PINK))
+        screen_pink.set_border_width(theme.PAD)
         screen_pink.add(screen_box)
 
         # keyframes
 
         self.kfdraw = Gtk.DrawingArea()
-        self.kfdraw.set_size_request(KEYFRAMEWIDTH, KEYFRAMEHEIGHT)
+        self.kfdraw.set_size_request(theme.KEYFRAMEWIDTH, theme.KEYFRAMEHEIGHT)
         self.kfdraw.connect('draw', self.__kf_draw_cb)
         self.kfdraw.connect('configure_event', self.kf_configure_event)
         self.kfdraw.connect('motion_notify_event', self.kf_motion_notify_event)
         self.kfdraw.connect('button_press_event', self.kf_button_press_event)
-        self.kfdraw.connect('button_release_event', self.kf_button_release_event)
+        self.kfdraw.connect('button_release_event',
+                            self.kf_button_release_event)
         self.kfdraw.set_events(Gdk.EventMask.EXPOSURE_MASK
                                | Gdk.EventMask.LEAVE_NOTIFY_MASK
                                | Gdk.EventMask.BUTTON_PRESS_MASK
@@ -672,48 +709,52 @@ class View(Gtk.EventBox):
                                | Gdk.EventMask.POINTER_MOTION_HINT_MASK)
 
         kfdraw_box = Gtk.EventBox()
-        kfdraw_box.set_border_width(PAD)
+        kfdraw_box.set_border_width(theme.PAD)
         kfdraw_box.add(self.kfdraw)
 
         # control box
 
         angle_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         anglelabel = Gtk.Label(label=_('Angle:'))
-        anglelabel.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
+        anglelabel.modify_fg(Gtk.StateType.NORMAL,
+                             Gdk.color_parse(theme.BUTTON_BACKGROUND))
         anglelabel.set_size_request(60, -1)
         angle_box.pack_start(anglelabel, False, False, 5)
         self.angleentry = Gtk.Entry()
         self.angleentry.set_max_length(3)
         self.angleentry.set_width_chars(3)
-        self.angleentry.connect('activate', self.enterangle_callback, self.angleentry)
+        self.angleentry.connect('activate', self.enterangle_callback,
+                                self.angleentry)
         self.angleentry.modify_bg(Gtk.StateType.INSENSITIVE,
-                Gdk.color_parse(BUTTON_FOREGROUND))
+                                  Gdk.color_parse(theme.BUTTON_FOREGROUND))
         angle_box.pack_start(self.angleentry, False, False, 0)
         self.anglel_adj = Gtk.Adjustment(0, 0, 360, 1, 60, 0)
         self.anglel_adj.connect('value_changed', self._anglel_adj_cb)
         self.anglel_slider = Gtk.Scale.new(0, self.anglel_adj)
         self.anglel_slider.set_draw_value(False)
-        for state, color in COLOR_BG_BUTTONS:
+        for state, color in theme.COLOR_BG_BUTTONS:
             self.anglel_slider.modify_bg(state, Gdk.color_parse(color))
         angle_box.pack_start(self.anglel_slider, True, True, 0)
 
         size_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         sizelabel = Gtk.Label(label=_('Size:'))
-        sizelabel.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
+        sizelabel.modify_fg(Gtk.StateType.NORMAL,
+                            Gdk.color_parse(theme.BUTTON_BACKGROUND))
         sizelabel.set_size_request(60, -1)
         size_box.pack_start(sizelabel, False, False, 5)
         self.sizeentry = Gtk.Entry()
         self.sizeentry.set_max_length(3)
         self.sizeentry.set_width_chars(3)
-        self.sizeentry.connect('activate', self.enterlen_callback, self.sizeentry)
+        self.sizeentry.connect('activate', self.enterlen_callback,
+                               self.sizeentry)
         self.sizeentry.modify_bg(Gtk.StateType.INSENSITIVE,
-                Gdk.color_parse(BUTTON_FOREGROUND))
+                                 Gdk.color_parse(theme.BUTTON_FOREGROUND))
         size_box.pack_start(self.sizeentry, False, False, 0)
         self.size_adj = Gtk.Adjustment(0, 0, 200, 1, 30, 0)
         self.size_adj.connect('value_changed', self._size_adj_cb)
         size_slider = Gtk.Scale.new(0, self.size_adj)
         size_slider.set_draw_value(False)
-        for state, color in COLOR_BG_BUTTONS:
+        for state, color in theme.COLOR_BG_BUTTONS:
             size_slider.modify_bg(state, Gdk.color_parse(color))
         size_box.pack_start(size_slider, True, True, 0)
 
@@ -722,18 +763,21 @@ class View(Gtk.EventBox):
         control_head_box.pack_start(size_box, True, True, 0)
 
         control_head = Gtk.EventBox()
-        control_head.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
+        control_head.modify_bg(Gtk.StateType.NORMAL,
+                               Gdk.color_parse(theme.BUTTON_FOREGROUND))
         control_head.add(control_head_box)
 
         control_options = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.stickbuttons = {}
         self.sticklabels = {}
-        for stickpartname in LABELLIST:
-            label = Gtk.Label(label=STRINGS[stickpartname])
-            label.modify_fg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_FOREGROUND))
+        for stickpartname in theme.LABELLIST:
+            label = Gtk.Label(label=theme.STRINGS[stickpartname])
+            label.modify_fg(Gtk.StateType.NORMAL,
+                            Gdk.color_parse(theme.BUTTON_FOREGROUND))
             self.sticklabels[stickpartname] = label
             ebox = Gtk.EventBox()
-            ebox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
+            ebox.modify_bg(Gtk.StateType.NORMAL,
+                           Gdk.color_parse(theme.BUTTON_BACKGROUND))
             ebox.set_events(Gdk.EventMask.BUTTON_PRESS_MASK)
             ebox.connect('button_press_event', self.selectstick, stickpartname)
             ebox.add(label)
@@ -742,23 +786,27 @@ class View(Gtk.EventBox):
         self.selectstickebox()
 
         control_scroll = Gtk.ScrolledWindow()
-        control_scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        control_scroll.set_policy(Gtk.PolicyType.NEVER,
+                                  Gtk.PolicyType.AUTOMATIC)
         control_scroll.add_with_viewport(control_options)
         control_options.get_parent().modify_bg(Gtk.StateType.NORMAL,
-                Gdk.color_parse(BUTTON_BACKGROUND))
+                                               Gdk.color_parse(
+                                                   theme.BUTTON_BACKGROUND))
 
         control_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         control_box.pack_start(control_head, False, False, 0)
         control_box.pack_start(control_scroll, True, True, 0)
 
         control_bg = Gtk.EventBox()
-        control_bg.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BUTTON_BACKGROUND))
-        control_bg.set_border_width(PAD / 2)
+        control_bg.modify_bg(Gtk.StateType.NORMAL,
+                             Gdk.color_parse(theme.BUTTON_BACKGROUND))
+        control_bg.set_border_width(theme.PAD / 2)
         control_bg.add(control_box)
 
         control_pink = Gtk.EventBox()
-        control_pink.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(PINK))
-        control_pink.set_border_width(PAD)
+        control_pink.modify_bg(Gtk.StateType.NORMAL,
+                               Gdk.color_parse(theme.PINK))
+        control_pink.set_border_width(theme.PAD)
         control_pink.add(control_bg)
 
         # left control box
@@ -781,11 +829,12 @@ class View(Gtk.EventBox):
         desktop.pack_start(kfdraw_box, False, False, 0)
 
         greenbox = Gtk.EventBox()
-        greenbox.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(BACKGROUND))
-        greenbox.set_border_width(PAD / 2)
+        greenbox.modify_bg(Gtk.StateType.NORMAL,
+                           Gdk.color_parse(theme.BACKGROUND))
+        greenbox.set_border_width(theme.PAD / 2)
         greenbox.add(desktop)
 
-        self.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(YELLOW))
+        self.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(theme.YELLOW))
         self.add(greenbox)
         self.show_all()
 
@@ -793,14 +842,14 @@ class View(Gtk.EventBox):
         joints = self.frames[index].joints
         parts = self.frames[index].parts
         # draw on the main drawing area
-        area = self.toplevel.get_window()
+        # area = self.toplevel.get_window()
         drawgc = cairo.Context(surface)
         drawgc.set_line_width(3)
         white = Gdk.Color.parse('white')[1]
         black = Gdk.Color.parse('black')[1]
         width = self.mfdraw.get_allocated_width()
         height = self.mfdraw.get_allocated_height()
-        #pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
+        # pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
         drawgc.rectangle(0, 0, width, height)
@@ -811,15 +860,16 @@ class View(Gtk.EventBox):
         middle = self.frames[index].middle
         rhsize = parts['RIGHT HAND']
         lhsize = parts['LEFT HAND']
-        self.drawstickman(drawgc, surface, middle, joints, hsize, rhsize, lhsize)
+        self.drawstickman(drawgc, surface, middle,
+                          joints, hsize, rhsize, lhsize)
 
     def _inkeyframe(self, x, y):
-        dy = math.pow(abs(y - KEYFRAMEHEIGHT / 2), 2)
+        dy = math.pow(abs(y - theme.KEYFRAMEHEIGHT / 2), 2)
 
         for i, key in enumerate(self.keys_overlap_stack):
             dx = math.pow(abs(x - model.keys[key].x), 2)
-            l = math.sqrt(dx + dy)
-            if int(l) <= KEYFRAME_RADIUS:
+            check = math.sqrt(dx + dy)
+            if int(check) <= theme.KEYFRAME_RADIUS:
                 self.keys_overlap_stack.pop(i)
                 self.keys_overlap_stack.insert(0, key)
                 return key

@@ -15,6 +15,7 @@
 import model
 import theme
 
+
 class KinematicFrame:
     def __init__(self, keyframe=None):
         if keyframe:
@@ -30,6 +31,7 @@ class KinematicFrame:
         self.parts = keyframe.parts.copy()
         self.middle = keyframe.middle
         self.hsize = keyframe.sticks['HEAD'][1]
+
 
 def makeframes():
     frames = {}
@@ -53,54 +55,57 @@ def makeframes():
     fsecs.sort()
 
     # frame interval
-    fint = int(theme.KEYFRAMEWIDTH/float(theme.TOTALFRAMES)) 
+    fint = int(theme.KEYFRAMEWIDTH / float(theme.TOTALFRAMES))
 
     for i in range(len(fsecs)):
-        if i == len(fsecs)-1:
-            continue # nothing after end
+        if i == len(fsecs) - 1:
+            continue  # nothing after end
 
         startsecs = fsecs[i]
-        endsecs = fsecs[i+1]
+        endsecs = fsecs[i + 1]
         start_frame = frames[startsecs]
         end_frame = frames[endsecs]
-        numframes = int((endsecs-startsecs)/float(fint))-1
+        numframes = int((endsecs - startsecs) / float(fint)) - 1
 
-        for j in range(numframes-1): # MAYBE SHOULD BE numframes
-            frame = frames[startsecs + ((j+1)*fint)] = KinematicFrame()
+        for j in range(numframes - 1):  # MAYBE SHOULD BE numframes
+            frame = frames[startsecs + ((j + 1) * fint)] = KinematicFrame()
 
             frame.joints = _intjoints(start_frame.joints, end_frame.joints,
-                    j+1, numframes)
+                                      j + 1, numframes)
             frame.parts = _intparts(start_frame.parts, end_frame.parts,
-                    j+1, numframes)
+                                    j + 1, numframes)
             frame.middle = _intmiddle(start_frame.middle, end_frame.middle,
-                    j+1, numframes)
+                                      j + 1, numframes)
             frame.hsize = _inthsize(start_frame.hsize, end_frame.hsize,
-                    j+1, numframes)
+                                    j + 1, numframes)
 
     return frames
 
-def _interpolate(x,x0,y0,x1,y1):
-    if x1-x0 == 0:
+
+def _interpolate(x, x0, y0, x1, y1):
+    if x1 - x0 == 0:
         return y0
-    m = float(y1-y0)/float(x1-x0)
-    y = y0 + ((x-x0)*m)
+    m = float(y1 - y0) / float(x1 - x0)
+    y = y0 + ((x - x0) * m)
     return y
+
 
 def _intjoints(sjoints, ejoints, count, numpoints):
     # numpoints: number of points between start and end
     # count: point were getting now
     ijoints = {}
     for jname in sjoints:
-        (x0,y0) = sjoints[jname]
-        (x1,y1) = ejoints[jname]
-        #print 'x0:%s,y0:%s' % (x0,y0)
-        #print 'x1:%s,y1:%s' % (x1,y1)
-        x = x0 + (count * ((x1-x0)/float(numpoints)))
-        y = _interpolate(x,x0,y0,x1,y1)
-        ijoints[jname] = (int(x),int(y))
+        (x0, y0) = sjoints[jname]
+        (x1, y1) = ejoints[jname]
+        # print 'x0:%s,y0:%s' % (x0,y0)
+        # print 'x1:%s,y1:%s' % (x1,y1)
+        x = x0 + (count * ((x1 - x0) / float(numpoints)))
+        y = _interpolate(x, x0, y0, x1, y1)
+        ijoints[jname] = (int(x), int(y))
     return ijoints
 
-def _intparts(sparts,eparts,count,numpoints):
+
+def _intparts(sparts, eparts, count, numpoints):
     iparts = {}
     for pname in sparts:
         x0 = sparts[pname]
@@ -108,21 +113,23 @@ def _intparts(sparts,eparts,count,numpoints):
         if x0 == x1:
             iparts[pname] = x0
             continue
-        x = x0 + (count * ((x1-x0)/float(numpoints)))
+        x = x0 + (count * ((x1 - x0) / float(numpoints)))
         iparts[pname] = int(x)
     return iparts
 
-def _intmiddle(smiddle,emiddle,count,numpoints):
-    (x0,y0) = smiddle
-    (x1,y1) = emiddle
-    x = x0 + (count * ((x1-x0)/float(numpoints)))
-    y = _interpolate(x,x0,y0,x1,y1)
-    return (int(x),int(y))
 
-def _inthsize(shsize,ehsize,count,numpoints):
+def _intmiddle(smiddle, emiddle, count, numpoints):
+    (x0, y0) = smiddle
+    (x1, y1) = emiddle
+    x = x0 + (count * ((x1 - x0) / float(numpoints)))
+    y = _interpolate(x, x0, y0, x1, y1)
+    return (int(x), int(y))
+
+
+def _inthsize(shsize, ehsize, count, numpoints):
     x0 = shsize
     x1 = ehsize
     if x0 == x1:
         return x0
-    x = x0 + (count * ((x1-x0)/float(numpoints)))
+    x = x0 + (count * ((x1 - x0) / float(numpoints)))
     return int(x)

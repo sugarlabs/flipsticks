@@ -29,7 +29,7 @@ import model
 import montage
 import lessons
 from messenger import Messenger, SERVICE
-from theme import *
+
 
 class flipsticksActivity(SharedActivity):
     def __init__(self, handle):
@@ -95,6 +95,7 @@ class flipsticksActivity(SharedActivity):
         self.notebook_toolbar.set_current_page(page)
         self.notebook.set_current_page(page)
 
+
 class MontageToolbar(Gtk.Toolbar):
     def __init__(self, montage):
         Gtk.Toolbar.__init__(self)
@@ -118,36 +119,36 @@ class MontageToolbar(Gtk.Toolbar):
         self.insert(resetframe, -1)
 
         separator = Gtk.SeparatorToolItem()
-        self.insert(separator,-1)
+        self.insert(separator, -1)
 
         # play/pause buttons
 
         play_img_1 = Gtk.Image()
         play_img_1.set_from_icon_name('media-playback-start-back',
-                Gtk.IconSize.LARGE_TOOLBAR)
+                                      Gtk.IconSize.LARGE_TOOLBAR)
         pause_img_1 = Gtk.Image()
         pause_img_1.set_from_icon_name('media-playback-pause',
-                Gtk.IconSize.LARGE_TOOLBAR)
+                                       Gtk.IconSize.LARGE_TOOLBAR)
 
         play_img_2 = Gtk.Image()
         play_img_2.set_from_icon_name('media-playback-start',
-                Gtk.IconSize.LARGE_TOOLBAR)
+                                      Gtk.IconSize.LARGE_TOOLBAR)
         pause_img_2 = Gtk.Image()
         pause_img_2.set_from_icon_name('media-playback-pause',
-                Gtk.IconSize.LARGE_TOOLBAR)
+                                       Gtk.IconSize.LARGE_TOOLBAR)
 
         paly_1 = ToggleToolButton('media-playback-start-back')
         play_2 = ToggleToolButton('media-playback-start')
 
         paly_1.connect('toggled', self._play_cb,
-                (paly_1, play_2), (play_img_1, pause_img_1),
-                self.montage.playbackwards)
+                       (paly_1, play_2), (play_img_1, pause_img_1),
+                       self.montage.playbackwards)
         self.insert(paly_1, -1)
         paly_1.set_tooltip(_('Play backward / Pause'))
 
         play_2.connect('toggled', self._play_cb,
-                (play_2, paly_1), (play_img_2, pause_img_2),
-                self.montage.playforwards)
+                       (play_2, paly_1), (play_img_2, pause_img_2),
+                       self.montage.playforwards)
         self.insert(play_2, -1)
         play_2.set_tooltip(_('Play forward / Pause'))
 
@@ -162,7 +163,7 @@ class MontageToolbar(Gtk.Toolbar):
         self.insert(tempo_item, -1)
 
         separator = Gtk.SeparatorToolItem()
-        self.insert(separator,-1)
+        self.insert(separator, -1)
 
         # export buttons
 
@@ -198,6 +199,7 @@ class MontageToolbar(Gtk.Toolbar):
             images[0].show()
             widget.set_icon_widget(images[0])
             self.montage.stop()
+
 
 class LessonsToolbar(Gtk.Toolbar):
     def __init__(self):

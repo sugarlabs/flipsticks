@@ -28,15 +28,17 @@ logger = logging.getLogger('flipsticks')
 
 THEMES = []
 
+
 class Lesson:
     def __init__(self, index, filename):
         self.index = index
         self.name = os.path.splitext(os.path.basename(filename).lstrip(
-                '.-_1234567890').replace('_', ' '))[0]
+            '.-_1234567890').replace('_', ' '))[0]
         self.text = open(filename, 'r').read()
 
     def change(self):
         View.notebook.set_current_page(self.index)
+
 
 class View(Gtk.EventBox):
     notebook = None
@@ -57,20 +59,24 @@ class View(Gtk.EventBox):
 
             view_box = Gtk.EventBox()
             view_box.add(view)
-            view_box.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(theme.WHITE))
+            view_box.modify_bg(Gtk.StateType.NORMAL,
+                               Gdk.color_parse(theme.WHITE))
             view_box.props.border_width = 10
 
             border_box = Gtk.EventBox()
             border_box.add(view_box)
-            border_box.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(theme.WHITE))
+            border_box.modify_bg(Gtk.StateType.NORMAL,
+                                 Gdk.color_parse(theme.WHITE))
 
             scrolled_window = Gtk.ScrolledWindow()
-            scrolled_window.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+            scrolled_window.set_policy(Gtk.PolicyType.NEVER,
+                                       Gtk.PolicyType.AUTOMATIC)
             scrolled_window.add_with_viewport(border_box)
 
             View.notebook.append_page(scrolled_window)
 
         self.show_all()
+
 
 _lessons_dir = os.path.join(get_bundle_path(), 'lessons')
 _lang = locale.getdefaultlocale()[0].split('_')[0]
@@ -79,5 +85,6 @@ if not os.path.isdir(os.path.join(_lessons_dir, _lang)):
     logger.info('Cannot find lessons for language %s, thus use en' % _lang)
     _lang = 'en'
 
-for i, filename in enumerate(sorted(glob(os.path.join(_lessons_dir, _lang, '*')))):
+for i, filename in enumerate(sorted(glob(os.path.join(_lessons_dir,
+                                                      _lang, '*')))):
     THEMES.append(Lesson(i, filename))
