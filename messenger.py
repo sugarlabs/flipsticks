@@ -30,10 +30,12 @@ SERVICE = 'org.freedesktop.Telepathy.Tube.Connect'
 IFACE = SERVICE
 PATH = '/org/freedesktop/Telepathy/Tube/Connect'
 
+
 class Slot:
     def __init__(self, seqno=-1, owner=None):
         self.seqno = seqno
         self.owner = owner
+
 
 class Messenger(ExportedGObject):
     def __init__(self, tube, initiator, view):
@@ -57,18 +59,19 @@ class Messenger(ExportedGObject):
 
             if self.initiator:
                 self._tube.add_signal_receiver(self._ping_cb, '_ping', IFACE,
-                        path=PATH, sender_keyword='sender')
+                                               path=PATH,
+                                               sender_keyword='sender')
                 for i in self._slots:
                     i.seqno = 0
                     i.owner = self.me
             else:
                 self._pong_handle = self._tube.add_signal_receiver(
-                        self._pong_cb, '_pong', IFACE, path=PATH,
-                        sender_keyword='sender')
+                    self._pong_cb, '_pong', IFACE, path=PATH,
+                    sender_keyword='sender')
                 self._ping()
 
             self._tube.add_signal_receiver(self._notify_cb, '_notify', IFACE,
-                    path=PATH, sender_keyword='sender')
+                                           path=PATH, sender_keyword='sender')
             self._entered = True
 
     # incomers' signal to retrieve initial snapshot
@@ -97,7 +100,7 @@ class Messenger(ExportedGObject):
 
         for i, slot in enumerate(self._slots):
             out.append((slot.seqno, slot.owner,
-                    json.dumps(model.keys[i].collect())))
+                        json.dumps(model.keys[i].collect())))
 
         return out
 
@@ -126,7 +129,7 @@ class Messenger(ExportedGObject):
 
         # we are ready to receive _snapshot requests
         self._tube.add_signal_receiver(self._ping_cb, '_ping', IFACE,
-                path=PATH, sender_keyword='sender')
+                                       path=PATH, sender_keyword='sender')
 
     def _notify_cb(self, slot, seqno, owner, raw, sender=None):
         if sender == self.me:
@@ -139,7 +142,7 @@ class Messenger(ExportedGObject):
         new = Slot(seqno, owner)
 
         logger.debug('object received slot=%s seqno=%d owner=%s from %s'
-                % (slot, new.seqno, new.owner, sender))
+                     % (slot, new.seqno, new.owner, sender))
 
         if cur.seqno > new.seqno:
             logger.debug('trying to rewrite newer value by older one')
@@ -169,7 +172,7 @@ class Messenger(ExportedGObject):
         slot.owner = self.me
 
         self._notify(slot_num, slot.seqno, slot.owner,
-                json.dumps(model.keys[slot_num].collect()))
+                     json.dumps(model.keys[slot_num].collect()))
 
         logger.debug('_send slot=%s seqno=%d' % (slot_num, slot.seqno))
 

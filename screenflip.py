@@ -15,6 +15,7 @@
 import theme
 import model
 
+
 class ScreenFrame(model.KeyFrame):
     def __init__(self):
         self.reset()
@@ -26,7 +27,7 @@ class ScreenFrame(model.KeyFrame):
         self.parts = theme.PARTS.copy()
         self.sticks = theme.STICKS.copy()
         self.joints = self._initjoints()
-        self.middle = (theme.DRAWWIDTH/2, theme.DRAWHEIGHT/3)
+        self.middle = (theme.DRAWWIDTH / 2, theme.DRAWHEIGHT / 3)
         self.setjoints()
 
     def assign(self, x):
@@ -37,27 +38,27 @@ class ScreenFrame(model.KeyFrame):
         self.setjoints()
 
     def getrotatepoint(self):
-        (angle,len) = self.sticks['TORSO']
-        x,y = self.middle
-        (rx,ry) = self._getpoints(x,y,angle,int(len/2.0))
-        return (rx,ry)
+        (angle, len) = self.sticks['TORSO']
+        x, y = self.middle
+        (rx, ry) = self._getpoints(x, y, angle, int(len / 2.0))
+        return (rx, ry)
 
     def inrotate(self, x, y):
         rx, ry = self.getrotatepoint()
-        if (abs(rx-x) <= 5) and (abs(ry-y) <= 5):
+        if (abs(rx - x) <= 5) and (abs(ry - y) <= 5):
             return True
         return False
 
     def injoint(self, x, y):
         for jname in self.joints:
             jx, jy = self.joints[jname]
-            if (abs(jx-x) <= 5) and (abs(jy-y) <= 5):
+            if (abs(jx - x) <= 5) and (abs(jy - y) <= 5):
                 return jname
         return False
 
     def inmiddle(self, x, y):
         mx, my = self.middle
-        if (abs(mx-x) <= 5) and (abs(my-y) <= 5):
+        if (abs(mx - x) <= 5) and (abs(my - y) <= 5):
             return True
         return False
 
@@ -65,4 +66,4 @@ class ScreenFrame(model.KeyFrame):
         if self.joints:
             for jname in self.joints:
                 (jx, jy) = self.joints[jname]
-                self.joints[jname] = (jx+dx, jy+dy)
+                self.joints[jname] = (jx + dx, jy + dy)

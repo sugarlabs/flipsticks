@@ -23,17 +23,16 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import TelepathyGLib
 import logging
-from gi.repository import GObject
 
 from sugar3.activity import activity
 from sugar3.presence.sugartubeconn import SugarTubeConnection
 from sugar3.graphics.alert import ConfirmationAlert, NotifyAlert
 
 
-_NEW_INSTANCE   = 0
-_NEW_INSTANCE   = 1
-_PRE_INSTANCE   = 2
-_POST_INSTANCE  = 3
+_NEW_INSTANCE = 0
+_NEW_INSTANCE = 1
+_PRE_INSTANCE = 2
+_POST_INSTANCE = 3
 
 
 class CursorFactory:
@@ -158,7 +157,6 @@ class Activity(activity.Activity):
             self.get_window().set_cursor(self._cursor)
             Gdk.flush()
 
-
     def __init__(self, canvas, handle):
         """
         Initialise the Activity.
@@ -168,7 +166,6 @@ class Activity(activity.Activity):
 
         handle -- sugar.activity.activityhandle.ActivityHandle
             instance providing the activity id and access to the
-
         """
         activity.Activity.__init__(self, handle)
 
@@ -221,8 +218,8 @@ class Activity(activity.Activity):
         self.save_instance(filepath)
 
     def __map_canvasactivity_cb(self, widget):
-        logging.debug('Activity.__map_canvasactivity_cb state=%s' % \
-                self.__state)
+        logging.debug('Activity.__map_canvasactivity_cb state=%s'
+                      % self.__state)
 
         if self.__state == _NEW_INSTANCE:
             self.__instance()
@@ -284,8 +281,9 @@ class SharedActivity(Activity):
         self._sharing_setup()
 
         logging.debug('This is my activity: making a tube...')
-        id = self._tubes_chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES].OfferDBusTube(
-            self.service, {})
+        # id = self._tubes_chan[
+        #     TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES].OfferDBusTube(
+        #     self.service, {})
 
     def _joined_cb(self, activity):
         if not self.shared_activity:
@@ -309,8 +307,9 @@ class SharedActivity(Activity):
         self._tubes_chan = self.shared_activity.telepathy_tubes_chan
         self._text_chan = self.shared_activity.telepathy_text_chan
 
-        self._tubes_chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES].connect_to_signal(
-                'NewTube', self._new_tube_cb)
+        self._tubes_chan[
+            TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES].connect_to_signal(
+            'NewTube', self._new_tube_cb)
 
     def _list_tubes_reply_cb(self, tubes):
         for tube_info in tubes:
@@ -321,17 +320,19 @@ class SharedActivity(Activity):
 
     def _new_tube_cb(self, id, initiator, type, service, params, state):
         logging.debug('New tube: ID=%d initator=%d type=%d service=%s '
-                     'params=%r state=%d', id, initiator, type, service,
-                     params, state)
+                      'params=%r state=%d', id, initiator, type, service,
+                      params, state)
 
-        if (type == TelepathyGLib.TubeType.DBUS and
-                service == self.service):
+        if (type == TelepathyGLib.TubeType.DBUS
+                and service == self.service):
             if state == TelepathyGLib.TubeState.LOCAL_PENDING:
                 self._tubes_chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES] \
-                        .AcceptDBusTube(id)
+                    .AcceptDBusTube(id)
 
             tube_conn = SugarTubeConnection(self._conn,
-                self._tubes_chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES], id,
-                group_iface=self._text_chan[TelepathyGLib.IFACE_CHANNEL_INTERFACE_GROUP])
+                                            self._tubes_chan[
+                                                TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES],
+                                            id, group_iface=self._text_chan[
+                                                TelepathyGLib.IFACE_CHANNEL_INTERFACE_GROUP])
 
             self._share(tube_conn, self.__initiator)
