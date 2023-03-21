@@ -27,25 +27,25 @@ BACKGROUND = "#66CC00"  # light green
 BUTTON_FOREGROUND = "#CCFB99"  # very light green
 BUTTON_BACKGROUND = "#027F01"  # dark green
 COLOR_FG_BUTTONS = (
-    (Gtk.StateType.NORMAL, "#CCFF99"),
-    (Gtk.StateType.ACTIVE, "#CCFF99"),
-    (Gtk.StateType.PRELIGHT, "#CCFF99"),
-    (Gtk.StateType.SELECTED, "#CCFF99"),
-    (Gtk.StateType.INSENSITIVE, "#CCFF99"),
+    (Gtk.StateType.NORMAL, BUTTON_FOREGROUND),
+    (Gtk.StateType.ACTIVE, BUTTON_FOREGROUND),
+    (Gtk.StateType.PRELIGHT, BUTTON_FOREGROUND),
+    (Gtk.StateType.SELECTED, BUTTON_FOREGROUND),
+    (Gtk.StateType.INSENSITIVE, BUTTON_FOREGROUND),
 )  # very light green
 COLOR_BG_BUTTONS = (
-    (Gtk.StateType.NORMAL, "#027F01"),
-    (Gtk.StateType.ACTIVE, "#CCFF99"),
+    (Gtk.StateType.NORMAL, BUTTON_BACKGROUND),
+    (Gtk.StateType.ACTIVE, BUTTON_FOREGROUND),
     (Gtk.StateType.PRELIGHT, "#016D01"),
-    (Gtk.StateType.SELECTED, "#CCFF99"),
-    (Gtk.StateType.INSENSITIVE, "#027F01"),
+    (Gtk.StateType.SELECTED, BUTTON_FOREGROUND),
+    (Gtk.StateType.INSENSITIVE, BUTTON_BACKGROUND),
 )
 OLD_COLOR_BG_BUTTONS = (
-    (Gtk.StateType.NORMAL, "#027F01"),
+    (Gtk.StateType.NORMAL, BUTTON_BACKGROUND),
     (Gtk.StateType.ACTIVE, "#014D01"),
     (Gtk.StateType.PRELIGHT, "#016D01"),
-    (Gtk.StateType.SELECTED, "#027F01"),
-    (Gtk.StateType.INSENSITIVE, "#027F01"),
+    (Gtk.StateType.SELECTED, BUTTON_BACKGROUND),
+    (Gtk.StateType.INSENSITIVE, BUTTON_BACKGROUND),
 )
 
 STRINGS = {
@@ -202,23 +202,25 @@ LABELLIST = [
 
 # The joint is the circle at the end of the stick
 
-JOINTS = {'HEAD': 'head',
-          'NECK': 'neck',
-          'RIGHT SHOULDER': 'rightshoulder',
-          'UPPER RIGHT ARM': 'rightelbow',
-          'LOWER RIGHT ARM': 'righthand',
-          'LEFT SHOULDER': 'leftshoulder',
-          'UPPER LEFT ARM': 'leftelbow',
-          'LOWER LEFT ARM': 'lefthand',
-          'TORSO': 'groin',
-          'RIGHT HIP': 'righthip',
-          'UPPER RIGHT LEG': 'rightknee',
-          'LOWER RIGHT LEG': 'rightheel',
-          'RIGHT FOOT': 'righttoe',
-          'LEFT HIP': 'lefthip',
-          'UPPER LEFT LEG': 'leftknee',
-          'LOWER LEFT LEG': 'leftheel',
-          'LEFT FOOT': 'lefttoe'}
+JOINTS = {
+    'HEAD': 'head',
+    'NECK': 'neck',
+    'RIGHT SHOULDER': 'rightshoulder',
+    'UPPER RIGHT ARM': 'rightelbow',
+    'LOWER RIGHT ARM': 'righthand',
+    'LEFT SHOULDER': 'leftshoulder',
+    'UPPER LEFT ARM': 'leftelbow',
+    'LOWER LEFT ARM': 'lefthand',
+    'TORSO': 'groin',
+    'RIGHT HIP': 'righthip',
+    'UPPER RIGHT LEG': 'rightknee',
+    'LOWER RIGHT LEG': 'rightheel',
+    'RIGHT FOOT': 'righttoe',
+    'LEFT HIP': 'lefthip',
+    'UPPER LEFT LEG': 'leftknee',
+    'LOWER LEFT LEG': 'leftheel',
+    'LEFT FOOT': 'lefttoe'
+    }
 
 JOINTTOSTICK = {}
 for jname in JOINTS:
