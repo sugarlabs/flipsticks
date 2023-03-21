@@ -281,9 +281,6 @@ class SharedActivity(Activity):
         self._sharing_setup()
 
         logging.debug('This is my activity: making a tube...')
-        # id = self._tubes_chan[
-        #     TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES].OfferDBusTube(
-        #     self.service, {})
 
     def _joined_cb(self, activity):
         if not self.shared_activity:
