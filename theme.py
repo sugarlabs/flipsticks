@@ -18,9 +18,9 @@ from gettext import gettext as _
 
 from sugar3.graphics import style
 
-GRAY = "#B7B7B7"  # gray
-PINK = "#FF0099"  # pink
-YELLOW = "#FFFF00"  # yellow
+GRAY = "#B7B7B7"
+PINK = "#FF0099"
+YELLOW = "#FFFF00"
 WHITE = "#FFFFFF"
 BLACK = "#000000"
 BACKGROUND = "#66CC00"  # light green

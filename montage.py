@@ -181,7 +181,6 @@ class View(Gtk.EventBox):
                                                     self.key.joints,
                                                     self.key.middle)
                     if x - px == 0:
-                        # computeangle = 0
                         b = 1
                     else:
                         b = float(px - x)
@@ -195,8 +194,6 @@ class View(Gtk.EventBox):
                         (pangle, plen) = self.key.sticks[parentname]
                         panglesum += pangle
                     (angle, len) = self.key.sticks[stickname]
-                    # print 'X:%s,Y:%s,PX:%s,PY:%s,ANGLE:%s,NEWANGLE:%s' %
-                    #       (x,y,px,py,angle,newangle)
                     newangle = computeangle - panglesum
                     if (x < px) or (b == 1):
                         newangle = newangle + 180
@@ -217,7 +214,6 @@ class View(Gtk.EventBox):
                 if _inarea(widget, x, y):
                     (px, py) = self.key.middle
                     if x - px == 0:
-                        # computeangle = 0
                         b = 1
                     else:
                         b = float(px - x)
@@ -334,10 +330,6 @@ class View(Gtk.EventBox):
 
         self._draw_frame(self.playframenum, self.surface)
         # draw circle for middle
-        # green = cm.alloc_color('green')
-        # drawgc.set_foreground(green)
-        # x,y = middle
-        # self.pixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         self.mfdraw.queue_draw()
 
         fsecs = list(self.frames.keys())
@@ -406,7 +398,6 @@ class View(Gtk.EventBox):
         if not self.surface:
             return
 
-        # area = self.toplevel.get_window()
         drawgc = cairo.Context(self.surface)
         drawgc.set_line_width(3)
         red = Gdk.Color.parse('red')[1]
@@ -417,7 +408,6 @@ class View(Gtk.EventBox):
         green = Gdk.Color.parse('green')[1]
         width = self.mfdraw.get_allocated_width()
         height = self.mfdraw.get_allocated_height()
-        # self.pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
         drawgc.rectangle(0, 0, width, height)
@@ -508,19 +498,14 @@ class View(Gtk.EventBox):
         drawgc.fill()
 
     def drawkeyframe(self):
-        # area = self.toplevel.get_window()
         width = self.kfdraw.get_allocated_width()
         height = self.kfdraw.get_allocated_height()
         self.kfsurface = self.kfdraw.get_window().create_similar_surface(
             cairo.CONTENT_COLOR, width, height)
         drawgc = cairo.Context(self.kfsurface)
         drawgc.set_line_width(2)
-        # red = Gdk.Color.parse('red')[1]
-        # yellow = Gdk.Color.parse('yellow')[1]
         white = Gdk.Color.parse('white')[1]
         black = Gdk.Color.parse('black')[1]
-        # blue = Gdk.Color.parse('blue')[1]
-        # green = Gdk.Color.parse('green')[1]
         pink = Gdk.Color.parse(theme.PINK)[1]
         bgcolor = Gdk.Color.parse(theme.BACKGROUND)[1]
         darkgreen = Gdk.Color.parse(theme.BUTTON_BACKGROUND)[1]
@@ -573,26 +558,16 @@ class View(Gtk.EventBox):
                 self.drawstickman(drawgc, self.kfsurface, (x, y),
                                   model.keys[i].scaled_joints, hsize,
                                   rhsize, lhsize)
-                # self.kfpixmap.draw_arc(drawgc,True,x-5,y-5,10,10,0,360*64)
         self.kfdraw.queue_draw()
 
     def drawfp(self):
-        # area = self.toplevel.get_window()
         width = self.fpdraw.get_allocated_width()
         height = self.fpdraw.get_allocated_height()
         self.fpsurface = self.fpdraw.get_window().create_similar_surface(
             cairo.CONTENT_COLOR, width, height)
         drawgc = cairo.Context(self.fpsurface)
         drawgc.set_line_width(1)
-        # red = Gdk.Color.parse('red')[1]
-        # yellow = Gdk.Color.parse('yellow')[1]
         white = Gdk.Color.parse('white')[1]
-        # black = Gdk.Color.parse('black')[1]
-        # blue = Gdk.Color.parse('blue')[1]
-        # green = Gdk.Color.parse('green')[1]
-        # pink = Gdk.Color.parse(PINK)[1]
-        # bgcolor = Gdk.Color.parse(BACKGROUND)[1]
-        # darkgreen = Gdk.Color.parse(BUTTON_BACKGROUND)[1]
 
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
@@ -842,14 +817,12 @@ class View(Gtk.EventBox):
         joints = self.frames[index].joints
         parts = self.frames[index].parts
         # draw on the main drawing area
-        # area = self.toplevel.get_window()
         drawgc = cairo.Context(surface)
         drawgc.set_line_width(3)
         white = Gdk.Color.parse('white')[1]
         black = Gdk.Color.parse('black')[1]
         width = self.mfdraw.get_allocated_width()
         height = self.mfdraw.get_allocated_height()
-        # pixmap = Gdk.Pixmap(self.mfdraw.window, width, height)
         # clear area
         drawgc.set_source_rgb(white.red, white.green, white.blue)
         drawgc.rectangle(0, 0, width, height)
