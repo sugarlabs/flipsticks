@@ -85,6 +85,6 @@ if not os.path.isdir(os.path.join(_lessons_dir, _lang)):
     logger.info('Cannot find lessons for language %s, thus use en' % _lang)
     _lang = 'en'
 
-for i, filename in enumerate(sorted(glob(os.path.join(_lessons_dir,
-                                                      _lang, '*')))):
+for i, filename in enumerate(sorted(glob(
+    os.path.join(_lessons_dir, _lang, '*')))):
     THEMES.append(Lesson(i, filename))
