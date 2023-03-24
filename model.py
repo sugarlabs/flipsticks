@@ -158,7 +158,7 @@ def load(filename):
 def getparentsticks(stickname):
     if stickname in ['RIGHT SHOULDER', 'LEFT SHOULDER', 'NECK', 'TORSO']:
         return []
-    if stickname in ['HEAD']:
+    if stickname == 'HEAD':
         return ['NECK']
     if stickname == 'UPPER RIGHT ARM':
         return ['RIGHT SHOULDER']
