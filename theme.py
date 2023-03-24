@@ -220,7 +220,7 @@ JOINTS = {
     'UPPER LEFT LEG': 'leftknee',
     'LOWER LEFT LEG': 'leftheel',
     'LEFT FOOT': 'lefttoe'
-    }
+}
 
 JOINTTOSTICK = {}
 for jname in JOINTS:
