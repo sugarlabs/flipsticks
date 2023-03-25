@@ -146,7 +146,7 @@ IMAGE[0] = """<?xml version="1.0" encoding="utf-8"?>
 <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M23.5,6.5c3,3,7,7,9,11c-7,5-4,6-3,26c-1,1-8,1-9,0c0,0,2,1,2-1
     c0-3-2-7-2-11c0-2,1-4,1-6c0-3-2-1-2-3c0-3,3-8,3-11c0-2-1-1-2-2v-3H23.5z"/>
 </svg>
-"""
+"""  # noqa: E501
 
 IMAGE[1] = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -156,7 +156,7 @@ IMAGE[1] = """<?xml version="1.0" encoding="utf-8"?>
     c2,2,2,6,2,8c0,4-3,11-3,13s4,7,7,10c-2,2-4,3-5,5h-6c1-1,2-3,2-5c0-3-2-9-3-14c0,0,0-1-1,0v-6c0-3,3-8,3-11c0-1-2-2-2-6h3
     C23.5,5.5,26.5,9.5,26.5,10.5z"/>
 </svg>
-"""
+"""  # noqa: E501
 
 IMAGE[2] = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -165,7 +165,7 @@ IMAGE[2] = """<?xml version="1.0" encoding="utf-8"?>
 <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M30.5,17.5c0,3-2,2-2,4c0,3,4,14,7,21c-1,0-3,1-5,1c1-1,2,0,2-3
     c0-2-4-7-6-10c-3,3-5,8-7,13c-1,0-3-1-4-1c3-3,7-14,7-18s-1-3-4-4c3-2,4-8,4-14h3C23.5,9.5,30.5,14.5,30.5,17.5z"/>
 </svg>
-"""
+"""  # noqa: E501
 
 IMAGE[3] = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -175,7 +175,7 @@ IMAGE[3] = """<?xml version="1.0" encoding="utf-8"?>
     c0,3-1,4-2,5c0-1,0-3-1-4c-1,3-2,7-3,10c-4-3,0-6,0-9s-3-11-4-17l-4,4c1-5,8.25-11.12,7.25-16.12c0.68,0.68,3.029,0,2.87,2.12
     C26.5,10.25,33.62,17.75,34.5,22.5z"/>
 </svg>
-"""
+"""  # noqa: E501
 
 IMAGE[4] = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -185,7 +185,7 @@ IMAGE[4] = """<?xml version="1.0" encoding="utf-8"?>
     c-3-1-9,1-10-3c-2,3-5,7-7,11c-3,0-3-1-4-1c0-2,3-3,4-6s4-8,4-10c0-3-1-3-2-5c-1,0-2,1-3,2c0-1,2-3,2-4c1-2,3-5,2-8c0,0,1-1,4-2
     C25.5,9.5,25.5,11.5,24.5,13.5z"/>
 </svg>
-"""
+"""  # noqa: E501
 
 IMAGE[5] = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -197,7 +197,7 @@ IMAGE[5] = """<?xml version="1.0" encoding="utf-8"?>
 <polygon fill-rule="evenodd" clip-rule="evenodd" fill="#333333" stroke="#333333" stroke-linecap="round" stroke-linejoin="round" points="
     25,20 25.25,16.75 26.5,17.88 "/>
 </svg>
-"""
+"""  # noqa: E501
 
 IMAGE[6] = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -207,7 +207,7 @@ IMAGE[6] = """<?xml version="1.0" encoding="utf-8"?>
     c1.62-8.88-8.75-13.88-12-15c-1,1-1,0-1,2c0,3,2,5,3,7c-1,1-3,2-6,2c0-1,2-1,2-4c0-2-4-4-4-6c0-3,3-4,5-6c-3-8-8-2-11-6h6
     c0-1,1,0,1-3c0-2-1-1-2-2l1-5H20.5z"/>
 </svg>
-"""
+"""  # noqa: E501
 
 IMAGE[7] = """<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -218,4 +218,4 @@ IMAGE[7] = """<?xml version="1.0" encoding="utf-8"?>
     c-1.561-0.02-2.34-1.561-3.75-1.87c-3.42-0.76-4.67-0.38-5.5-0.38c-3,0-8,7-11,7c-2,0-3-1-3-2c4,2,8-4,9-7c2-1,5-1,8-3c-2-4-6-5-8-3
     l-6-6l2-2c1,1,1,2,1,4c1,0,4.12,0.38,6.12-0.62L16.5,17.5v-5H20.5z"/>
 </svg>
-"""
+"""  # noqa: E501
