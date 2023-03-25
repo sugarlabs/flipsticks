@@ -89,7 +89,7 @@ class Activity(activity.Activity):
         Activity was shared/joined.
 
         connection -- SugarTubeConnection object
-            wich represents telepathy connection
+            which represents telepathy connection
 
         is_initiator -- boolean
             if True activity was shared and
