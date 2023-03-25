@@ -315,21 +315,21 @@ class SharedActivity(Activity):
     def _list_tubes_error_cb(self, e):
         logging.error('ListTubes() failed: %s', e)
 
-    def _new_tube_cb(self, id, initiator, type, service, params, state):
+    def _new_tube_cb(self, tube_id, initiator, type, service, params, state):
         logging.debug('New tube: ID=%d initator=%d type=%d service=%s '
-                      'params=%r state=%d', id, initiator, type, service,
+                      'params=%r state=%d', tube_id, initiator, type, service,
                       params, state)
 
         if (type == TelepathyGLib.TubeType.DBUS
                 and service == self.service):
+            tubes_iface = self._tubes_chan[
+                TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES]
             if state == TelepathyGLib.TubeState.LOCAL_PENDING:
-                self._tubes_chan[TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES] \
-                    .AcceptDBusTube(id)
+                tubes_iface.AcceptDBusTube(tube_id)
 
-            tube_conn = SugarTubeConnection(self._conn,
-                                            self._tubes_chan[
-                                                TelepathyGLib.IFACE_CHANNEL_TYPE_TUBES],
-                                            id, group_iface=self._text_chan[
-                                                TelepathyGLib.IFACE_CHANNEL_INTERFACE_GROUP])
+            group_iface = self._text_chan[
+                TelepathyGLib.IFACE_CHANNEL_INTERFACE_GROUP]
+            tube_conn = SugarTubeConnection(self._conn, tubes_iface,
+                                            tube_id, group_iface=group_iface)
 
             self._share(tube_conn, self.__initiator)
