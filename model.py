@@ -136,7 +136,7 @@ class StoredFrame(KeyFrame):
             self.scaled_sticks[key] = (angle, newlen)
 
         self._setjoints(self.scaled_joints, self.scaled_sticks,
-                        (self.x, theme.KEYFRAMEHEIGHT / 2))
+                        (self.x, theme.KEYFRAMEHEIGHT // 2))
 
 
 def save(filename):
@@ -235,6 +235,6 @@ def _get_base64_pixbuf_data(pixbuf):
 
 for i in range(5):
     key = StoredFrame()
-    keyframe_width = theme.KEYFRAMEWIDTH / 5
-    key.x = keyframe_width / 2 + i * keyframe_width
+    keyframe_width = theme.KEYFRAMEWIDTH // 5
+    key.x = keyframe_width // 2 + i * keyframe_width
     keys.append(key)

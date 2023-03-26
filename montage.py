@@ -657,7 +657,7 @@ class View(Gtk.EventBox):
         screen_box = Gtk.EventBox()
         screen_box.modify_bg(Gtk.StateType.NORMAL,
                              Gdk.color_parse(theme.BACKGROUND))
-        screen_box.set_border_width(theme.PAD / 2)
+        screen_box.set_border_width(theme.PAD // 2)
         screen_box.add(self.mfdraw)
 
         screen_pink = Gtk.EventBox()
@@ -775,7 +775,7 @@ class View(Gtk.EventBox):
         control_bg = Gtk.EventBox()
         control_bg.modify_bg(Gtk.StateType.NORMAL,
                              Gdk.color_parse(theme.BUTTON_BACKGROUND))
-        control_bg.set_border_width(theme.PAD / 2)
+        control_bg.set_border_width(theme.PAD // 2)
         control_bg.add(control_box)
 
         control_pink = Gtk.EventBox()
@@ -806,7 +806,7 @@ class View(Gtk.EventBox):
         greenbox = Gtk.EventBox()
         greenbox.modify_bg(Gtk.StateType.NORMAL,
                            Gdk.color_parse(theme.BACKGROUND))
-        greenbox.set_border_width(theme.PAD / 2)
+        greenbox.set_border_width(theme.PAD // 2)
         greenbox.add(desktop)
 
         self.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse(theme.YELLOW))
@@ -837,7 +837,7 @@ class View(Gtk.EventBox):
                           joints, hsize, rhsize, lhsize)
 
     def _inkeyframe(self, x, y):
-        dy = math.pow(abs(y - theme.KEYFRAMEHEIGHT / 2), 2)
+        dy = math.pow(abs(y - theme.KEYFRAMEHEIGHT // 2), 2)
 
         for i, key in enumerate(self.keys_overlap_stack):
             dx = math.pow(abs(x - model.keys[key].x), 2)
