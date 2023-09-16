@@ -12,15 +12,14 @@ Flipsticks is not part of the Sugar desktop, but can be added.  Please refer to;
 
 * [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
 * [How to use Sugar](https://help.sugarlabs.org/),
-* [Download Flipsticks using Browse](https://activities.sugarlabs.org/), search for `Flips Sticks`, then download, and;
-* Refer the 'How to play' section inside the activity
+* [Download Flipsticks using Browse](https://activities.sugarlabs.org/), search for `Flip Sticks`, then download.
 
 How to upgrade?
 ===============
 
 On Sugar desktop systems;
 * use [My Settings](https://help.sugarlabs.org/my_settings.html), [Software Update](https://help.sugarlabs.org/my_settings.html#software-update), or;
-* use Browse to open [https://activities.sugarlabs.org](https://activities.sugarlabs.org), search for `Flip Stciks`, then download.
+* use Browse to open [https://activities.sugarlabs.org](https://activities.sugarlabs.org), search for `Flip Sticks`, then download.
 
 How to run?
 =================
