@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2026-05-19 11:34+0000\n"
+"PO-Revision-Date: 2026-05-19 11:35+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/flipsticks/ka/>\n"
@@ -139,7 +139,7 @@ msgstr "ტორსი"
 
 #: theme.py:66
 msgid "Right Hip"
-msgstr ""
+msgstr "მარჯვენა ბარძაყი"
 
 #: theme.py:67
 msgid "Upper Right Leg"
@@ -151,7 +151,7 @@ msgstr ""
 
 #: theme.py:69
 msgid "Right Foot"
-msgstr ""
+msgstr "მარჯვენა ფეხი"
 
 #: theme.py:70
 msgid "Left Hip"
