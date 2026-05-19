@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2026-05-19 11:36+0000\n"
+"PO-Revision-Date: 2026-05-19 12:28+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/flipsticks/ka/>\n"
@@ -55,11 +55,11 @@ msgstr "ჩამოყრა"
 
 #: activity.py:142
 msgid "Play backward / Pause"
-msgstr ""
+msgstr "დაკვრა უკან / შეჩერება"
 
 #: activity.py:148
 msgid "Play forward / Pause"
-msgstr ""
+msgstr "დაკვრა წინ / შეჩერება"
 
 #: activity.py:167
 msgid "Snapshot"
@@ -107,11 +107,11 @@ msgstr "მარჯვენა მხარი"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr "ზედა მარჯვენა მკლავი"
+msgstr "მარჯვენა მკლავის ზედა ნაწილი"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr "ქვედა მარჯვენა მკლავი"
+msgstr "მარჯვენა მკლავის ქვედა ნაწილი"
 
 #: theme.py:60
 msgid "Right Hand"
@@ -123,11 +123,11 @@ msgstr "მარცხენა მხარი"
 
 #: theme.py:62
 msgid "Upper Left Arm"
-msgstr ""
+msgstr "მარცხენა მკლავის ზედა ნაწილი"
 
 #: theme.py:63
 msgid "Lower Left Arm"
-msgstr ""
+msgstr "მარცხენა მკლავის ქვედა ნაწილი"
 
 #: theme.py:64
 msgid "Left Hand"
@@ -143,11 +143,11 @@ msgstr "მარჯვენა ბარძაყი"
 
 #: theme.py:67
 msgid "Upper Right Leg"
-msgstr ""
+msgstr "მარჯვენა ფეხის ზედა ნაწილი"
 
 #: theme.py:68
 msgid "Lower Right Leg"
-msgstr ""
+msgstr "მარჯვენა ფეხი ქვედა ნაწილი"
 
 #: theme.py:69
 msgid "Right Foot"
@@ -159,11 +159,11 @@ msgstr "მარცხენა ბარძაყი"
 
 #: theme.py:71
 msgid "Upper Left Leg"
-msgstr ""
+msgstr "მარცხენა ფეხის ზედა ნაწილი"
 
 #: theme.py:72
 msgid "Lower Left Leg"
-msgstr ""
+msgstr "მარცხენა ფეხის ქვედა ნაწილი"
 
 #: theme.py:73
 msgid "Left Foot"
