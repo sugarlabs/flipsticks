@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2026-05-19 07:09+0000\n"
+"PO-Revision-Date: 2026-05-19 11:33+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/flipsticks/ka/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #. TRANS: "name" option from activity.info file
 msgid "Flip Sticks"
-msgstr ""
+msgstr "Flip Sticks"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
@@ -39,19 +39,19 @@ msgstr ""
 
 #: activity.py:54
 msgid "Lessons"
-msgstr ""
+msgstr "გაკვეთილები"
 
 #: activity.py:103
 msgid "Set frame"
-msgstr ""
+msgstr "კადრის დაყენება"
 
 #: activity.py:108
 msgid "Clear frame"
-msgstr ""
+msgstr "კადრის გასუფთავება"
 
 #: activity.py:113
 msgid "Reset"
-msgstr ""
+msgstr "ჩამოყრა"
 
 #: activity.py:142
 msgid "Play backward / Pause"
@@ -63,31 +63,31 @@ msgstr ""
 
 #: activity.py:167
 msgid "Snapshot"
-msgstr ""
+msgstr "სწრაფი ასლი"
 
 #: montage.py:652
 msgid "Angle:"
-msgstr ""
+msgstr "კუთხე:"
 
 #: montage.py:672
 msgid "Size:"
-msgstr ""
+msgstr "ზომა:"
 
 #: theme.py:50
 msgid "Size"
-msgstr ""
+msgstr "ზომა"
 
 #: theme.py:51
 msgid "Angle"
-msgstr ""
+msgstr "კუთხე"
 
 #: theme.py:52
 msgid "Lesson Plans"
-msgstr ""
+msgstr "გაკვეთილის გეგმები"
 
 #: theme.py:53
 msgid "lp-en"
-msgstr ""
+msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
@@ -95,15 +95,15 @@ msgstr ""
 
 #: theme.py:55
 msgid "Head"
-msgstr ""
+msgstr "თავი"
 
 #: theme.py:56
 msgid "Neck"
-msgstr ""
+msgstr "კისერი"
 
 #: theme.py:57
 msgid "Right Shoulder"
-msgstr ""
+msgstr "მარჯვენა მხარი"
 
 #: theme.py:58
 msgid "Upper Right Arm"
@@ -135,7 +135,7 @@ msgstr ""
 
 #: theme.py:65
 msgid "Torso"
-msgstr ""
+msgstr "ტორსი"
 
 #: theme.py:66
 msgid "Right Hip"
@@ -191,7 +191,7 @@ msgstr "ჩასმა"
 
 #: toolkit/activity_widgets.py:128
 msgid "Private"
-msgstr ""
+msgstr "პირადი"
 
 #: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
@@ -199,8 +199,8 @@ msgstr ""
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
-msgstr ""
+msgstr "აღწერა"
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"
-msgstr ""
+msgstr "აქტივობა"
