@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
-"PO-Revision-Date: 2026-05-19 11:35+0000\n"
+"PO-Revision-Date: 2026-05-19 11:36+0000\n"
 "Last-Translator: NF <rkavt@smartprojects.ge>\n"
 "Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
 "sugar-activities/flipsticks/ka/>\n"
@@ -91,7 +91,7 @@ msgstr "lp-en"
 
 #: theme.py:54
 msgid "Export Frame One"
-msgstr ""
+msgstr "პირველი კადრის გატანა"
 
 #: theme.py:55
 msgid "Head"
@@ -107,11 +107,11 @@ msgstr "მარჯვენა მხარი"
 
 #: theme.py:58
 msgid "Upper Right Arm"
-msgstr ""
+msgstr "ზედა მარჯვენა მკლავი"
 
 #: theme.py:59
 msgid "Lower Right Arm"
-msgstr ""
+msgstr "ქვედა მარჯვენა მკლავი"
 
 #: theme.py:60
 msgid "Right Hand"
@@ -155,7 +155,7 @@ msgstr "მარჯვენა ფეხი"
 
 #: theme.py:70
 msgid "Left Hip"
-msgstr ""
+msgstr "მარცხენა ბარძაყი"
 
 #: theme.py:71
 msgid "Upper Left Leg"
@@ -167,7 +167,7 @@ msgstr ""
 
 #: theme.py:73
 msgid "Left Foot"
-msgstr ""
+msgstr "მარცხენა ფეხი"
 
 #: toolkit/activity_widgets.py:84
 msgid "Stop"
@@ -195,7 +195,7 @@ msgstr "პირადი"
 
 #: toolkit/activity_widgets.py:135
 msgid "My Neighborhood"
-msgstr ""
+msgstr "ჩემი სამეზობლო"
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
