@@ -8,9 +8,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-09-27 14:48-0400\n"
 "PO-Revision-Date: 2011-02-11 11:39+0200\n"
-"Last-Translator: Carlo Falciola <cfalciola@yahoo.it>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Last-Translator: Albano Battistella <albanobattistellaògmail.com>\n"
+"Language-Team: Italian <LL@li.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +23,7 @@ msgstr "Flip Sticks"
 
 #. TRANS: "summary" option from activity.info file
 msgid "Using keyframes, program a stick figure to twist and dance"
-msgstr ""
+msgstr "Utilizzando i fotogrammi chiave, programma un omino stilizzato che si gira e può ballare"
 
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -34,6 +34,11 @@ msgid ""
 "programming and animation; it helps develop spatial and analytical thinking "
 "skills."
 msgstr ""
+"Flipsticks è un'attività di animazione fotogrammi chiave che consente di posare e programmare un "
+"omino stilizzato che cammina, corre, ruota, si attorciglia, si rotola e balla. Puoi salvare "
+"le tue animazioni sul diario e presto potrai condividerle tramite "
+"mesh. I flipstick possono essere utilizzati per esplorare concetti di geometria e informatica "
+"programmazione e animazione; aiuta a sviluppare capacità di pensiero spaziale e analitico."
 
 #: activity.py:54
 msgid "Lessons"
@@ -197,7 +202,7 @@ msgstr "I miei vicini"
 
 #: toolkit/activity_widgets.py:213
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: toolkit/activity_widgets.py:393
 msgid "Activity"
